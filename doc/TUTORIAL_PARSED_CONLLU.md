@@ -8,8 +8,8 @@ tuple of two lists: the *tokenized sentence* and the *metadata*. *Tokenized
 sentence* is a list of of sentence's tokens, each of those is represented as a
 dict with *CONLL-U* fields. All fields' names keeps as constants of `str`
 type. Fields' values has an `str` type, too, except *FEATS* and *MISC* fields
-that keeps as `OrderedDict`s of their components. Keys and values of
-components are of `str` type.
+that keeps as `OrderedDict` of their components. Keys and values of components
+are of `str` type.
 
 *Metadata* stores as `OrderedDict` with `str` keys and values.
 
