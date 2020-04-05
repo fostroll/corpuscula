@@ -103,5 +103,5 @@ Params for additional processing:
 multiword tokens.
 
 **adjust_for_speech**: if True, remove all non alphanumeric tokens and
-convert all words to lower case. That blends in the **corpus** for the speech
+convert all words to lower case. That blends in the **corpus** with the speech
 kits output.
