@@ -41,7 +41,7 @@ downloading corpuses:
 >>> import corpuscula.corpus_utils as cu
 >>> cu.set_root_dir(<path>)  # We will keep corpuses here
 ```
-NB: it will create/update config file `.rumor` in your home directory.
+**NB:** it will create/update config file `.rumor` in your home directory.
 
 If you'll not do it, `corpuscula` will try to keep corpuses in the directory
 where you installed it.

@@ -59,7 +59,7 @@ method. Have no affect if **fix** is False.
 **log_file**: stream for progress messages. Default is `sys.stderr`. If
 `None`, then output will be suppressed.
 
-NB: For *CONLL-U Plus* format, the field list must be specified in the first
+**NB:** For *CONLL-U Plus* format, the field list must be specified in the first
 line of the **corpus** (in the meta variable *global.columns*)
 
 ### Save *CONLL-U*
