@@ -11,6 +11,7 @@ from collections import OrderedDict
 from html import unescape
 import json
 import os
+from pathlib import Path
 import re
 import sys
 from urllib.error import HTTPError
@@ -20,7 +21,44 @@ from .utils import LOG_FILE, download_file, rmdir, read_bz2, read_rar, read_zip
 
 
 ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
+_CFG_ROOT_DIR = 'ROOT_DIR'
 def set_root_dir(root_dir):
+    root_dir = root_dir.strip()
+    cfg_path = os.path.join(Path.home(), '.rumor')
+    cfg = ["# Config file for RuMor project. Don't change it manually."]
+    isdone = False
+    if os.path.isfile(cfg_path):
+        with open(cfg_path, 'rt', encoding='utf-8') as f:
+            for line in f:
+                try:
+                    var, val = line.split('\t', maxsplit=1)
+                    if var == _CFG_ROOT_DIR:
+                        if not isdone:
+                            val = root_dir
+                        else:
+                            continue
+                    cfg.append('\t'.join((var, val.strip())))
+                except ValueError:
+                    pass
+    if not isdone:
+        cfg.append('\t'.join((_CFG_ROOT_DIR, root_dir)))
+    with open(cfg_path, 'wt', encoding='utf-8') as f:
+        for line in cfg:
+            print(line, file=f)
+
+def get_root_dir():
+    cfg_path = os.path.join(Path.home(), '.rumor')
+    res = ROOT_DIR
+    with open(cfg_path, 'rt', encoding='utf-8') as f:
+        for line in f:
+            try:
+                var, val = line.split('\t', maxsplit=1)
+                if var == _CFG_ROOT_DIR:
+                    res = val.strip()
+                    break
+            except ValueError:
+                pass
+    return res
 
 CORPUS_DNAME = 'corpus'
 def download_corpus(name, url, dname=None, root_dir=None, fname=None,
@@ -40,7 +78,8 @@ def download_corpus(name, url, dname=None, root_dir=None, fname=None,
 
     Also, the function receives other parameters that fit for
     ``.utils.download_file()`` method"""
-    dpath = os.path.join(root_dir if root_dir else ROOT_DIR, CORPUS_DNAME,
+    dpath = os.path.join(root_dir if root_dir else get_root_dir(),
+                         CORPUS_DNAME,
                          dname if dname is not None else '')
     
     return download_file(url, dpath=dpath, fname=fname,
@@ -57,14 +96,15 @@ def remove_corpus(dname, root_dir=None):
 
     If *dname* is None, the corpus storage will be totally cleaned. All
     downloaded corpora will be removed"""
-    dpath = os.path.join(root_dir if root_dir else ROOT_DIR, CORPUS_DNAME,
+    dpath = os.path.join(root_dir if root_dir else get_root_dir(),
+                         CORPUS_DNAME,
                          dname if dname is not None else '')
     try:
         rmdir(dpath)
     except FileNotFoundError:
         pass
     try:
-        os.rmdir(os.path.join(root_dir if root_dir else ROOT_DIR,
+        os.rmdir(os.path.join(root_dir if root_dir else get_root_dir(),
                               CORPUS_DNAME))
     except OSError:
         pass
@@ -80,7 +120,8 @@ def get_corpus_fpath(dname=None, root_dir=None, fname=None, url=None):
     """
     assert fname is not None or url is not None, \
         '*fname* or *url* must be not None'
-    dpath = os.path.join(root_dir if root_dir else ROOT_DIR, CORPUS_DNAME,
+    dpath = os.path.join(root_dir if root_dir else get_root_dir(),
+                         CORPUS_DNAME,
                          dname if dname is not None else '')
     fpath = os.path.join(dpath, fname if fname else
                                 re.sub('^.+/', '', url))
@@ -111,8 +152,8 @@ def download_ud(corpus_name, root_dir=None, overwrite=True):
                       kept in the corpus storage
     """
     fpaths = []
-    dpath = os.path.join(root_dir if root_dir else ROOT_DIR, CORPUS_DNAME,
-                         UD_DNAME)
+    dpath = os.path.join(root_dir if root_dir else get_root_dir(),
+                         CORPUS_DNAME, UD_DNAME)
     fcont = corpus_name + '.contents'
     try:
         download_file(UD_URL.format(corpus_name),
@@ -169,7 +210,7 @@ def remove_ud(corpus_name, root_dir=None):
 def get_ud_train_path(corpus_name, root_dir=None):
     """Return a name of the train corpus of a corpus ``corpus_name`` of 
     Universal Dependencies"""
-    dpath = os.path.join(root_dir if root_dir else ROOT_DIR,
+    dpath = os.path.join(root_dir if root_dir else get_root_dir(),
                          CORPUS_DNAME, UD_DNAME, corpus_name)
     fname = _get_ud_train_name(os.listdir(dpath))
     return os.path.join(dpath, fname) if fname else None
@@ -177,15 +218,15 @@ def get_ud_train_path(corpus_name, root_dir=None):
 def get_ud_dev_path(corpus_name, root_dir=None):
     """Return a name of the dev corpus of a corpus ``corpus_name`` of 
     Universal Dependencies"""
-    dpath = os.path.join(root_dir if root_dir else ROOT_DIR,
+    dpath = os.path.join(root_dir if root_dir else get_root_dir(),
                          CORPUS_DNAME, UD_DNAME, corpus_name)
     fname = _get_ud_dev_name(os.listdir(dpath))
     return os.path.join(dpath, fname) if fname else None
 
-epochscorpus_name, root_dir=None):
+def get_ud_test_path(corpus_name, root_dir=None):
     """Return a name of the test corpus of a corpus ``corpus_name`` of 
     Universal Dependencies"""
-    dpath = os.path.join(root_dir if root_dir else ROOT_DIR,
+    dpath = os.path.join(root_dir if root_dir else get_root_dir(),
                          CORPUS_DNAME, UD_DNAME, corpus_name)
     fname = _get_ud_test_name(os.listdir(dpath))
     return os.path.join(dpath, fname) if fname else None
