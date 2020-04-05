@@ -156,7 +156,7 @@ class Conllu:
 
     @classmethod
     def from_sentence(cls, wforms, columns=None):
-        """Convert list of tokenized wforms to Parsed CONLL-U format.
+        """Convert a list of wforms to Parsed CONLL-U format.
 
         :param columns: list of column names. If None, standard CONLL-U columns
                         are used
@@ -184,15 +184,15 @@ class Conllu:
                                         'FEATS', 'MISC'
                                     ] else \
                                     None
-                if wform:
+                if wform and 'MISC' in columns:
                     token['MISC']['SpaceAfter'] = 'No'
                 sent.append(token)
         return sent
 
     @classmethod
-    def from_sentences(cls, sentences, fix=True, split_multi=False,
+    def from_sentences(cls, sentences, split_multi=False,
                        adjust_for_speech=False, columns=None):
-        """Convert sequence of tokenized sentences to Parsed CONLL-U format
+        """Convert a sequence of tokenized sentences to Parsed CONLL-U format
 
         :param fix: fix CONLL-U structure of after conversion
         :param split_multi: if True then wforms with spaces will be processed
