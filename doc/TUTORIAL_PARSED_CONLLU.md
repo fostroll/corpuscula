@@ -2,7 +2,7 @@
 
 ## Parsed CONLL-U format
 
-In `corpuscula`, internal representation of CONLL-U file is *Parsed CONLL-U*
+In `corpuscula`, internal representation of CONLL-U file is _Parsed CONLL-U_
 format. It has a structure as follows. Each sentence stores as a tuple of two
 lists: the tokenized sentence and the metadata. Tokenized sentence is a list
 of of sentence's tokens, each of those is represented as a dict with CONLL-U
