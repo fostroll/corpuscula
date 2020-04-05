@@ -54,13 +54,11 @@ The class `Conllu` promotes full CONLL-U format support (including CONLL-U
 Plus). The description of CONLL-U format you can find on [Universal
 Dependencies](https://universaldependencies.org/format.html) project site.
 In `corpuscula`, internal representation of CONLL-U file is [Parsed
-CONLL-U](https://github.com/fostroll/corpuscula/blob/master/resources/docs/TUTORIAL_PARSED_CONLLU.md)
+CONLL-U](https://github.com/fostroll/corpuscula/blob/master/doc/TUTORIAL_PARSED_CONLLU.md)
 format.
 
-#### Conllu class methods
-
-NB: All methods of class are static. All returns are generators. All input
-lists may be generators, too.
+All methods of the class are static. All returning sequences are generators.
+Input sequences may be generators or lists.
 
 `Conllu.from_sentences(cls, sentences, fix=True, split_multi=False,
                        adjust_for_speech=False, columns=None)`
