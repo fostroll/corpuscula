@@ -62,7 +62,8 @@ Input sequences may be generators or lists.
 
 #### Convertation tokenized sentences to *Parsed CONLL-U*
 
-```Conllu.from_sentence(wforms, columns=None)
+```
+Conllu.from_sentence(wforms, columns=None)
 ```
 
 Converts already tokenized sentence (**wforms** is a list of `str`). Returns
@@ -76,7 +77,8 @@ By default, the return contain fields of *CONLL-U* format. If you need some
 alternative fields set, you can pass them to the method as list of `str` via
 **columns** param. All non-standard fields will be initialized with `None`.
 
-```Conllu.from_sentences(sentences, split_multi=False, adjust_for_speech=False, columns=None)
+```
+Conllu.from_sentences(sentences, split_multi=False, adjust_for_speech=False, columns=None)
 ```
 
 Convert sequence of tokenized sentences to *Parsed CONLL-U* format. For every
