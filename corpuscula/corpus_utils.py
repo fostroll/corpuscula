@@ -35,6 +35,7 @@ def set_root_dir(root_dir):
                     if var == _CFG_ROOT_DIR:
                         if not isdone:
                             val = root_dir
+                            isdone = True
                         else:
                             continue
                     cfg.append('\t'.join((var, val.strip())))
