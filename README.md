@@ -60,7 +60,7 @@ format.
 All methods of the class are static. All returning sequences are generators.
 Input sequences may be generators or lists.
 
-#### Convertation tokenized sentences to *Parsed CONLL-U*
+#### Converting tokenized sentences to *Parsed CONLL-U*
 
 ```
 Conllu.from_sentences(sentences, split_multi=False, adjust_for_speech=False, columns=None)
