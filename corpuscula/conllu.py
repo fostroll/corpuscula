@@ -16,7 +16,7 @@ import sys
 from .utils import LOG_FILE, print_progress
 
 
-def id_to_numeric (id_):
+def id_to_numeric(id_):
     # there will be ValueError if id is incorrect
     return None if id_ is None else \
            int(id_) if id_.isdecimal() else \
@@ -29,11 +29,11 @@ class Conllu:
     STD_COLUMNS = ['ID', 'FORM', 'LEMMA', 'UPOS', 'XPOS',
                    'FEATS', 'HEAD', 'DEPREL', 'DEPS', 'MISC']
 
-    def __new__ (cls):
+    def __new__(cls):
         raise NotImplementedError('This class has only static methods')
 
     @staticmethod
-    def fix (corpus, split_multi=False, adjust_for_speech=False):
+    def fix(corpus, split_multi=False, adjust_for_speech=False):
         """Fix Parsed CONLL-U structure of *corpus* (renew token ids, generate
         sentence ids and text if they are not present in metadata, etc.)
 
@@ -155,7 +155,7 @@ class Conllu:
             yield sentence, sentence_meta
 
     @classmethod
-    def from_sentence (cls, wforms, columns=None):
+    def from_sentence(cls, wforms, columns=None):
         """Convert list of tokenized wforms to Parsed CONLL-U format.
 
         :param columns: list of column names. If None, standard CONLL-U columns
@@ -190,8 +190,8 @@ class Conllu:
         return sent
 
     @classmethod
-    def from_sentences (cls, sentences, fix=True, split_multi=False,
-                        adjust_for_speech=False, columns=None):
+    def from_sentences(cls, sentences, fix=True, split_multi=False,
+                       adjust_for_speech=False, columns=None):
         """Convert sequence of tokenized sentences to Parsed CONLL-U format
 
         :param fix: fix CONLL-U structure of after conversion
@@ -208,8 +208,8 @@ class Conllu:
                            adjust_for_speech=adjust_for_speech)
 
     @classmethod
-    def load (cls, corpus, encoding='utf-8-sig', fix=True, split_multi=False,
-              adjust_for_speech=False, log_file=LOG_FILE):
+    def load(cls, corpus, encoding='utf-8-sig', fix=True, split_multi=False,
+             adjust_for_speech=False, log_file=LOG_FILE):
         """Load corpus in CONLL-U format as sequence of Parsed CONLL-U
         sentences. Each sentence returns as tuple of a list of tagged tokens
         and a dict of metadata that can be used to restore corpus back to
@@ -318,8 +318,8 @@ class Conllu:
                 corpus.close()
 
     @classmethod
-    def get_as_text (cls, corpus, fix=True, split_multi=False,
-                     adjust_for_speech=False, log_file=LOG_FILE):
+    def get_as_text(cls, corpus, fix=True, split_multi=False,
+                    adjust_for_speech=False, log_file=LOG_FILE):
         """Convert a *corpus* in Parsed CONLL-U format to text form.
 
         :rtype: iter(str)
@@ -404,7 +404,7 @@ class Conllu:
             print('Corpus has been saved', file=log_file)
 
     @classmethod
-    def save (cls, corpus, file_path, **kwargs):
+    def save(cls, corpus, file_path, **kwargs):
         """Save a *corpus* in Parsed CONLL-U format to CONLL-U file"""
         with open(file_path, mode='wt', encoding='utf-8') as f:
             for line in cls.get_as_text(corpus, **kwargs):

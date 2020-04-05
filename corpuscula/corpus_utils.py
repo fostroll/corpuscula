@@ -20,6 +20,8 @@ from .utils import LOG_FILE, download_file, rmdir, read_bz2, read_rar, read_zip
 
 
 ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
+def set_root_dir(root_dir):
+
 CORPUS_DNAME = 'corpus'
 def download_corpus(name, url, dname=None, root_dir=None, fname=None,
                     **kwargs):
@@ -44,7 +46,7 @@ def download_corpus(name, url, dname=None, root_dir=None, fname=None,
     return download_file(url, dpath=dpath, fname=fname,
                          log_msg='Downloading {}'.format(name), **kwargs)
 
-def remove_corpus (dname, root_dir=None):
+def remove_corpus(dname, root_dir=None):
     """Remove a directory *dname* from the project corpus storage.
 
     WARNING: All files in the directory will be removed.
@@ -67,7 +69,7 @@ def remove_corpus (dname, root_dir=None):
     except OSError:
         pass
 
-def get_corpus_fpath (dname=None, root_dir=None, fname=None, url=None):
+def get_corpus_fpath(dname=None, root_dir=None, fname=None, url=None):
     """Return full path for file *fname* from project corpus storage directory
     *dname*. If *fname* is None, the name of the file will be copied from the
     *url*. No cheking of the file existance is made.
@@ -84,19 +86,19 @@ def get_corpus_fpath (dname=None, root_dir=None, fname=None, url=None):
                                 re.sub('^.+/', '', url))
     return fpath
 
-def _get_ud_train_name (file_list):
+def _get_ud_train_name(file_list):
     return next((x for x in file_list if x.endswith('train.conllu')), None)
 
-def _get_ud_dev_name (file_list):
+def _get_ud_dev_name(file_list):
     return next((x for x in file_list if x.endswith('dev.conllu')), None)
 
-def _get_ud_test_name (file_list):
+def _get_ud_test_name(file_list):
     return next((x for x in file_list if x.endswith('test.conllu')), None)
 
 UD = 'UniversalDependencies'
 UD_URL = 'https://api.github.com/repos/UniversalDependencies/{}/contents/'
 UD_DNAME = '_UD'
-def download_ud (corpus_name, root_dir=None, overwrite=True):
+def download_ud(corpus_name, root_dir=None, overwrite=True):
     """Download a corpus ``corpus_name`` from Universal Dependencies.
 
     :param corpus_name: name of the corpus as it specified on the Universal
@@ -152,7 +154,7 @@ def download_ud (corpus_name, root_dir=None, overwrite=True):
         os.remove(fcont)
     return fpaths
 
-def remove_ud (corpus_name, root_dir=None):
+def remove_ud(corpus_name, root_dir=None):
     """Remove a corpus ``corpus_name`` of Universal Dependencies.
 
     :param corpus_name: name of the corpus as it specified on the Universal
@@ -164,7 +166,7 @@ def remove_ud (corpus_name, root_dir=None):
     """
     remove_corpus(os.path.join(UD_DNAME, corpus_name), root_dir=root_dir)
 
-def get_ud_train_path (corpus_name, root_dir=None):
+def get_ud_train_path(corpus_name, root_dir=None):
     """Return a name of the train corpus of a corpus ``corpus_name`` of 
     Universal Dependencies"""
     dpath = os.path.join(root_dir if root_dir else ROOT_DIR,
@@ -172,7 +174,7 @@ def get_ud_train_path (corpus_name, root_dir=None):
     fname = _get_ud_train_name(os.listdir(dpath))
     return os.path.join(dpath, fname) if fname else None
 
-def get_ud_dev_path (corpus_name, root_dir=None):
+def get_ud_dev_path(corpus_name, root_dir=None):
     """Return a name of the dev corpus of a corpus ``corpus_name`` of 
     Universal Dependencies"""
     dpath = os.path.join(root_dir if root_dir else ROOT_DIR,
@@ -180,7 +182,7 @@ def get_ud_dev_path (corpus_name, root_dir=None):
     fname = _get_ud_dev_name(os.listdir(dpath))
     return os.path.join(dpath, fname) if fname else None
 
-def get_ud_test_path (corpus_name, root_dir=None):
+epochscorpus_name, root_dir=None):
     """Return a name of the test corpus of a corpus ``corpus_name`` of 
     Universal Dependencies"""
     dpath = os.path.join(root_dir if root_dir else ROOT_DIR,
@@ -191,7 +193,7 @@ def get_ud_test_path (corpus_name, root_dir=None):
 GICR = 'GICR'
 GICR_URL = 'https://github.com/dialogue-evaluation/morphoRuEval-2017/raw/master/GIKRYA_texts_new.zip'
 GICR_DNAME = 'gicr'
-def download_gicr (root_dir=None, overwrite=True):
+def download_gicr(root_dir=None, overwrite=True):
     """Download the corpus GICR.
     
     :param root_dir: path to the root storage. If None, default value will
@@ -203,7 +205,7 @@ def download_gicr (root_dir=None, overwrite=True):
     return download_corpus(GICR, GICR_URL, dname=GICR_DNAME, root_dir=root_dir,
                            overwrite=overwrite, file_noless=8000000)
 
-def remove_gicr (root_dir=None):
+def remove_gicr(root_dir=None):
     """Remove the corpus GICR.
 
     :param root_dir: path to the root storage. If None, default value will
@@ -218,8 +220,8 @@ OPENCORPORA_NOAMB_URL = 'http://opencorpora.org/files/export/annot/annot.opcorpo
 OPENCORPORA_NOAMB_NOUNKN_URL = 'http://opencorpora.org/files/export/annot/annot.opcorpora.no_ambig_strict.xml.bz2'
 OPENCORPORA_DICT_URL = 'http://opencorpora.org/files/export/dict/dict.opcorpora.xml.bz2'
 OPENCORPORA_DNAME = 'opencorpora'
-def download_opencorpora (root_dir=None, overwrite=True,
-                          noamb=False, nounkn=False):
+def download_opencorpora(root_dir=None, overwrite=True,
+                         noamb=False, nounkn=False):
     """Download the corpus OpenCorpora.
     
     :param root_dir: path to the root storage. If None, default value will
@@ -246,7 +248,7 @@ def download_opencorpora (root_dir=None, overwrite=True,
                         overwrite=overwrite, file_noless=16000000)
     )
 
-def remove_opencorpora (root_dir=None):
+def remove_opencorpora(root_dir=None):
     """Remove the corpus OpenCorpora.
 
     :param root_dir: path to the root storage. If None, default value will
@@ -258,7 +260,7 @@ def remove_opencorpora (root_dir=None):
 RNC = 'RNC'
 RNC_URL = 'https://github.com/dialogue-evaluation/morphoRuEval-2017/raw/master/RNC_texts.rar'
 RNC_DNAME = 'rnc'
-def download_rnc (root_dir=None, overwrite=True):
+def download_rnc(root_dir=None, overwrite=True):
     """Download the corpus RNC.
     
     :param root_dir: path to the root storage. If None, default value will
@@ -270,7 +272,7 @@ def download_rnc (root_dir=None, overwrite=True):
     return download_corpus(RNC, RNC_URL, dname=RNC_DNAME, root_dir=root_dir,
                            overwrite=overwrite, file_noless=5000000)
 
-def remove_rnc (root_dir=None):
+def remove_rnc(root_dir=None):
     """Remove the corpus RNC.
 
     :param root_dir: path to the root storage. If None, default value will
@@ -284,7 +286,7 @@ SYNTAGRUS_TRAIN_URL = 'https://github.com/UniversalDependencies/UD_Russian-SynTa
 SYNTAGRUS_DEV_URL = 'https://github.com/UniversalDependencies/UD_Russian-SynTagRus/raw/master/ru_syntagrus-ud-dev.conllu'
 SYNTAGRUS_TEST_URL = 'https://github.com/UniversalDependencies/UD_Russian-SynTagRus/raw/master/ru_syntagrus-ud-test.conllu'
 SYNTAGRUS_DNAME = 'syntagrus'
-def download_syntagrus (root_dir=None, overwrite=True):
+def download_syntagrus(root_dir=None, overwrite=True):
     """Download the corpus SynTagRus.
     
     :param root_dir: path to the root storage. If None, default value will
@@ -305,7 +307,7 @@ def download_syntagrus (root_dir=None, overwrite=True):
                                   overwrite=overwrite, file_noless=10000000))
     return fpaths
 
-def remove_syntagrus (root_dir=None):
+def remove_syntagrus(root_dir=None):
     """Remove the corpus SynTagRus.
 
     :param root_dir: path to the root storage. If None, default value will
@@ -322,22 +324,22 @@ class _AbstractCorpus:
     _dl_params = ''
 
     @classmethod
-    def train (cls):
+    def train(cls):
         raise ValueError('ERROR: {} does not have a train part'
                              .format(cls.name))
 
     @classmethod
-    def dev (cls):
+    def dev(cls):
         raise ValueError('ERROR: {} does not have a dev part'
                              .format(cls.name))
 
     @classmethod
-    def test (cls):
+    def test(cls):
         raise ValueError('ERROR: {} does not have a test part'
                              .format(cls.name))
 
     @classmethod
-    def isfile (cls, fpath):
+    def isfile(cls, fpath):
         if not os.path.isfile(fpath):
             raise FileNotFoundError(
                 '{} is not found. Download it first with {}({})'
@@ -348,7 +350,7 @@ class _AbstractCorpus:
 class AdjustedForSpeech(_AbstractCorpus):
     """Wrapper for a known corpus, adjusted for speech"""
 
-    def __init__ (self, cls):
+    def __init__(self, cls):
         """
         :param cls: one of the children of _AbstractCorpus
         """
@@ -366,7 +368,7 @@ class gicr(_AbstractCorpus):
     _dl_name = 'download_gicr'
 
     @staticmethod
-    def _fix (line):
+    def _fix(line):
         line = line.strip()
         if line:
             line = line.split('\t')
@@ -378,7 +380,7 @@ class gicr(_AbstractCorpus):
         return line
 
     @classmethod
-    def train (cls):
+    def train(cls):
         """Return train part of GICR corpus in CONLL-U format"""
         fpath = get_corpus_fpath(dname=GICR_DNAME, url=GICR_URL)
         cls.isfile(fpath)
@@ -387,7 +389,7 @@ class gicr(_AbstractCorpus):
                            log_file=LOG_FILE)
 
     @classmethod
-    def test (cls):
+    def test(cls):
         """Return test part of GICR corpus in CONLL-U format"""
         fpath = get_corpus_fpath(dname=GICR_DNAME, url=GICR_URL)
         cls.isfile(fpath)
@@ -417,7 +419,7 @@ class opencorpora(_AbstractCorpus):
     _dl_name = 'download_opencorpora'
 
     @classmethod
-    def _fix (cls, line):
+    def _fix(cls, line):
         line = line.strip()
         rex = re_token.search(line)
         if rex:
@@ -482,7 +484,7 @@ class opencorpora(_AbstractCorpus):
         return res
 
     @classmethod
-    def train (cls, noamb=False, nounkn=False):
+    def train(cls, noamb=False, nounkn=False):
         """Return OpenCorpora corpus in CONLL-U format.
 
         :param noamb: download a version of the corpus with removed ambiguity
@@ -534,7 +536,7 @@ class rnc(_AbstractCorpus):
     _dl_name = 'download_rnc'
 
     @staticmethod
-    def _fix (line):
+    def _fix(line):
         line = line.strip()
         if line:
             line = line.split('\t')
@@ -554,7 +556,7 @@ class rnc(_AbstractCorpus):
         return line
 
     @classmethod
-    def train (cls):
+    def train(cls):
         """Return RNC corpus in CONLL-U format"""
         fpath = get_corpus_fpath(dname=RNC_DNAME, url=RNC_URL)
         cls.isfile(fpath)
@@ -572,21 +574,21 @@ class syntagrus(_AbstractCorpus):
     _dl_name = 'download_syntagrus'
 
     @classmethod
-    def train (cls):
+    def train(cls):
         fpath = get_corpus_fpath(dname=SYNTAGRUS_DNAME,
                                  url=SYNTAGRUS_TRAIN_URL)
         cls.isfile(fpath)
         return Conllu.load(fpath, log_file=LOG_FILE)
 
     @classmethod
-    def dev (cls):
+    def dev(cls):
         fpath = get_corpus_fpath(dname=SYNTAGRUS_DNAME,
                                  url=SYNTAGRUS_DEV_URL)
         cls.isfile(fpath)
         return Conllu.load(fpath, log_file=LOG_FILE)
 
     @classmethod
-    def test (cls):
+    def test(cls):
         fpath = get_corpus_fpath(dname=SYNTAGRUS_DNAME,
                                  url=SYNTAGRUS_TEST_URL)
         cls.isfile(fpath)
@@ -602,24 +604,24 @@ class UniversalDependencies(_AbstractCorpus):
         self._root_dir = root_dir
         self._corpus_name = corpus_name
 
-    def isfile (self, fpath):
+    def isfile(self, fpath):
         if not os.path.isfile(fpath):
             raise FileNotFoundError(
                 '{} is not found. Download it first with {}()'
                     .format(cls.name, cls._dl_name)
             )
 
-    def train (self):
+    def train(self):
         fpath = get_ud_train_path(self._corpus_name, root_dir=self._root_dir)
         self.isfile(fpath)
         return Conllu.load(fpath, log_file=LOG_FILE)
 
-    def dev (self):
+    def dev(self):
         fpath = get_ud_dev_path(self._corpus_name, root_dir=self._root_dir)
         self.isfile(fpath)
         return Conllu.load(fpath, log_file=LOG_FILE)
 
-    def test (self):
+    def test(self):
         fpath = get_ud_test_path(self._corpus_name, root_dir=self._root_dir)
         self.isfile(fpath)
         return Conllu.load(fpath, log_file=LOG_FILE)

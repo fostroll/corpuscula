@@ -42,5 +42,5 @@ downloading corpuses:
 >>> cu.set_root_path(<path>)  # We will keep corpuses here
 ```
 
-If you'll not do it, corpuscula will keep corpuses in the directory where you
-installed it.
+If you'll not do it, `corpuscula` will try to keep corpuses in the directory
+where you installed it.

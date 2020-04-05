@@ -18,7 +18,7 @@ from .utils import LOG_FILE, print_progress, read_bz2
 WIKIPEDIA_RU = 'Wikipedia.RU'
 WIKIPEDIA_RU_URL = 'https://dumps.wikimedia.org/ruwiki/latest/ruwiki-latest-pages-articles.xml.bz2'
 WIKIPEDIA_RU_DNAME = 'wikipedia_ru'
-def _consts (lang='RU'):
+def _consts(lang='RU'):
     if lang == 'RU':
         res = {'name' : WIKIPEDIA_RU,
                'url'  : WIKIPEDIA_RU_URL,
@@ -27,7 +27,7 @@ def _consts (lang='RU'):
         raise ValueError('ERROR: Lang "{}" is not supported yet'.format(lang))
     return res
 
-def download_wikipedia (lang='RU', root_dir=None, overwrite=True):
+def download_wikipedia(lang='RU', root_dir=None, overwrite=True):
     """Downloaded Wikipedia dump.
     
     :param root_dir: path to the root storage. If None, default value will
@@ -41,7 +41,7 @@ def download_wikipedia (lang='RU', root_dir=None, overwrite=True):
                            dname=consts['dname'], root_dir=root_dir,
                            overwrite=overwrite, file_noless=3000000000)
 
-def remove_wikipedia (lang='RU', root_dir=None):
+def remove_wikipedia(lang='RU', root_dir=None):
     """Remove Wikipedia dump.
 
     :param root_dir: path to the root storage. If None, default value will
@@ -50,19 +50,19 @@ def remove_wikipedia (lang='RU', root_dir=None):
     """
     remove_corpus(_consts(lang=lang)['dname'], root_dir=root_dir)
 
-def _get_titles (fpath, silent=False):
+def _get_titles(fpath, silent=False):
     return _get_all(fpath, what='titles', silent=silent)
 
-def _get_articles (fpath, silent=False):
+def _get_articles(fpath, silent=False):
     return _get_all(fpath, what='articles', silent=silent)
 
-def _get_templates (fpath, silent=False):
+def _get_templates(fpath, silent=False):
     return _get_all(fpath, what='templates', silent=silent)
 
 re_html = re_compile(r'<[^<>]+?>')
-def _get_all (fpath, what=None, silent=False):
+def _get_all(fpath, what=None, silent=False):
 
-    def read_txt ():
+    def read_txt():
         with open(fpath, 'rt', encoding='utf-8-sig') as f:
             for line in f:
                 yield line
@@ -188,7 +188,7 @@ def _get_all (fpath, what=None, silent=False):
                         line = ''
                         break
 
-                    def process_cu (match):
+                    def process_cu(match):
                         head, res_, tail = match.groups()
                         if '[[' in res_ or ']]' in res_:
                             res = ''
@@ -263,7 +263,7 @@ def _get_all (fpath, what=None, silent=False):
                     else:
                         line.replace('|}', '')  # just in case
 
-                    def process_sq (match):
+                    def process_sq(match):
                         redir, head, res_, tail = match.groups()
                         if redir:
                             res = ''
@@ -406,28 +406,28 @@ class Wikipedia(_AbstractCorpus):
     name = 'Wikipedia'
     _dl_name = 'download_wikipedia'
 
-    def __init__ (self, lang='RU', fpath=None, silent=False):
+    def __init__(self, lang='RU', fpath=None, silent=False):
         self.name = _consts(lang=lang)['name']
         self._lang = lang
         if fpath:
             self._fpath = fpath
         self._silent = silent
 
-    def _get_fpath (self):
+    def _get_fpath(self):
         consts = _consts(lang=self._lang)
         fpath = self._fpath if hasattr(self, '_fpath') else \
                 get_corpus_fpath(dname=consts['dname'], url=consts['url'])
         self.isfile(fpath)
         return fpath
 
-    def titles (self, silent=None):
+    def titles(self, silent=None):
         return _get_titles(self._get_fpath(),
                            self._silent if silent is None else silent)
 
-    def articles (self, silent=None):
+    def articles(self, silent=None):
         return _get_articles(self._get_fpath(),
                              self._silent if silent is None else silent)
 
-    def templates (self, silent=None):
+    def templates(self, silent=None):
         return _get_templates(self._get_fpath(),
                               self._silent if silent is None else silent)

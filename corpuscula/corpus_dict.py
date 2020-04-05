@@ -21,9 +21,9 @@ class CorpusDict:
     """Arrays of information extracted from labeled corpus(es).
     May be used for a lot of text processing tasks"""
 
-    def __init__ (self, restore_from=None, corpus=None, format='conllu',
-                  backup_to=None, cnt_thresh=20, ambiguity_thresh=1.,
-                  log_file=LOG_FILE):
+    def __init__(self, restore_from=None, corpus=None, format='conllu',
+                 backup_to=None, cnt_thresh=20, ambiguity_thresh=1.,
+                 log_file=LOG_FILE):
         """
         :param restore_from: path to backup file to load from
         :type restore_from: str
@@ -89,7 +89,7 @@ class CorpusDict:
         if corpus:
             self.fit()
 
-    def backup (self):
+    def backup(self):
         """Get current state"""
         return {'_cnt_thresh'      : self._cnt_thresh      ,
                 '_ambiguity_thresh': self._ambiguity_thresh,
@@ -103,12 +103,12 @@ class CorpusDict:
                 '_lemma_tag_cnts'  : self._lemma_tag_cnts  ,
                 '_lemma_feat_cnts' : self._lemma_feat_cnts }
 
-    def backup_to (self, file_path):
+    def backup_to(self, file_path):
         """Store current state to file"""
         with open(file_path, 'wb') as f:
             pickle.dump(self.backup(), f, 2)
 
-    def restore (self, o):
+    def restore(self, o):
         """Restore current state from backup object"""
         (self._cnt_thresh      ,
          self._ambiguity_thresh,
@@ -145,16 +145,16 @@ class CorpusDict:
         )
         self.fit()
 
-    def restore_from (self, file_path):
+    def restore_from(self, file_path):
         """Restore current state from file"""
         with open(file_path, 'rb') as f:
             self.restore(pickle.load(f))
 
-    def isempty (self):
+    def isempty(self):
         """Check if current state is not contain any information"""
         return not self._wforms
 
-    def parse (self, corpus, format='conllu', append=False, log_file=LOG_FILE):
+    def parse(self, corpus, format='conllu', append=False, log_file=LOG_FILE):
         """Extract useful information from a *corpus* given.
 
         :param corpus: path to file in known format or list of already parsed
@@ -305,7 +305,7 @@ class CorpusDict:
                       .format(sent_no, ntoken, nyo),
                   file=log_file)
 
-    def fit (self, cnt_thresh=None, ambiguity_thresh=None, log_file=LOG_FILE):
+    def fit(self, cnt_thresh=None, ambiguity_thresh=None, log_file=LOG_FILE):
         """Gather additional statictics from corups information.
 
         :type cnt_thresh: int
@@ -505,14 +505,14 @@ class CorpusDict:
         if log_file:
             print('done.', file=log_file)
 
-    def get_tags (self):
+    def get_tags(self):
         """Return a set of all known tag labels.
         
         :rtype: set(str)
         """
         return set(self._tags)
     
-    def get_feats (self):
+    def get_feats(self):
         """Return a dict of all known feats with their possible value labels.
 
         :rtype: dict(str: set(str))
@@ -520,7 +520,7 @@ class CorpusDict:
         return {feat: set(val for val in self._feat_vals[i])
                           for i, feat in enumerate(self._feats)}
 
-    def get_tag_feats (self, tag):
+    def get_tag_feats(self, tag):
         """Return a set of all known feat labels for a given tag.
         
         :rtype: set(str)
@@ -530,21 +530,21 @@ class CorpusDict:
         return set(self._feat_vals[feat_id] \
                        for feat_id in self._tag_feats[tag_id])
 
-    def get_tags_freq (self):
+    def get_tags_freq(self):
         """Return tags ordered by frequency.
         
         :rtype: [(tag, count, tag_freq)]
         """
         return self._tags_freq[:]
     
-    def get_feats_freq (self, tag):
+    def get_feats_freq(self, tag):
         """Return feats ordered by frequency for a given *tag*.
         
         :rtype: [(feat, count, feat_freq)]
         """
         return self._feats_freq[tag][:]
     
-    def get_feat_vals_freq (self, tag, feat):
+    def get_feat_vals_freq(self, tag, feat):
         """Return feat values ordered by frequency for a given *tag* and
         *feat*.
         
@@ -552,7 +552,7 @@ class CorpusDict:
         """
         return self._feat_vals_freq[tag].get(feat, [])[:]
 
-    def wform_isknown (self, wform, tag=None):
+    def wform_isknown(self, wform, tag=None):
         res = self._wforms_id.get(wform)
         if res is None:
             res = self._wforms_id.get(wform.lower())
@@ -566,11 +566,11 @@ class CorpusDict:
             res = self._wform_tag_cnts[res].get(self._tags_id[tag])
         return res is not None
 
-    def most_common_tag (self):
+    def most_common_tag(self):
         """Return most common tag for the whole corpus"""
         return self._most_common_tag
 
-    def predict_tag (self, wform, isfirst=False, cnt_thresh=None):
+    def predict_tag(self, wform, isfirst=False, cnt_thresh=None):
         """If the *wform* has a trusted tag then return that tag with
         a relevance coef equals to 1. Elsewise, we choose the most common tag
         for that *wform* and calculate some empirical value as a relevance
@@ -626,7 +626,7 @@ class CorpusDict:
                 #        tag, coef = tag2, coef2
         return tag, coef
 
-    def predict_lemma (self, wform, tag, isfirst=False, cnt_thresh=None):
+    def predict_lemma(self, wform, tag, isfirst=False, cnt_thresh=None):
         """Choose the most common lemma for the *wform* and *tag* and calculate
         some empirical value as a relevance coef.
 
@@ -738,7 +738,7 @@ class CorpusDict:
             lemma, coef = wform, 0
         return lemma, coef
 
-    def predict_feat (self, feat, wform, lemma, tag, cnt_thresh=None):
+    def predict_feat(self, feat, wform, lemma, tag, cnt_thresh=None):
         """Choose the most common *feat* for the *wform*, *tag*, and *lemma*
         and calculate some empirical value as a relevance coef.
 

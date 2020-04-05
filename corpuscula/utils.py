@@ -14,7 +14,7 @@ import uuid
 LOG_FILE=sys.stderr
 
 
-def vote (_iter, weights=None):
+def vote(_iter, weights=None):
     """Return a list of unique objects from *_iter* sorted by frequency.
 
     :rtype: list[(obj, count, freq)]
@@ -30,7 +30,7 @@ def vote (_iter, weights=None):
     res.sort(key=lambda x: (x[1], x[0]), reverse=True)
     return res
 
-def find_affixes (wform, lemma, lower=False):
+def find_affixes(wform, lemma, lower=False):
     """Find the longest common part of a given *wform* and *lemma*.
 
     :param lower: if True then return values will be always in lower case
@@ -52,7 +52,7 @@ def find_affixes (wform, lemma, lower=False):
            lemma[:b], lemma[b:b + size], lemma[b + size:]
     #       lemma[:b], wform[a:a + size], lemma[b + size:]
 
-def find_file (prefix, ext=None, dname=None):
+def find_file(prefix, ext=None, dname=None):
     """Return a full name of the file with specified *prefix* if it's present
     in the directory *dname*. If there are several such files, a name of the
     first one will be returned.
@@ -72,14 +72,14 @@ def find_file (prefix, ext=None, dname=None):
         res = None
     return res
 
-def rmdir (dname):
+def rmdir(dname):
     """Remove a directory *dname*"""
     for fname in os.listdir(dname):
         os.remove(os.path.join(dname if dname is not None else '', fname))
     os.rmdir(dname)
 
-def print_progress (current_value, end_value=10, step=1, start_value=0,
-                    max_width=60, file=LOG_FILE):
+def print_progress(current_value, end_value=10, step=1, start_value=0,
+                   max_width=60, file=LOG_FILE):
     """Show progress indicator.
 
     :param end_value: None means unknown; 0 means show finish
@@ -128,8 +128,8 @@ def print_progress (current_value, end_value=10, step=1, start_value=0,
 
 COPY_BUF_SIZE = 16 * 1024
 CALLBACK_CHUNK_SIZE = 1024 * 1024
-def copyfileobj (fsrc, fdst, buf_size=COPY_BUF_SIZE,
-                 callback=None, callback_chunk_size=CALLBACK_CHUNK_SIZE):
+def copyfileobj(fsrc, fdst, buf_size=COPY_BUF_SIZE,
+                callback=None, callback_chunk_size=CALLBACK_CHUNK_SIZE):
     """Copy data from file-like object *fsrc* to file-like object *fdst*
     (extends shutil.copyfileobj)
 
@@ -146,7 +146,7 @@ def copyfileobj (fsrc, fdst, buf_size=COPY_BUF_SIZE,
     bytes_read = 0
     chunks_read = 0
     chunk_size = 0
-    def run_callback_if_need (buf=None):
+    def run_callback_if_need(buf=None):
         nonlocal bytes_read, chunks_read, chunk_size
         urgent_need = False
         if callback:
@@ -168,7 +168,7 @@ def copyfileobj (fsrc, fdst, buf_size=COPY_BUF_SIZE,
         run_callback_if_need(buf)
     run_callback_if_need()
 
-def copy_file (src, dst, buf_size=COPY_BUF_SIZE, **kwargs):
+def copy_file(src, dst, buf_size=COPY_BUF_SIZE, **kwargs):
     """Copy data from file *src* to file *dst*.
 
     :param src: input file name
@@ -179,9 +179,9 @@ def copy_file (src, dst, buf_size=COPY_BUF_SIZE, **kwargs):
         copyfileobj(fsrc, fdst, **kwargs)
 
 DIR_ACCESS_RIGHTS = 0o755
-def download_file (url, dpath=None, fname=None, chunk_size=CALLBACK_CHUNK_SIZE,
-                   file_noless=None, overwrite=True, log_msg=None,
-                   silent=False):
+def download_file(url, dpath=None, fname=None, chunk_size=CALLBACK_CHUNK_SIZE,
+                  file_noless=None, overwrite=True, log_msg=None,
+                  silent=False):
     """Download file from *url* with progress indicator
 
     :param url: source url
@@ -247,7 +247,7 @@ def download_file (url, dpath=None, fname=None, chunk_size=CALLBACK_CHUNK_SIZE,
                 print_progress(0, chunks_count)
             bytes = 0
             try:
-                def callback (bytes_read, chunks_read, last_chunk_size):
+                def callback(bytes_read, chunks_read, last_chunk_size):
                     nonlocal bytes
                     bytes = bytes_read
                     prev_line_no = print_progress(
@@ -278,7 +278,7 @@ def download_file (url, dpath=None, fname=None, chunk_size=CALLBACK_CHUNK_SIZE,
                   file=LOG_FILE)
     return fpath
 
-def read_bz2 (apath, encoding='utf-8', errors='ignore', process_line=None):
+def read_bz2(apath, encoding='utf-8', errors='ignore', process_line=None):
     """Read lines from a file in bz2 archive.
 
     :param process_line: a function that will invoked to process each file
@@ -297,8 +297,8 @@ def read_bz2 (apath, encoding='utf-8', errors='ignore', process_line=None):
                     continue
             yield line
 
-def read_rar (apath, fname, encoding='utf-8', errors='ignore',
-              process_line=None):
+def read_rar(apath, fname, encoding='utf-8', errors='ignore',
+             process_line=None):
     """Read lines from a file in rar archive.
 
     :param fname: a name of the file in the archive
@@ -320,8 +320,8 @@ def read_rar (apath, fname, encoding='utf-8', errors='ignore',
                         continue
                 yield line
 
-def read_zip (apath, fname, encoding='utf-8', errors='ignore',
-              process_line=None):
+def read_zip(apath, fname, encoding='utf-8', errors='ignore',
+             process_line=None):
     """Read lines from a file in zip archive.
 
     :param fname: a name of the file in the archive

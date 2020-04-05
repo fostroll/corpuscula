@@ -32,29 +32,29 @@ class Items:
         if backup_to:
             self.backup_to(backup_to)
 
-    def backup (self):
+    def backup(self):
         """Get current state"""
         return self._items
 
-    def backup_to (self, file_path):
+    def backup_to(self, file_path):
         """Store current state to file"""
         with open(file_path, 'wb') as f:
             pickle.dump(self.backup(), f, 2)
 
-    def restore (self, o):
+    def restore(self, o):
         """Restore current state from backup object"""
         self._items = o
 
-    def restore_from (self, file_path):
+    def restore_from(self, file_path):
         """Restore current state from file"""
         with open(file_path, 'rb') as f:
             self.restore(pickle.load(f))
 
-    def isempty (self, item_class=None):
+    def isempty(self, item_class=None):
         """Check if current state is not contain any information"""
         return not self._items.get(item_class)
 
-    def get (self, item_class=None, item=None, copy=True):
+    def get(self, item_class=None, item=None, copy=True):
         """Return a value of some *item* of some class. If item is None, return
         all items of the class.
 
@@ -67,13 +67,13 @@ class Items:
             res = res.get(item.lower() if isinstance(item, str) else item)
         return deepcopy(res) if copy else res
 
-    def item_isknown (self, item, item_class):
+    def item_isknown(self, item, item_class):
         return self._items.get(item_class, {}).get(
             item.lower() if isinstance(item, str) else item
         ) is not None
 
-    def load (self, items, item_class=None, update=False, encoding='utf-8-sig',
-              log_file=LOG_FILE):
+    def load(self, items, item_class=None, update=False, encoding='utf-8-sig',
+             log_file=LOG_FILE):
         """Load a list of *items* of some class.
 
         :param items: {item: {attr: val}}, [item], set(item)
@@ -102,7 +102,7 @@ class Items:
                               .format(old_len, len(self._items[item_class]))),
               file=log_file)
 
-    def derive (self, derivator, item_class, proto_class=None, update=False):
+    def derive(self, derivator, item_class, proto_class=None, update=False):
         """Make a new class of items derived from some already existing class.
 
         :param derivator: method that make a new class
