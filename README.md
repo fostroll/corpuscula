@@ -14,23 +14,23 @@ Highlights are:
 ### pip
 
 Corpuscula supports Python 3.5 or later. To install it via pip, run:
-```bash
-pip install stanza
+```sh
+$ pip install stanza
 ```
 
 If you currently have a previous version of `corpuscula` installed, use:
-```bash
-pip install stanza -U
+```sh
+$ pip install stanza -U
 ```
 
 ### From Source
 
 Alternatively, you can also install `corpuscula` from source of this git
 repository:
-```bash
-git clone https://github.com/fostroll/corpuscula.git
-cd corpuscula
-pip install -e .
+```sh
+S git clone https://github.com/fostroll/corpuscula.git
+S cd corpuscula
+S pip install -e .
 ```
 
 ## Setup
@@ -65,15 +65,81 @@ Keys and values of components are of `str` type.
 
 Metadata stores as OrderedDict with `str` keys and values.
 
-Example (CONLL-U part is from [UD](https://universaldependencies.org/format.html)):
-```# sent_id = panc0.s4
-# text = तत् यथानुश्रूयते।
-# translit = tat yathānuśrūyate.
-# text_fr = Voilà ce qui nous est parvenu par la tradition orale.
-# text_en = This is what is heard.
-1     तत्	तद्	DET     _   Case=Nom|…|PronType=Dem   3   nsubj    _   Translit=tat|LTranslit=tad|Gloss=it
-2-3   यथानुश्रूयते	_	_       _   _                         _   _        _   SpaceAfter=No
-2     यथा	यथा	ADV     _   PronType=Rel              3   advmod   _   Translit=yathā|LTranslit=yathā|Gloss=how
-3     अनुश्रूयते   अनु-श्रु	VERB    _   Mood=Ind|…|Voice=Pass     0   root     _   Translit=anuśrūyate|LTranslit=anu-śru|Gloss=it-is-heard
-4     ।      	।	PUNCT   _   _                         3   punct    _   Translit=.|LTranslit=.|Gloss=.
+Example:
+```sh
+$ cat example.conllu
+# sent_id = 1
+# text = Мама мыла раму.
+# text_en = Mom washed a chess.
+1	Мама	мама	NOUN	_	Animacy=Anim|Case=Nom|Gender=Fem|Number=Sing	_	_	_	Translit=mama|Gloss=mom
+2	мыла	мыть	VERB	_	Aspect=Imp|Gender=Fem|Mood=Ind|Number=Sing|Tense=Past|VebForm=Fin|Voice=Act	_	_	_	Translit=myla|Gloss=washed
+3	раму	рама	NOUN	_	Animacy=Inan|Case=Acc|Gender=Fem|Number=Sing	_	_	_	SpaceAfter=No|Translit=ramu|Gloss=chess
+4	.	.	PUNCT	_	_	_	_	_	Translit=.|Gloss=.
+
+
+```
+
+will be converted to:
+```python
+>>> from pprint import pprint
+>>> from corpuscula import Conllu
+>>> corpus = Conllu.load('example.conllu')
+>>> pprint(list(corpus))
+[([{'DEPREL': None,
+    'DEPS': None,
+    'FEATS': OrderedDict([('Animacy', 'Anim'),
+                          ('Case', 'Nom'),
+                          ('Gender', 'Fem'),
+                          ('Number', 'Sing')]),
+    'FORM': 'Мама',
+    'HEAD': None,
+    'ID': '1',
+    'LEMMA': 'мама',
+    'MISC': OrderedDict([('Translit', 'mama'), ('Gloss', 'mom')]),
+    'UPOS': 'NOUN',
+    'XPOS': None},
+   {'DEPREL': None,
+    'DEPS': None,
+    'FEATS': OrderedDict([('Aspect', 'Imp'),
+                          ('Gender', 'Fem'),
+                          ('Mood', 'Ind'),
+                          ('Number', 'Sing'),
+                          ('Tense', 'Past'),
+                          ('VebForm', 'Fin'),
+                          ('Voice', 'Act')]),
+    'FORM': 'мыла',
+    'HEAD': None,
+    'ID': '2',
+    'LEMMA': 'мыть',
+    'MISC': OrderedDict([('Translit', 'myla'), ('Gloss', 'washed')]),
+    'UPOS': 'VERB',
+    'XPOS': None},
+   {'DEPREL': None,
+    'DEPS': None,
+    'FEATS': OrderedDict([('Animacy', 'Inan'),
+                          ('Case', 'Acc'),
+                          ('Gender', 'Fem'),
+                          ('Number', 'Sing')]),
+    'FORM': 'раму',
+    'HEAD': None,
+    'ID': '3',
+    'LEMMA': 'рама',
+    'MISC': OrderedDict([('SpaceAfter', 'No'),
+                         ('Translit', 'ramu'),
+                         ('Gloss', 'chess')]),
+    'UPOS': 'NOUN',
+    'XPOS': None},
+   {'DEPREL': None,
+    'DEPS': None,
+    'FEATS': OrderedDict(),
+    'FORM': '.',
+    'HEAD': None,
+    'ID': '4',
+    'LEMMA': '.',
+    'MISC': OrderedDict([('Translit', '.'), ('Gloss', '.')]),
+    'UPOS': 'PUNCT',
+    'XPOS': None}],
+  OrderedDict([('sent_id', '1'),
+               ('text', 'Мама мыла раму.'),
+               ('text_en', 'Mom washed a chess.')]))]
 ```

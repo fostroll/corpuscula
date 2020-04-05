@@ -304,10 +304,10 @@ class Conllu:
                                 val = ''
                         vals[column] = val
                     sentence.append(vals)
+            if sentence or sentence_meta:
+                yield sentence, sentence_meta
+                sent_no += 1
             if log_file and sent_no >= 0:
-                if sentence or sentence_meta:
-                    yield sentence, sentence_meta
-                    sent_no += 1
                 print_progress(sent_no + 1, end_value=0, step=1000,
                                file=log_file)
                 print('Corpus has been loaded: {} sentences, {} tokens'
