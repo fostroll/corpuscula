@@ -39,7 +39,7 @@ class Conllu:
 
         :param split_multi: if True then wforms with spaces will be processed
                             as multiword tokens
-        :param adjust_for_speech: if yes, remove all non alphanumeric tokens
+        :param adjust_for_speech: if True, remove all non alphanumeric tokens
                                   and convert all words to lower case
         :rtype: iter
         """

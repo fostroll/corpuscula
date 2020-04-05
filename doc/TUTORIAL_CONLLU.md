@@ -96,3 +96,12 @@ Converts data from *Parsed CONLL-U* format to text representation of
 Conllu.get_as_text(corpus, split_multi=False, adjust_for_speech=False)
 ```
 If need, restore correct *ID* numeration and adjust sentences' *metadata*.
+
+Params for additional processing:
+
+**split_multi**: if True then wforms with spaces will be processed as
+multiword tokens.
+
+**adjust_for_speech**: if True, remove all non alphanumeric tokens and
+convert all words to lower case. That blends in the **corpus** for the speech
+kits output.
