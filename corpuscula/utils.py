@@ -195,10 +195,7 @@ def download_file(url, dpath=None, fname=None, chunk_size=CALLBACK_CHUNK_SIZE,
     :param chunk_size: show progress after every *chunk_size* bytes read
     :type chunk_size: int
     :file_noless: if file is smaller then don't download it and keep already
-                  downloaded one (if exists);
-                  if not None then check if there is a file length
-                  in the server answer for to avoid downloading error page
-                  of the file nonexistence instead of the file itself
+                  downloaded one (if exists)
     :type file_noless: int
     :param overwrite: if False and file is exist, overwrite it
     :type overwrite: bool

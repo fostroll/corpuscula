@@ -5,7 +5,7 @@
 # License: BSD, see LICENSE for details
 """
 Tools for downloading and converting known corpora of Russian language.
-Includes wrapper for corupses to simplify the further processing.
+Includes wrapper for corpora to simplify the further processing.
 """
 from collections import OrderedDict
 from html import unescape
@@ -327,7 +327,7 @@ SYNTAGRUS = 'SynTagRus'
 SYNTAGRUS_TRAIN_URL = 'https://github.com/UniversalDependencies/UD_Russian-SynTagRus/raw/master/ru_syntagrus-ud-train.conllu'
 SYNTAGRUS_DEV_URL = 'https://github.com/UniversalDependencies/UD_Russian-SynTagRus/raw/master/ru_syntagrus-ud-dev.conllu'
 SYNTAGRUS_TEST_URL = 'https://github.com/UniversalDependencies/UD_Russian-SynTagRus/raw/master/ru_syntagrus-ud-test.conllu'
-SYNTAGRUS_DNAME = 'syntagrus'
+SYNTAGRUS_DNAME = '_UD/UD_Russian-SynTagRus'
 def download_syntagrus(root_dir=None, overwrite=True):
     """Download the corpus SynTagRus.
     
@@ -392,15 +392,21 @@ class _AbstractCorpus:
 class AdjustedForSpeech(_AbstractCorpus):
     """Wrapper for a known corpus, adjusted for speech"""
 
-    def __init__(self, cls):
+    def __init__(self, corpus):
         """
-        :param cls: one of the children of _AbstractCorpus
+        :param corpus: one of the children of _AbstractCorpus
         """
-        assert issubclass(cls, _AbstractCorpus), 'ERROR: Unknown input corpus'
-        self.name = cls.name
-        self.train = lambda: Conllu.fix(cls.train(), adjust_for_speech=True)
-        self.dev   = lambda: Conllu.fix(  cls.dev(), adjust_for_speech=True)
-        self.test  = lambda: Conllu.fix( cls.test(), adjust_for_speech=True)
+        #assert issubclass(corpus, _AbstractCorpus), 'ERROR: Unknown input corpus'
+        self.name = corpus.name
+        if hasattr(corpus, 'train') and callable(corpus.train):
+            self.train = lambda: Conllu.fix(corpus.train(),
+                                            adjust_for_speech=True)
+        if hasattr(corpus, 'dev') and callable(corpus.dev):
+            self.dev = lambda: Conllu.fix(corpus.dev(),
+                                          adjust_for_speech=True)
+        if hasattr(corpus, 'test') and callable(corpus.test):
+            self.test  = lambda: Conllu.fix(corpus.test(),
+                                            adjust_for_speech=True)
 
 
 class gicr(_AbstractCorpus):

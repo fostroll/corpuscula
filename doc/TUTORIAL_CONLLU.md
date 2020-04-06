@@ -4,9 +4,9 @@
 ## CONLL-U support
 
 The class `Conllu` promotes full *CONLL-U* format support (including *CONLL-U
-Plus*). The description of *CONLL-U* format you can find on [Universal
-Dependencies](https://universaldependencies.org/format.html) project site.
-In `corpuscula`, internal representation of *CONLL-U* file is
+Plus*). The description of *CONLL-U* format you can find on
+[Universal Dependencies](https://universaldependencies.org/format.html)
+project site. In `corpuscula`, internal representation of *CONLL-U* file is
 [Parsed CONLL-U](https://github.com/fostroll/corpuscula/blob/master/doc/TUTORIAL_PARSED_CONLLU.md)
 format.
 
@@ -104,5 +104,5 @@ Params for additional processing:
 multiword tokens.
 
 **adjust_for_speech**: if True, remove all non alphanumeric tokens and
-convert all words to lower case. That blends in the **corpus** with the speech
-kits output.
+convert all words to lower case. That makes the **corpus** blend in with the
+output of speech recognizing tools.
