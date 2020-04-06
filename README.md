@@ -7,7 +7,7 @@ processing. Highlights are:
 * full [*CONLL-U*](https://universaldependencies.org/format.html) support
 (includes *CONLL-U Plus*)
 * wrappers for known corpora of Russian language
-* parser and wrapper for russian part of Wikipedia
+* parser and wrapper for russian part of *Wikipedia*
 * corpus dictionary that can be used for further morphology processing
 * simple database to keep named entities
 
@@ -53,3 +53,5 @@ directory where you installed it.
 [*CONLL-U* Support](https://github.com/fostroll/corpuscula/blob/master/doc/README_CONLLU.md)
 
 [Management of Corpora](https://github.com/fostroll/corpuscula/blob/master/doc/README_CORPORA.md)
+
+[Wrapper for *Wikipedia*](https://github.com/fostroll/corpuscula/blob/master/doc/README_WIKIPEDIA.md)

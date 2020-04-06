@@ -100,5 +100,5 @@ Params for additional processing:
 multiword tokens.
 
 **adjust_for_speech**: if `True`, remove all non alphanumeric tokens and
-convert all words to lower case. That makes the **corpus** blend in with the
+convert all words to lower case. That makes the **corpus** blends in with the
 output of speech recognizing tools.

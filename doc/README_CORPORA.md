@@ -31,12 +31,12 @@ location for any operation. Default is the path from `.rumor` config or, if
 the config is not exists, root directory is the exact directory of
 ***Corpuscula*** package.
 
-**overwrite**: in downloading methods means force download corpus even it's
-already exists. Default is `True`.
+**overwrite**: if `True` (default), then in downloading methods means force
+download corpus even it's already exists.
 
 #### [*SynTagRus* from UniversalDependencies](https://github.com/UniversalDependencies/UD_Russian-SynTagRus/)
 
-Download and remove *SynTagRus*:
+Downloading and removal *SynTagRus*:
 ```python
 corpus_utils.download_syntagrus(root_dir=None, overwrite=True)
 corpus_utils.remove_syntagrus(root_dir=None)
@@ -52,7 +52,7 @@ corpus_utils.syntagrus.test()
 
 #### [*OpenCorpora*](http://opencorpora.org/?page=downloads)
 
-Download and remove *OpenCorpora*:
+Downloading and removal *OpenCorpora*:
 ```python
 corpus_utils.download_opencorpora(root_dir=None, overwrite=True)
 corpus_utils.remove_opencorpora(root_dir=None)
@@ -66,7 +66,7 @@ corpus_utils.opencorpora.train()
 
 #### [*GICR* from morphoRuEval-2017](https://github.com/dialogue-evaluation/morphoRuEval-2017)
 
-Download and remove *GICR*:
+Downloading and removal *GICR*:
 ```python
 corpus_utils.download_gicr(root_dir=None, overwrite=True)
 corpus_utils.remove_gicr(root_dir=None)
@@ -81,7 +81,7 @@ corpus_utils.gicr.test()
 
 #### [*RNC* from morphoRuEval-2017](https://github.com/dialogue-evaluation/morphoRuEval-2017)
 
-Download and remove *RNC*:
+Downloading and removal *RNC*:
 ```python
 corpus_utils.download_rnc(root_dir=None, overwrite=True)
 corpus_utils.remove_rnc(root_dir=None)
@@ -95,7 +95,7 @@ corpus_utils.rnc.train()
 
 #### [*UD Treebanks*](https://github.com/UniversalDependencies)
 
-Download and remove **corpus_name** *UD Treebank*:
+Downloading and removal **corpus_name** *UD Treebank*:
 ```python
 corpus_utils.download_ud(corpus_name, root_dir=None, overwrite=True)
 corpus_utils.remove_rnc(corpus_name, root_dir=None)
