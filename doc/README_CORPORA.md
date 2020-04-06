@@ -17,12 +17,12 @@ corpus_utils.set_root_dir(root_dir)
 If you'll not do it, `corpuscula` will try to keep corpora in the directory
 where you installed it.
 
+Next method allows to receive currently set root dir:
 ```python
 root_dir = corpus_utils.get_root_dir()
 ```
-Receive currently set root dir.
 
-### Manage known corpora
+### Management of known corpora
 
 Common attributes for operations below:
 
@@ -35,78 +35,78 @@ already exists. Default is True.
 
 #### [SynTagRus from UniversalDependencies](https://github.com/UniversalDependencies/UD_Russian-SynTagRus/)
 
+Download and remove *SynTagRus*:
 ```python
 corpus_utils.download_syntagrus(root_dir=None, overwrite=True)
 corpus_utils.remove_syntagrus(root_dir=None)
 ```
-Download and remove *SynTagRus*.
 
+Wrappers for the whole *SynTagRus* and its parts:
 ```python
 corpus_utils.syntagrus
 corpus_utils.syntagrus.train()
 corpus_utils.syntagrus.dev()
 corpus_utils.syntagrus.test()
 ```
-Wrappers for the whole *SynTagRus* and its parts.
 
 #### [OpenCorpora](http://opencorpora.org/?page=downloads)
 
+Download and remove *OpenCorpora*:
 ```python
 corpus_utils.download_opencorpora(root_dir=None, overwrite=True)
 corpus_utils.remove_opencorpora(root_dir=None)
 ```
-Download and remove *OpenCorpora*.
 
+Wrappers for the whole *OpenCorpora* and its the only part:
 ```python
 corpus_utils.opencorpora
 corpus_utils.opencorpora.train()
 ```
-Wrappers for the whole *OpenCorpora* and its the only part.
 
 #### [GICR from morphoRuEval-2017](https://github.com/dialogue-evaluation/morphoRuEval-2017)
 
+Download and remove *GICR*:
 ```python
 corpus_utils.download_gicr(root_dir=None, overwrite=True)
 corpus_utils.remove_gicr(root_dir=None)
 ```
-Download and remove *GICR*.
 
+Wrappers for the whole *GICR* and its parts:
 ```python
 corpus_utils.gicr
 corpus_utils.gicr.train()
 corpus_utils.gicr.test()
 ```
-Wrappers for the whole *GICR* and its parts.
 
 #### [RNC from morphoRuEval-2017](https://github.com/dialogue-evaluation/morphoRuEval-2017)
 
+Download and remove *RNC*:
 ```python
 corpus_utils.download_rnc(root_dir=None, overwrite=True)
 corpus_utils.remove_rnc(root_dir=None)
 ```
-Download and remove *RNC*.
 
+Wrappers for the whole *RNC* and its the only part:
 ```python
 corpus_utils.rnc
 corpus_utils.rnc.train()
 ```
-Wrappers for the whole *RNC* and its the only part.
 
 #### [UD Treebanks](https://github.com/UniversalDependencies)
 
+Download and remove **corpus_name** *UD Treebank*:
 ```python
 corpus_utils.download_ud(corpus_name, root_dir=None, overwrite=True)
 corpus_utils.remove_rnc(corpus_name, root_dir=None)
 ```
-Download and remove **corpus_name** *UD Treebank*.
 
+Wrappers for the whole **corpus_name** *UD Treebank* and its parts:
 ```python
 corpus = corpus_utils.UniversalDependencies(corpus_name, root_dir=None)
 corpus.train()
 corpus.dev()
 corpus.test()
 ```
-Wrappers for the whole **corpus_name** *UD Treebank* and its parts.
 
 **NB:** The *SynTagRus* wrapper above do exactly the same as the wrapper for
 *UD Treebank* with **corpus_name**=UD_Russian_SynTagRus.
