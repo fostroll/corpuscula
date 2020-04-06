@@ -20,10 +20,10 @@ $ cat example.conllu
 # sent_id = 1
 # text = Мама мыла раму.
 # text_en = Mom washed a chess.
-1	Мама	мама	NOUN	_	Animacy=Anim|Case=Nom|Gender=Fem|Number=Sing	_	_	_	Translit=mama|Gloss=mom
-2	мыла	мыть	VERB	_	Aspect=Imp|Gender=Fem|Mood=Ind|Number=Sing|Tense=Past|VerbForm=Fin|Voice=Act	_	_	_	Translit=myla|Gloss=washed
-3	раму	рама	NOUN	_	Animacy=Inan|Case=Acc|Gender=Fem|Number=Sing	_	_	_	SpaceAfter=No|Translit=ramu|Gloss=chess
-4	.	.	PUNCT	_	_	_	_	_	Translit=.|Gloss=.
+1	Мама	мама	NOUN	_	Animacy=Anim|Case=Nom|Gender=Fem|Number=Sing	_	_	_	Translit=mama|LTranslit=mama|Gloss=mom|
+2	мыла	мыть	VERB	_	Aspect=Imp|Gender=Fem|Mood=Ind|Number=Sing|Tense=Past|VerbForm=Fin|Voice=Act	_	_	_	Translit=myla|LTranslit=myt'|Gloss=washed
+3	раму	рама	NOUN	_	Animacy=Inan|Case=Acc|Gender=Fem|Number=Sing	_	_	_	SpaceAfter=No|Translit=ramu|LTranslit=rama|Gloss=chess
+4	.	.	PUNCT	_	_	_	_	_	Translit=.|LTranslit=.Gloss=.
 
 
 ```
@@ -44,7 +44,9 @@ will be converted to:
     'HEAD': None,
     'ID': '1',
     'LEMMA': 'мама',
-    'MISC': OrderedDict([('Translit', 'mama'), ('Gloss', 'mom')]),
+    'MISC': OrderedDict([('Translit', 'mama'),
+                         ('LTranslit', 'mama'),
+                         ('Gloss', 'mom')]),
     'UPOS': 'NOUN',
     'XPOS': None},
    {'DEPREL': None,
@@ -60,7 +62,9 @@ will be converted to:
     'HEAD': None,
     'ID': '2',
     'LEMMA': 'мыть',
-    'MISC': OrderedDict([('Translit', 'myla'), ('Gloss', 'washed')]),
+    'MISC': OrderedDict([('Translit', 'myla'),
+                         ('LTranslit', "myt'"),
+                         ('Gloss', 'washed')]),
     'UPOS': 'VERB',
     'XPOS': None},
    {'DEPREL': None,
@@ -75,6 +79,7 @@ will be converted to:
     'LEMMA': 'рама',
     'MISC': OrderedDict([('SpaceAfter', 'No'),
                          ('Translit', 'ramu'),
+                         ('LTranslit', 'rama'),
                          ('Gloss', 'chess')]),
     'UPOS': 'NOUN',
     'XPOS': None},
@@ -85,7 +90,9 @@ will be converted to:
     'HEAD': None,
     'ID': '4',
     'LEMMA': '.',
-    'MISC': OrderedDict([('Translit', '.'), ('Gloss', '.')]),
+    'MISC': OrderedDict([('Translit', '.'),
+                         ('LTranslit', '.'),
+                         ('Gloss', '.')]),
     'UPOS': 'PUNCT',
     'XPOS': None}],
   OrderedDict([('sent_id', '1'),
