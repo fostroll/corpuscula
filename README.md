@@ -1,3 +1,4 @@
+<div align="right">RuMor: Russian Morphology project</div>
 <h2 align="center">Corpuscula: a python NLP library for corpus processing</h2>
 
 A part of ***RuMor*** project. It contains tools to simplify corpus
