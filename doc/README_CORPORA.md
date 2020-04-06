@@ -32,7 +32,7 @@ the config is not exists, root directory is the exact directory of
 ***Corpuscula*** package.
 
 **overwrite**: if `True` (default), then in downloading methods means force
-download corpus even it's already exists.
+download corpus even if it's already exists.
 
 #### [*SynTagRus* from UniversalDependencies](https://github.com/UniversalDependencies/UD_Russian-SynTagRus/)
 

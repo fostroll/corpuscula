@@ -31,12 +31,13 @@ wikipedia_utils.remove_syntagrus(lang='RU', root_dir=None)
 ```
 
 **lang**: specifies what language you'd like to download *Wikipedia* dump for.
+Only **lang**=`'RU'` is supported.
 
 **root_dir**: param allow to specify alternative root directory location.
 Default is the path from `.rumor` config or, if the config is not exists, root
 directory is the exact directory of ***Corpuscula*** package.
 
-**overwrite**: If `True` (default), force download corpus even it's already
+**overwrite**: If `True` (default), force download corpus even if it's already
 exists.
 
 ### Wrappers for *Wikipedia*'s parts:
@@ -57,5 +58,5 @@ for `Wikipedia.templates`: `(<template id>, <template title>,
 <template text>)`;
 
 We promote `Wikipedia.templates` on the case if anyone can make parser for
-Wikipedia articles based that templates. So far, only most common templates
-were used for parsing of the articles.
+Wikipedia articles based on that templates. So far, only most common templates
+were used for parsing the articles.

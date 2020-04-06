@@ -7,7 +7,7 @@ processing. Highlights are:
 * full [*CONLL-U*](https://universaldependencies.org/format.html) support
 (includes *CONLL-U Plus*)
 * wrappers for known corpora of Russian language
-* parser and wrapper for russian part of *Wikipedia*
+* parser and wrapper for Russian part of *Wikipedia*
 * corpus dictionary that can be used for further morphology processing
 * simple database to keep named entities
 
