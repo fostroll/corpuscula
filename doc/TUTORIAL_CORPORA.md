@@ -1,7 +1,7 @@
 <div align="right"><strong>RuMor: Russian Morphology project</strong></div>
 <h2 align="center">Corpuscula: a python NLP library for corpus processing</h2>
 
-## Wrappers for CORPORA
+## Management of Corpora
 
 The package `corpus_utils` contain tools for downloading, store and usage of
 known corpora that can be accessed online.

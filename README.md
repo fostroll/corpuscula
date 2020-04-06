@@ -51,4 +51,4 @@ where you installed it.
 
 [CONLL-U Support](https://github.com/fostroll/corpuscula/blob/master/doc/TUTORIAL_CONLLU.md)
 
-[Wrappers for CORPORA](https://github.com/fostroll/corpuscula/blob/master/doc/TUTORIAL_CORPORA.md)
+[Management of Corpora](https://github.com/fostroll/corpuscula/blob/master/doc/TUTORIAL_CORPORA.md)
