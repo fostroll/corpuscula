@@ -20,10 +20,10 @@ $ cat example.conllu
 # sent_id = 1
 # text = Мама мыла раму.
 # text_en = Mom washed a chess.
-1	Мама	мама	NOUN	_	Animacy=Anim|Case=Nom|Gender=Fem|Number=Sing	_	_	_	Translit=mama|LTranslit=mama|Gloss=mom|
+1	Мама	мама	NOUN	_	Animacy=Anim|Case=Nom|Gender=Fem|Number=Sing	_	_	_	Translit=mama|LTranslit=mama|Gloss=mom
 2	мыла	мыть	VERB	_	Aspect=Imp|Gender=Fem|Mood=Ind|Number=Sing|Tense=Past|VerbForm=Fin|Voice=Act	_	_	_	Translit=myla|LTranslit=myt'|Gloss=washed
 3	раму	рама	NOUN	_	Animacy=Inan|Case=Acc|Gender=Fem|Number=Sing	_	_	_	SpaceAfter=No|Translit=ramu|LTranslit=rama|Gloss=chess
-4	.	.	PUNCT	_	_	_	_	_	Translit=.|LTranslit=.Gloss=.
+4	.	.	PUNCT	_	_	_	_	_	Translit=.|LTranslit=.|Gloss=.
 
 
 ```
