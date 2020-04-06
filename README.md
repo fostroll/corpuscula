@@ -55,3 +55,5 @@ directory where you installed it.
 [Management of Corpora](https://github.com/fostroll/corpuscula/blob/master/doc/README_CORPORA.md)
 
 [Wrapper for *Wikipedia*](https://github.com/fostroll/corpuscula/blob/master/doc/README_WIKIPEDIA.md)
+
+[*Corpus Dictionary*](https://github.com/fostroll/corpuscula/blob/master/doc/README_CDICT.md)

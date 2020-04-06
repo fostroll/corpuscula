@@ -151,7 +151,7 @@ class CorpusDict:
             self.restore(pickle.load(f))
 
     def isempty(self):
-        """Check if current state is not contain any information"""
+        """Check if current state does not contain any information"""
         return not self._wforms
 
     def parse(self, corpus, format='conllu', append=False, log_file=LOG_FILE):
@@ -310,9 +310,9 @@ class CorpusDict:
 
         :type cnt_thresh: int
         :type ambiguity_thresh: float
-        If any wform was meet in corpus at least *cnt_thresh* times and it was
-        tagged by the same label at least in *ambiguity_thresh* * 100% cases
-        then that label will mark as trusted for that wform.
+        If any wform was meet in the corpus at least *cnt_thresh* times and it
+        was tagged by the same label at least in (*ambiguity_thresh* * 100)%
+        cases, then that label will mark as trusted for that wform.
 
         :param log_file: stream for info messages
         :type file
