@@ -6,7 +6,7 @@
 The package `corpus_utils` contain tools for downloading, store and usage of
 known corpora that can be accessed online.
 
-### Setting a root dir where to store downloading corpora
+### Setting a root directory for store downloaded corpora
 
 ```python
 from corpuscula import corpus_utils
@@ -14,10 +14,10 @@ corpus_utils.set_root_dir(root_dir)
 ```
 **NB:** it will create/update config file `.rumor` in your home directory.
 
-If you'll not do it, `corpuscula` will try to keep corpora in the directory
+If you won't do it, ***Corpuscula*** will try to keep corpora in the directory
 where you installed it.
 
-Next method allows to receive currently set root dir:
+Next method allows to receive currently set root directory:
 ```python
 root_dir = corpus_utils.get_root_dir()
 ```
@@ -26,14 +26,15 @@ root_dir = corpus_utils.get_root_dir()
 
 Common attributes for operations below:
 
-**root_dir** in all methods allow to specify alternative root dir location
-for any operation. Default is the path from `.rumor` config or, if the config
-is not exists, root dir is the root directory of ***Corpuscula*** package.
+**root_dir**: in all methods allow to specify alternative root directory
+location for any operation. Default is the path from `.rumor` config or, if
+the config is not exists, root directory is the exact directory of
+***Corpuscula*** package.
 
-**overwrite** in downloading methods means force download corpus even it's
-already exists. Default is True.
+**overwrite**: in downloading methods means force download corpus even it's
+already exists. Default is `True`.
 
-#### [SynTagRus from UniversalDependencies](https://github.com/UniversalDependencies/UD_Russian-SynTagRus/)
+#### [*SynTagRus* from UniversalDependencies](https://github.com/UniversalDependencies/UD_Russian-SynTagRus/)
 
 Download and remove *SynTagRus*:
 ```python
@@ -49,7 +50,7 @@ corpus_utils.syntagrus.dev()
 corpus_utils.syntagrus.test()
 ```
 
-#### [OpenCorpora](http://opencorpora.org/?page=downloads)
+#### [*OpenCorpora*](http://opencorpora.org/?page=downloads)
 
 Download and remove *OpenCorpora*:
 ```python
@@ -63,7 +64,7 @@ corpus_utils.opencorpora
 corpus_utils.opencorpora.train()
 ```
 
-#### [GICR from morphoRuEval-2017](https://github.com/dialogue-evaluation/morphoRuEval-2017)
+#### [*GICR* from morphoRuEval-2017](https://github.com/dialogue-evaluation/morphoRuEval-2017)
 
 Download and remove *GICR*:
 ```python
@@ -78,7 +79,7 @@ corpus_utils.gicr.train()
 corpus_utils.gicr.test()
 ```
 
-#### [RNC from morphoRuEval-2017](https://github.com/dialogue-evaluation/morphoRuEval-2017)
+#### [*RNC* from morphoRuEval-2017](https://github.com/dialogue-evaluation/morphoRuEval-2017)
 
 Download and remove *RNC*:
 ```python
@@ -92,7 +93,7 @@ corpus_utils.rnc
 corpus_utils.rnc.train()
 ```
 
-#### [UD Treebanks](https://github.com/UniversalDependencies)
+#### [*UD Treebanks*](https://github.com/UniversalDependencies)
 
 Download and remove **corpus_name** *UD Treebank*:
 ```python
@@ -109,7 +110,7 @@ corpus.test()
 ```
 
 **NB:** The *SynTagRus* wrapper above do exactly the same as the wrapper for
-*UD Treebank* with **corpus_name**=UD_Russian_SynTagRus.
+*UD Treebank* with **corpus_name**=`'UD_Russian_SynTagRus'`.
 
 ### Adjust corpora for speech
 
@@ -120,11 +121,12 @@ of the same type. ***Corpuscula*** promote a simple way for such
 transformation of known corpora:
 ```python
 corpus = corpus_utils.AdjustedForSpeech(corpus_utils.syntagrus)
-corpus = corpus_utils.AdjustedForSpeech(UniversalDependencies('UD_Russian_SynTagRus'))
+corpus = corpus_utils.AdjustedForSpeech(corpus_utils.UniversalDependencies('UD_Russian_SynTagRus'))
 ```
 
-Really, any object with `train()`, `dev()`, or `test()` methods can be wrapped
-by `corpus_utils.AdjustedForSpeech`. However, if your **corpus** is simply a
+Really, any object with `train()`, `dev()`, or `test()` methods which returns
+data in *Parsed CONLL-U* format can be wrapped by
+`corpus_utils.AdjustedForSpeech`. However, if your **corpus** is simply a
 [CONLL-U](https://universaldependencies.org/format.html) file or
 [Parsed CONLL-U](https://github.com/fostroll/corpuscula/blob/master/doc/README_PARSED_CONLLU.md)
 sequence, you can just
@@ -140,7 +142,7 @@ method of `Conllu` class directly:
 from corpuscula import Conllu
 corpus = Conllu.fix(corpus, adjust_for_speech=True)
 ```
-Really, the wrapper `corpus_utils.AdjustedForSpeech` do exactly that
+Really, the wrapper `corpus_utils.AdjustedForSpeech` do exactly that.
 
 ### Support for other corpora
 
@@ -158,13 +160,14 @@ Here:
 **url**: url of a downloading file.
 
 **dname**: a name of the directory where to download. The directory will be
-created (if not exists) inside your **root_dir**/corpus path.
+created (if not exists) inside your **root_dir**/corpus path. If **dname** is
+`None`, param **name** will be used instead.
 
-**fname**: a name of a downloading file. If None then the name from url will
+**fname**: a name of a downloading file. If `None`, then the name from url will
 be kept.
 
-**file_noless**: size in bytes. If not None, then check a size of a
-downloading file, and if it is smaller, then don't download it and keep
+**file_noless**: size in bytes. If not `None`, then the metod checks a size of
+a downloading file, and if it is smaller, then doesn't download it and keeps
 already downloaded one (if exists).
 
 **silent**: suppress progress messages.
@@ -176,5 +179,5 @@ corpus_utils.remove_corpus(dname, root_dir=None)
 **dname**: a name of the corpus' directory (located inside **root_dir**/corpus
 path).
 
-NB: Param **dname**=None` is allowed. In this case *all the corpora will be
-deleted*. Be careful. It's a feature.
+NB: Param **dname**=`None` is allowed. In this case *all the corpora will be
+deleted*. It's a feature. Be careful.

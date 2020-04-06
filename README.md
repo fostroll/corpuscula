@@ -37,8 +37,8 @@ $ pip install -e .
 
 ## Setup
 
-After installation, you'd like to specify a root path where you prefer to store
-downloading corpora:
+After installation, you'd like to specify a directory where you prefer to
+store downloading corpora:
 ```python
 >>> import corpuscula.corpus_utils as cu
 >>> cu.set_root_dir(<path>)  # We will keep corpora here

@@ -68,8 +68,7 @@ def download_corpus(name, url, dname=None, root_dir=None, fname=None,
     the project corpus storage in the directory *dname* with the file name
     *fname*.
 
-    If *dname* is None, corpus will be downloaded right in the root
-    of the storage.
+    If *dname* is None, *name* param is used instead.
 
     If *fname is None, the name of the file will be copied from the *url*
 
@@ -81,7 +80,7 @@ def download_corpus(name, url, dname=None, root_dir=None, fname=None,
     ``.utils.download_file()`` method"""
     dpath = os.path.join(root_dir if root_dir else get_root_dir(),
                          CORPUS_DNAME,
-                         dname if dname is not None else '')
+                         dname if dname is not None else name)
     
     return download_file(url, dpath=dpath, fname=fname,
                          log_msg='Downloading {}'.format(name), **kwargs)
