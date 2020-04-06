@@ -1,3 +1,4 @@
+<div align="right"><strong>RuMor: Russian Morphology project</strong></div>
 <h2 align="center">Corpuscula: a python NLP library for corpus processing</h2>
 
 ## CONLL-U support
