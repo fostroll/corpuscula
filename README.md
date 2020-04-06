@@ -49,6 +49,6 @@ where you installed it.
 
 ## Usage
 
-[CONLL-U Support](https://github.com/fostroll/corpuscula/blob/master/doc/TUTORIAL_CONLLU.md)
+[CONLL-U Support](https://github.com/fostroll/corpuscula/blob/master/doc/README_CONLLU.md)
 
-[Management of Corpora](https://github.com/fostroll/corpuscula/blob/master/doc/TUTORIAL_CORPORA.md)
+[Management of Corpora](https://github.com/fostroll/corpuscula/blob/master/doc/README_CORPORA.md)

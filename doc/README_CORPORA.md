@@ -126,7 +126,7 @@ corpus = corpus_utils.AdjustedForSpeech(UniversalDependencies('UD_Russian_SynTag
 Really, any object with `train()`, `dev()`, or `test()` methods can be wrapped
 by `corpus_utils.AdjustedForSpeech`. However, if your **corpus** is simply a
 [CONLL-U](https://universaldependencies.org/format.html) file or
-[Parsed CONLL-U](https://github.com/fostroll/corpuscula/blob/master/doc/TUTORIAL_PARSED_CONLLU.md)
+[Parsed CONLL-U](https://github.com/fostroll/corpuscula/blob/master/doc/README_PARSED_CONLLU.md)
 sequence, you can just
 use `adjust_for_speech` parameter of `Conllu.load` method:
 ```python

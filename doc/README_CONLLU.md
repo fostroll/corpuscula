@@ -7,7 +7,7 @@ The class `Conllu` promotes full *CONLL-U* format support (including *CONLL-U
 Plus*). The description of *CONLL-U* format you can find on
 [Universal Dependencies](https://universaldependencies.org/format.html)
 project site. In `corpuscula`, internal representation of *CONLL-U* file is
-[Parsed CONLL-U](https://github.com/fostroll/corpuscula/blob/master/doc/TUTORIAL_PARSED_CONLLU.md)
+[Parsed CONLL-U](https://github.com/fostroll/corpuscula/blob/master/doc/README_PARSED_CONLLU.md)
 format.
 
 All methods of the class are static. All returning sequences are generators.
