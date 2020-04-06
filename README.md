@@ -4,7 +4,8 @@
 A part of ***RuMor*** project. It contains tools to simplify corpus
 processing. Highlights are:
 
-* full CONLL-U support (includes CONLL-U Plus)
+* full [*CONLL-U*](https://universaldependencies.org/format.html) support
+(includes *CONLL-U Plus*)
 * wrappers for known corpora of Russian language
 * parser and wrapper for russian part of Wikipedia
 * corpus dictionary that can be used for further morphology processing
@@ -14,20 +15,20 @@ processing. Highlights are:
 
 ### pip
 
-Corpuscula supports Python 3.5 or later. To install it via pip, run:
+***Corpuscula*** supports *Python 3.5* or later. To install it via *pip*, run:
 ```sh
 $ pip install corpuscula
 ```
 
-If you currently have a previous version of `corpuscula` installed, use:
+If you currently have a previous version of ***Corpuscula*** installed, use:
 ```sh
 $ pip install corpuscula -U
 ```
 
 ### From Source
 
-Alternatively, you can also install `corpuscula` from source of this git
-repository:
+Alternatively, you can also install ***Corpuscula*** from source of this *git
+repository*:
 ```sh
 $ git clone https://github.com/fostroll/corpuscula.git
 $ cd corpuscula
@@ -44,8 +45,8 @@ downloading corpora:
 ```
 **NB:** it will create/update config file `.rumor` in your home directory.
 
-If you'll not do it, `corpuscula` will try to keep corpora in the directory
-where you installed it.
+If you'll not do it, ***Corpuscula*** will try to keep corpora in the
+directory where you installed it.
 
 ## Usage
 
