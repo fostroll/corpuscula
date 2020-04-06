@@ -29,9 +29,9 @@ $ pip install corpuscula -U
 Alternatively, you can also install `corpuscula` from source of this git
 repository:
 ```sh
-S git clone https://github.com/fostroll/corpuscula.git
-S cd corpuscula
-S pip install -e .
+$ git clone https://github.com/fostroll/corpuscula.git
+$ cd corpuscula
+$ pip install -e .
 ```
 
 ## Setup
