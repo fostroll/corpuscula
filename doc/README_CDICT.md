@@ -97,8 +97,8 @@ All *UPOS* tags ordered by their frequency:
 ```python
 cdict.get_tags_freq()
 ```
-Return is a list of tuples (<*UPOS* tag> (`str`), <tag count> (`int`), <tag
-frequency> (`float`)) ordered by frequency.
+Return is a list of tuples (*UPOS* tag (`str`), tag count (`int`), tag
+frequency (`float`)) ordered by frequency.
 
 All *FEATS* tags:
 ```python
