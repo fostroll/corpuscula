@@ -10,7 +10,7 @@ processing. Highlights are:
 * full CONLL-U support (includes CONLL-U Plus)
 * wrappers for known corpora of Russian language
 * parser and wrapper for russian part of Wikipedia
-* corpus dictionary that can be used for further morphology processing
+* Corpus Dictionary that can be used for further morphology processing
 """
 from .conllu import Conllu
 from .corpus_dict import CorpusDict

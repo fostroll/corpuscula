@@ -8,7 +8,7 @@ processing. Highlights are:
 (includes *CONLL-U Plus*)
 * wrappers for known corpora of Russian language
 * parser and wrapper for Russian part of *Wikipedia*
-* corpus dictionary that can be used for further morphology processing
+* *Corpus Dictionary* that can be used for further morphology processing
 * simple database to keep named entities
 
 ## Installation

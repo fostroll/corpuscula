@@ -310,7 +310,7 @@ class CorpusDict:
 
         :type cnt_thresh: int
         :type ambiguity_thresh: float
-        If any wform was meet in the corpus at least *cnt_thresh* times and it
+        If any wform has met in the corpus at least *cnt_thresh* times and it
         was tagged by the same label at least in (*ambiguity_thresh* * 100)%
         cases, then that label will mark as trusted for that wform.
 
