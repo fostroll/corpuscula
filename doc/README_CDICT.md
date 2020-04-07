@@ -91,26 +91,41 @@ All *UPOS* tags:
 ```python
 cdict.get_tags()
 ```
-Return is a set of `str` *UPOS* tag labels in the corpus.
+Returns a set of `str` *UPOS* tag labels in the corpus.
 
 All *UPOS* tags ordered by their frequency:
 ```python
 cdict.get_tags_freq()
 ```
-Return is a list of tuples (*UPOS* tag (`str`), tag count (`int`), tag
-frequency (`float`)) ordered by frequency.
+Returns a list of tuples (*UPOS* tag (`str`), tag count (`int`), tag frequency
+(`float`)) ordered by frequency.
 
 All *FEATS* tags:
 ```python
 cdict.get_feats()
 ```
-Return is a dict of all possible keys (`str`) and values (`str`) of *FEATS* in
+Returns a dict of all possible keys (`str`) and values (`str`) of *FEATS* in
 the corpus.
 
 *UPOS* - *FEATS* matching:
 ```python
 cdict.get_tag_feats(tag)
 ```
-Return is a dict of all possible keys (`str`) and values (`str`) of *FEATS*
+Returns a dict of all possible keys (`str`) and values (`str`) of *FEATS*
 for the *UPOS* **tag** given.
 
+*FEATS* tags ordered by frequency:
+```python
+cdict.get_feats_freq(tag)
+```
+Returns a list of ordered by frequency tuples (*FEATS* key (`str`), key count
+(`int`), key frequency (`float`)) of all possible *FEATS* keys for the given
+*UPOS* **tag**.
+
+*FEATS* values ordered by frequency:
+```python
+cdict.get_feat_vals_feats(tag, feat)
+```
+Returns a list of ordered by frequency tuples (*FEATS* value (`str`), 
+value count (`int`), value frequency (`float`)) of all possible *FEATS* values
+for the given *UPOS* **tag** and *FEATS* key **feat**.
