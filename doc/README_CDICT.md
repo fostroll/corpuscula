@@ -84,9 +84,7 @@ if cdict.isempty():
     [...]
 ```
 
-### Usage
-
-#### Getting a summary of the corpus processed
+### Getting a summary of the corpus processed
 
 Get a most common *UPOS* tag:
 ```python
@@ -137,7 +135,7 @@ Returns a list of ordered by frequency tuples (*FEATS* value (`str`),
 value count (`int`), value frequency (`float`)) of all possible *FEATS* values
 for the given *UPOS* **tag** and *FEATS* key **feat**.
 
-#### Make statistical hint predictions
+### Make hint predictions
 
 Predict the *UPOS* tag label:
 ```python
@@ -193,7 +191,7 @@ If we can't find the value, we return (`None`, `None`).
 Param **cnt_thresh** has the same meaning as the one of
 `CorpusDict.predict_tag` method.
 
-#### Supplements
+### Supplements
 
 You can check if a certain word form was met in the training corpus:
 ```python
