@@ -4,14 +4,13 @@
 ## *Corpus Dictionary*
 
 The class `CorpusDict` parse training corpus and gather some statistics that
-can be used in further morphology processing pipeline. In particular, the
-class has methods to predict *POS*, *LEMMA* and *FEATS* tags of a word form
-based on that statistics. Further, that predictions can be used as a hints for
-more complicated tagging models. The `CorpusDict` *LEMMA* generator has
-`0.9809` accuracy on *SynTagRus* corpus, that is not far from current state of
-the art. Adding our [***Morra***](https://github.com/fostroll/morra) library
-allows to increase that value upto `0.9873`, and that threshold still stay
-unbeaten.
+can be used in further morphology processing pipeline. Also, the class has
+methods to predict *POS*, *LEMMA* and *FEATS* tags of a word form based on
+that statistics. Further, that predictions can be used as a hints for more
+complicated tagging models. The `CorpusDict` *LEMMA* generator has `0.9809`
+accuracy on *SynTagRus* corpus, that is not far from current state of the art.
+Adding our [***Morra***](https://github.com/fostroll/morra) library allows to
+increase that value upto `0.9873`, and that threshold still stay unbeaten.
 
 ### Create, Backup and Restore
 
