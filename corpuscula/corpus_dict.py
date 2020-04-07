@@ -571,7 +571,7 @@ class CorpusDict:
         return self._most_common_tag
 
     def predict_tag(self, wform, isfirst=False, cnt_thresh=None):
-        """If the *wform* has a trusted tag then return that tag with
+        """If the *wform* has a trusted tag, then return that tag with
         a relevance coef equals to 1. Elsewise, we choose the most common tag
         for that *wform* and calculate some empirical value as a relevance
         coef.
@@ -579,8 +579,9 @@ class CorpusDict:
         The relevance coef may be used to improve an alternative tag
         prediction algorithm.
 
-        :param cnt_thresh: if the *wform* was meet in corpus less than
-                           *cnt_thresh* times then the relevance coef will be
+        :param isfirst: pointed whether the *wform* is a first word in the sentence
+        :param cnt_thresh: if the *wform* was met in the corpus less than
+                           *cnt_thresh* times, then the relevance coef will be
                            discounted by (count / cnt_thresh)
         :type cnt_thresh: int
         :return: tag predicted and relevance coef
@@ -634,8 +635,8 @@ class CorpusDict:
         prediction algorithm.
 
         :isfirst: True if the *wform* is first in a sequence
-        :param cnt_thresh: if the *wform* was meet in corpus less than
-                           *cnt_thresh* times then the relevance coef will be
+        :param cnt_thresh: if the *wform* was met in corpus less than
+                           *cnt_thresh* times, then the relevance coef will be
                            discounted by (count / cnt_thresh)
         :type cnt_thresh: int
         :return: lemma chosen and relevance coef
@@ -745,8 +746,8 @@ class CorpusDict:
         The relevance coef may be used to improve an alternative feats
         prediction algorithm.
 
-        :param cnt_thresh: if the *wform* was meet in corpus less than
-                           *cnt_thresh* times then the relevance coef will be
+        :param cnt_thresh: if the *wform* was met in corpus less than
+                           *cnt_thresh* times, then the relevance coef will be
                            discounted by (count / cnt_thresh)
         :type cnt_thresh: int
         :return: feat predicted and relevance coef
