@@ -157,7 +157,7 @@ less than **cnt_thresh** times, then the relevance coef will be discounted by
 If **cnt_thresh** is not specified (`None`), then the default value of the
 constructor of the class will be used.
 
-NB: If the **wform** is not known, the method returns (`None`, `None`).
+**NB:** If the **wform** is not known, the method returns (`None`, `None`).
 
 Predict the *LEMMA* field value:
 ```python

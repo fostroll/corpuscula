@@ -57,3 +57,5 @@ directory where you installed it.
 [Wrapper for *Wikipedia*](https://github.com/fostroll/corpuscula/blob/master/doc/README_WIKIPEDIA.md)
 
 [*Corpus Dictionary*](https://github.com/fostroll/corpuscula/blob/master/doc/README_CDICT.md)
+
+[Utilities](https://github.com/fostroll/corpuscula/blob/master/doc/README_UTILS.md)

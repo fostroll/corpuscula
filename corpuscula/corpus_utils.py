@@ -24,7 +24,7 @@ ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
 _CFG_ROOT_DIR = 'ROOT_DIR'
 def set_root_dir(root_dir):
     root_dir = root_dir.strip()
-    cfg_path = os.path.join(Path.home(), '.rumor')
+    cfg_path = os.path.join(str(Path.home()), '.rumor')
     cfg = ["# Config file for RuMor project. Don't change it manually."]
     isdone = False
     if os.path.isfile(cfg_path):
@@ -48,7 +48,7 @@ def set_root_dir(root_dir):
             print(line, file=f)
 
 def get_root_dir():
-    cfg_path = os.path.join(Path.home(), '.rumor')
+    cfg_path = os.path.join(str(Path.home()), '.rumor')
     res = ROOT_DIR
     with open(cfg_path, 'rt', encoding='utf-8') as f:
         for line in f:

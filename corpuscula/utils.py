@@ -9,21 +9,17 @@ import os
 import shutil
 import sys
 from urllib.request import urlopen
-import uuid
 
 LOG_FILE=sys.stderr
 
 
-def vote(_iter, weights=None):
-    """Return a list of unique objects from *_iter* sorted by frequency.
+def vote(sequence, weights=None):
+    """Return a list of unique objects from the *sequence* sorted by frequency.
 
     :rtype: list[(obj, count, freq)]
     """
     cands = {}
-    if weights:
-        weights = iter(weights)
-    for o in _iter:
-        w = next(weights) if weights else 1
+    for o, w in zip(sequence, weights if weights else iter(lambda: 1, 2)):
         cands[o] = cands.get(o, 0) + w
     cnt = sum(cands.values())
     res = [(x, y, y / cnt) for x, y in cands.items()]
@@ -31,11 +27,11 @@ def vote(_iter, weights=None):
     return res
 
 def find_affixes(wform, lemma, lower=False):
-    """Find the longest common part of a given *wform* and *lemma*.
+    """Find the longest common part of the given *wform* and *lemma*.
 
     :param lower: if True then return values will be always in lower case
-    :return: prefix of wform, common part, suffix/flexion of wform,
-             prefix of lemma, common part, suffix/flexion of lemma
+    :return: prefix, common part, suffix/flexion of the *wform*;
+             prefix, common part, suffix/flexion of the *lemma*
     :rtype: str, str, str, str, str, str
     """
     if lower:
@@ -58,8 +54,8 @@ def find_file(prefix, ext=None, dname=None):
     first one will be returned.
     
     :param ext: an extension of the target file
-    :param dname: a name of the directory for searching. If None then current
-                  directory will be used
+    :param dname: a name of the directory for searching. If None, then the
+                  current directory will be used
     """
     for fname in os.listdir(dname):
         if fname.startswith(prefix) and (not ext or fname.endswith('.' + ext)):
@@ -75,7 +71,11 @@ def find_file(prefix, ext=None, dname=None):
 def rmdir(dname):
     """Remove a directory *dname*"""
     for fname in os.listdir(dname):
-        os.remove(os.path.join(dname if dname is not None else '', fname))
+        path = os.path.join(dname, fname)
+        if os.path.isdir(path):
+            rmdir(path)
+        else:
+            os.remove(path)
     os.rmdir(dname)
 
 def print_progress(current_value, end_value=10, step=1, start_value=0,
@@ -171,8 +171,8 @@ def copyfileobj(fsrc, fdst, buf_size=COPY_BUF_SIZE,
 def copy_file(src, dst, buf_size=COPY_BUF_SIZE, **kwargs):
     """Copy data from file *src* to file *dst*.
 
-    :param src: input file name
-    :param dst: output file name
+    :param src: source file name
+    :param dst: destination file name
     :param kwargs: params for ``copyfileobj()`` method
     """
     with open(src, 'rb') as fsrc, open(dst, 'wb') as fdst:
@@ -186,18 +186,18 @@ def download_file(url, dpath=None, fname=None, chunk_size=CALLBACK_CHUNK_SIZE,
 
     :param url: source url
     :type url: str
-    :param dpath: path to destination directory;
-                  if None then current work directory will be used
+    :param dpath: path to the destination directory;
+                  if None, then the current work directory will be used
     :type dpath: str
     :param fname: result file name;
                   if None then the name from url will be kept
     :type fname: str
     :param chunk_size: show progress after every *chunk_size* bytes read
     :type chunk_size: int
-    :file_noless: if file is smaller then don't download it and keep already
-                  downloaded one (if exists)
+    :file_noless: if the file is smaller, then don't download it and keep
+                  already downloaded one (if exists)
     :type file_noless: int
-    :param overwrite: if False and file is exist, overwrite it
+    :param overwrite: if False and the file is exist, overwrite it
     :type overwrite: bool
     :param log_msg: message that will be printed before downloading
     :type log_msg: str
@@ -228,7 +228,8 @@ def download_file(url, dpath=None, fname=None, chunk_size=CALLBACK_CHUNK_SIZE,
                 elif f_in_length < file_noless:
                     raise RuntimeError(
                         'The size of the downloading file less than threshold '
-                        '({} bytes vs. {}). '.format(f_in_length, file_noless) +
+                        '({} bytes vs. {}). '
+                            .format(f_in_length, file_noless) +
                         'Check the url manually:\n' + url
                     )
             total_, used_, free_ = shutil.disk_usage(dpath)
@@ -238,7 +239,8 @@ def download_file(url, dpath=None, fname=None, chunk_size=CALLBACK_CHUNK_SIZE,
             chunks_count = f_in_length / CALLBACK_CHUNK_SIZE \
                 if f_in_length is not None else None
             if chunks_count is not None:
-                chunks_count = int(chunks_count) + (not chunks_count.is_integer())
+                chunks_count = int(chunks_count) \
+                             + (not chunks_count.is_integer())
             prev_line_no = 0
             if not silent and (chunks_count is None or chunks_count > 2):
                 print_progress(0, chunks_count)
@@ -250,7 +252,7 @@ def download_file(url, dpath=None, fname=None, chunk_size=CALLBACK_CHUNK_SIZE,
                     prev_line_no = print_progress(
                         bytes_read if chunks_count is None else chunks_read,  # current
                         chunks_count,                                         # end
-                        CALLBACK_CHUNK_SIZE if chunks_count is None else 1   # step
+                        CALLBACK_CHUNK_SIZE if chunks_count is None else 1    # step
                     ) if not silent and (chunks_count is None
                                       or chunks_count > 2) else None
                 with open(fpath_, 'wb') as f_out:
@@ -278,8 +280,8 @@ def download_file(url, dpath=None, fname=None, chunk_size=CALLBACK_CHUNK_SIZE,
 def read_bz2(apath, encoding='utf-8', errors='ignore', process_line=None):
     """Read lines from a file in bz2 archive.
 
-    :param process_line: a function that will invoked to process each file
-                         line. If result is a list then it will be
+    :param process_line: a function that will be invoked to process each file's
+                         line. If its result is a list, then it will be
                          returned by lines
     :type process_line: callable
     """
@@ -299,8 +301,8 @@ def read_rar(apath, fname, encoding='utf-8', errors='ignore',
     """Read lines from a file in rar archive.
 
     :param fname: a name of the file in the archive
-    :param process_line: a function that will invoked to process each file
-                         line. If result is a list then it will be
+    :param process_line: a function that will be invoked to process each file's
+                         line. If its result is a list, then it will be
                          returned by lines
     :type process_line: callable
     """
@@ -322,8 +324,8 @@ def read_zip(apath, fname, encoding='utf-8', errors='ignore',
     """Read lines from a file in zip archive.
 
     :param fname: a name of the file in the archive
-    :param process_line: a function that will invoked to process each file
-                         line. If result is a list then it will be
+    :param process_line: a function that will be invoked to process each file's
+                         line. If its result is a list, then it will be
                          returned by lines
     :type process_line: callable
     """
