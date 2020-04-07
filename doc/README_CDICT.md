@@ -7,10 +7,11 @@ The class `CorpusDict` parse training corpus and gather some statistics that
 can be used in further morphology processing pipeline. Also, the class has
 methods to predict *POS*, *LEMMA* and *FEATS* tags of a word form based on
 that statistics. Further, that predictions can be used as a hints for more
-complicated tagging models. The `CorpusDict` *LEMMA* generator has `0.9809`
-accuracy on *SynTagRus* corpus, that is not far from current state of the art.
-Adding our [***Morra***](https://github.com/fostroll/morra) library allows to
-increase that value upto `0.9873`, and that threshold still stay unbeaten.
+complicated tagging models. The *LEMMA* generator of the `CorpusDict` has
+`0.9809` accuracy on *SynTagRus* corpus, that is not far from current state of
+the art. Adding our [***Morra***](https://github.com/fostroll/morra) library
+allows to increase that value upto `0.9873`, and that threshold still stay
+unbeaten.
 
 ### Create, Backup and Restore
 
@@ -53,7 +54,7 @@ parameters that engine is used when it counts a probability that some given
 word form has a certain tag. In particular, if any word form was met in the
 processed corpus at least **cnt_thresh** times, and it was tagged by the same
 label at least in (**ambiguity_thresh** * 100)% cases, then that label will
-mark as trusted for that word form.
+mark as *trusted* for that word form.
 
 If params **cnt_thresh** and **ambiguity_thresh** stay unchanged (`None`),
 then default values of the constructor of the class will be used (see below).
@@ -141,17 +142,17 @@ Predict the *UPOS* tag label:
 cdict.predict_tag(wform, isfirst=False, cnt_thresh=None)
 ```
 Returns a tuple of an *UPOS* tag predicted and a relevance coef. If the word
-form **wform** has a trusted tag label, then returns that tag with a relevance
-coef equals to 1. Elsewise, we choose the most common tag for **wform** and
-calculate some empirical value as a relevance coef.
+form **wform** has a *trusted* tag label, then returns that tag with a
+relevance coef equals to 1. Elsewise, we choose the most common tag for
+**wform** and calculate some empirical value as a relevance coef.
 
 Param **isfirst** pointed whether the **wform** is a first word in the
 sentence.
 
-**cnt_thresh** detect when we must put a penalty on the our prediction because
-of a lack of data. If the **wform** was met in the training corpus less than
-**cnt_thresh** times, then the relevance coef will be discounted by (count /
-**cnt_thresh**).
+**cnt_thresh** detects, when we must put a penalty on the our prediction
+because of a lack of data. If the **wform** was met in the training corpus
+less than **cnt_thresh** times, then the relevance coef will be discounted by
+(count / **cnt_thresh**).
 
 If **cnt_thresh** is not specified (`None`), then the default value of the
 constructor of the class will be used.
@@ -163,9 +164,9 @@ Predict the *LEMMA* field value:
 cdict.predict_lemma(wform, tag, isfirst=False, cnt_thresh=None)
 ```
 Returns a tuple of a lemma and a relevance coef. If the word form **wform**
-has a trusted lemma, then returns it with a relevance coef equals to 1.
+has a *trusted* lemma, then returns it with a relevance coef equals to 1.
 Elsewise, we choose the most common lemma for **wform** and *UPOS* **tag**
-calculate some empirical value as a relevance coef.
+and calculate some empirical value as a relevance coef.
 
 If the **wform** is not known, we try to construct the lemma based on words
 from the training corpus dictionary that have similar endings. We set
@@ -182,7 +183,7 @@ cdict.predict_feat(feat, wform, lemma, tag, cnt_thresh=None)
 Search a tuple of a most common *FEATS* tag value for a certain *FEATS* tag
 key **feat** by a given word form **wform**, word's **lemma** and an *UPOS*
 **tag**. Returns a tuple of a value found and a relevance coef. If the value
-counted as trusted, then the relevance coef set to 1. Elsewise, we calculate
+counted as *trusted*, then the relevance coef set to 1. Elsewise, we calculate
 for it some empirical value.
 
 If we can't find the value, we return (`None`, `None`).
