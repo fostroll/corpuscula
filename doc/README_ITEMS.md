@@ -103,7 +103,7 @@ also keep the number of occurences for every gender.
 
 By default, script set thresholds of `5` for names and patronym, and of `3`
 for surnames. That means that if any item was met less times than that
-threshold, then we remove it. We also consider this param when make conclusion
+threshold, we remove it. We also consider this param when make conclusion
 about name's gender. E.g.: if we met that name as female `2` times and as male
 `10` times, that we count the name as male and just remove it's "female part".
 The total number of occurences for that case we set to `10`.
@@ -112,11 +112,11 @@ We need such pruning because the names we got contain a lot of mistypes.
 Even set threshold to `2` decrease names and patronyms thrice (number of
 surnames decreases twice). But, maybe, it's worth to keep all mistakes.
 Because, if someone make them once, you can meet them again... Anyhow, we put
-to the root directory of ***Corpuscula*** the original `names.tgz` along with
-our pruned `Items` files. We separate surnames from names and patronyms and
-store it to  `surnames.pickle` file. Names and patronyms you can find in
+to the ***Corpuscula*** root directory the original `names.zip` along with our
+pruned `Items` files. We separate surnames from names and patronyms and store
+it to  `surnames.pickle` file. Names and patronyms you can find in
 `names.pickle` file.
 
-If you need your own version of names' database, you can change agruments of
+If you need your own version of names' database, you can change arguments of
 the call of the function `load_names_db` at the bottom of the `load_names.py`
-script.
+script and re-run it.
