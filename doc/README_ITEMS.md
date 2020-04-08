@@ -87,16 +87,16 @@ if items.isempty():
 
 ### Russian Names Database
 
-As an example of usage of `Items`, we put to the root directory of our project
-a csv-file (in Russian) with a list of names (see `names.tgz` file). We can't
-find such list anywhere, so we just grab the data from open resouces (mostly,
-it's some war heroes and smth like that, so we have a strong bias to the male
-side). We also put there the script `load_names.py` to convert that data to
-`Items` databases. The script is complex, but the meaning of it, that we
-detect a gender of person by it's patronym. As result, we get lists of unique
-names, patronyms and surnames together with their genders and numbers of
-occurences. If a name is unisex, we also keep the number of occurences for
-every gender.
+As an example of usage of `Items`, we put to the root of our github directory
+of ***Corpuscula*** project a csv-file (in Russian) with a list of names (see
+`names.tgz` file). We can't find such list anywhere, so we just grab the data
+from open resouces (mostly, it's some war heroes and smth like that, so we
+have a strong bias to the male side). We also put there the script
+`load_names.py` to convert that data to `Items` databases. The script is
+complex, but the meaning of it, that we detect a gender of person by it's
+patronym. As result, we get lists of unique names, patronyms and surnames
+together with their genders and numbers of occurences. If a name is unisex, we
+also keep the number of occurences for every gender.
 
 By default, script set thresholds of 5 for names and patronym, and of 3 for
 surnames. That means that if any item was met less times than that threshold,
@@ -109,10 +109,10 @@ We need such pruning because the names we got contain a lot of mistypes.
 Even set threshold to 2 decrease names and patronyms thrice (number of
 surnames decreases twice). But, maybe, it's worth to keep all mistakes.
 Because, if someone make them once, you can meet them again... Anyhow, we put
-to the root directory the original `names.tgz` along with our pruned `Items`
-files. We separate surnames from names and patronyms and store it to 
-`surnames.pickle` file. Names and patronyms you can find in `names.pickle`
-file.
+to the root directory of ***Corpuscula*** the original `names.tgz` along with
+our pruned `Items` files. We separate surnames from names and patronyms and
+store it to  `surnames.pickle` file. Names and patronyms you can find in
+`names.pickle` file.
 
 If you need your own version of names' database, you can change agruments of
 the call of the function `load_names_db` at the bottom of the `load_names.py`
