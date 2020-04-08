@@ -15,30 +15,33 @@ without params:
 from corpuscula import Items
 items = Items()
 ```
-See below for the full parameter list of the constructor.
+See below for the parameters of the constructor.
 
 Then, you can load data to `Items`:
 ```python
 items.load(items, items_class=None, update=False, encoding='utf-8-sig',
            log_file=sys.stderr)
 ```
-Param **item** usually is a *dict* ({**item**: {attr: val}}), but it can also
-be a *list* or set of **item** constants. In the former case they will be
+Param **item** is usually a *dict* ({**item**: {attr: val}}), but it can also
+be a *list* or *set* of **item** constants. In the latter case they will be
 transformed to the *dict* of {**item**: {}}.
 
 While loading, orig **item** will be copied to its attributes with a key =
 `None`, and if the **item** is of `str` type, then its key in **items** will
-be replaced to `**items**.lower()`. It's done for not to keep some one
-entiny twice in different character case.
+be replaced to lowercase version of **items**. It's done for not to keep one
+entiny twice in different character cases.
 
-**NB:** it's your burden to care of the absence of such duplicates in the data
-of **items**.
+**NB:** It's your burden to care of the absence of such duplicates in the data
+of **items**. During loading, they will be silently replaced by the last one.
 
 **items_class** is just a `str` name of the category for your **items** data.
 If the category with that name is already present in `Items`, you should to
-set the **update** parameter to `True`. Elsewise, you'll get an error.
+set the **update** parameter to `True`. You'll get an error elsewise.
 
 **NB:** `None` is a valid value for the **items_class**.
+
+**log_file** specifies a stream for progress messages. Default is
+`sys.stderr`. If **log_file**=`None`, all output will be suppressed.
 
 After loading, you can read the data kept:
 ```python
@@ -52,7 +55,7 @@ use **copy**=`False` to speed up your pipeline.
 if **item** is `None` (default), you'll get all the **item_class** category as
 the return.
 
-**NB**: The `Items` doesn't have methods for change or removel **item** or
+**NB**: The `Items` doesn't have methods for changing or removal **item** or
 **item_class** keys. So far, we didn't see a necessity of it.
 
 You can check if a certain **item** is present in a certain **item_class**:
@@ -76,7 +79,7 @@ items = Items(restore_from=None, backup_to=None)
 ```
 Params **restore_from** and **backup_to** allow to specify file paths for
 loading and saving `Items` data. The constructor firstly restore data, and 
-only after that backup them.
+only after that backup it.
 
 If need, you can check if current state of a `Items` object does not contain
 any information:
@@ -87,11 +90,11 @@ if items.isempty():
 
 ### Russian Names Database
 
-As an example of usage of `Items`, we put to the root of our github directory
-of ***Corpuscula*** project a csv-file (in Russian) with a list of names (see
-`names.tgz` file). We can't find such list anywhere, so we just grab the data
-from open resouces (mostly, it's some war heroes and smth like that, so we
-have a strong bias to the male side). We also put there the script
+As an example of usage of `Items`, we put to the root of our github
+***Corpuscula*** directory a csv-file (in Russian) with a list of names (see
+`names.tgz` file). We can't find names database anywhere, so we just grab the
+data from open resouces (mostly, it's some war heroes and smth like that, so
+we have a strong bias to the male side). We also put there the script
 `load_names.py` to convert that data to `Items` databases. The script is
 complex, but the meaning of it, that we detect a gender of person by it's
 patronym. As result, we get lists of unique names, patronyms and surnames
