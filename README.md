@@ -59,3 +59,5 @@ directory where you installed it.
 [*Corpus Dictionary*](https://github.com/fostroll/corpuscula/blob/master/doc/README_CDICT.md)
 
 [Utilities](https://github.com/fostroll/corpuscula/blob/master/doc/README_UTILS.md)
+
+[*Items* database](https://github.com/fostroll/corpuscula/blob/master/doc/README_ITEMS.md)

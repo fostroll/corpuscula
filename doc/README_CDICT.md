@@ -15,8 +15,8 @@ unbeaten.
 
 ### Create, Backup and Restore
 
-The simplest way to create a *Corpus Dictionary* is just invoke its
-constructor without params:
+The simplest way to create a *Corpus Dictionary* is just run its constructor
+without params:
 ```python
 from corpuscula import CorpusDict
 cdict = CorpusDict()
@@ -35,8 +35,8 @@ Param **format** can be `'conllu'` or `'parsed_conllu'`. Default is
 when **format**=`'parsed_conllu'`, the **corpus** will be used directly,
 without processing via `Conllu.load` method.
 
-If `cdict` already contain data, the try to append it via second invocation of
-its `parse` method will throw an error. If you really want to append current
+If `cdict` already contain data, the try to append it via second call of its
+`parse` method will throw an error. If you really want to append current
 statistics with data of other corpus, specify **append**=`True`.
 
 **log_file** here and in all other methods specifies a stream for progress

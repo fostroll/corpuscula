@@ -20,8 +20,8 @@ Input sequences may be both generators and lists.
 Conllu.from_sentences(sentences, split_multi=False, adjust_for_speech=False, columns=None)
 ```
 Converts sequence of tokenized sentences to *Parsed CONLL-U* format. For every
-sentence from **sentences**, the method `Conllu.from_sentence` will be
-invoked. Param **columns** is passed to that method.
+sentence from **sentences**, the method `Conllu.from_sentence` will be run.
+Param **columns** is passed to that method.
 
 Params **split_multi** and **adjust_for_speech** are passed to the method
 `Conllu.fix`.

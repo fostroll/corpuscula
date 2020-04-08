@@ -136,7 +136,7 @@ from corpuscula import Conllu
 corpus = Conllu.load(corpus, fix=True, adjust_for_speech=True)
 ```
 
-Also, if the **corpus** is a *Parsed CONLL-U* sequence, you can invoke `fix`
+Also, if the **corpus** is a *Parsed CONLL-U* sequence, you can run `fix`
 method of `Conllu` class directly:
 ```python
 from corpuscula import Conllu
@@ -172,7 +172,7 @@ already downloaded one (if exists).
 
 **silent**: suppress progress messages.
 
-To remove corpus, you can invoke:
+To remove corpus, you can run:
 ```python
 corpus_utils.remove_corpus(dname, root_dir=None)
 ```
