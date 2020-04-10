@@ -60,3 +60,8 @@ for `Wikipedia.templates`: `(<template id>, <template title>,
 We promote `Wikipedia.templates` on the case if anyone can make parser for
 Wikipedia articles based on that templates. So far, only most common templates
 were used for parsing the articles.
+
+**NB:** all methods return just a cleared text, not *CONLL-U*. That's because
+for *CONLL-U* we require tokenized text. If you want *Wikipedia* wrapper with
+*CONLL-U* tokenized output, refer our
+[***Toxic***](https://github.com/fostroll/toxic) library.
