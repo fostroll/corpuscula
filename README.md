@@ -34,6 +34,8 @@ $ git clone https://github.com/fostroll/corpuscula.git
 $ cd corpuscula
 $ pip install -e .
 ```
+This gives you access to examples and data that are not included to the
+*PyPI* package.
 
 ## Setup
 
