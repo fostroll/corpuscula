@@ -1,8 +1,9 @@
 <div align="right"><strong>RuMor: Russian Morphology project</strong></div>
 <h2 align="center">Corpuscula: a python NLP library for corpus processing</h2>
 
-[PyPI Version](https://img.shields.io/pypi/v/corpuscula?color=blue)
-[Python Version](https://img.shields.io/pypi/pyversions/corpuscula?color=blue)
+[![PyPI Version](https://img.shields.io/pypi/v/corpuscula?color=blue)](https://pypi.org/project/corpuscula/)
+[![Python Version](https://img.shields.io/pypi/pyversions/corpuscula?color=blue)](https://www.python.org/)
+[![License: BSD-3](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 A part of ***RuMor*** project. It contains tools to simplify corpus
 processing. Highlights are:
@@ -66,3 +67,8 @@ directory where you installed it.
 [Utilities](https://github.com/fostroll/corpuscula/blob/master/doc/README_UTILS.md)
 
 [*Items* database](https://github.com/fostroll/corpuscula/blob/master/doc/README_ITEMS.md)
+
+## License
+
+***Corpuscula*** is released under the BSD License. See the
+[LICENSE](https://github.com/fostroll/corpuscula/blob/master/LICENSE) file for more details.
