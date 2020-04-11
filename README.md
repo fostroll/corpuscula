@@ -9,7 +9,7 @@ A part of ***RuMor*** project. It contains tools to simplify corpus
 processing. Highlights are:
 
 * full [*CONLL-U*](https://universaldependencies.org/format.html) support
-(includes *CONLL-U Plus*)
+(includes [*CONLL-U Plus*](https://universaldependencies.org/ext-format.html))
 * wrappers for known corpora of Russian language
 * parser and wrapper for Russian part of *Wikipedia*
 * *Corpus Dictionary* that can be used for further morphology processing
