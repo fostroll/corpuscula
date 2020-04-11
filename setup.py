@@ -1,20 +1,52 @@
+import os
 from setuptools import setup, find_packages
 
-with open("requirements.txt") as f:
-    required = f.read().splitlines()
+SCRIPT_PATH = path.abspath(path.dirname(__file__))
+version_file_contents = open(path.join(SCRIPT_PATH, 'corpuscula/_version.py'),
+                             'rt', encoding='utf-8').read()
+VERSION = re.search('__version__ = \"(.*)\"', version_file_contents).group(1)
 
 setup(
-    name="corpuscula",
-    version="1.0.0",
-    description="A toolkit that simplifies corpus processing",
-    long_description=open("README.md", encoding="utf-8").read(),
-    long_description_content_type="text/markdown",
-    author="Sergei Ternovykh",
-    author_email="fostroll@gmail.com",
-    url="https://github.com/fostroll/corpuscula",
-    packages=find_packages(exclude=["data", "scripts", "tests"]),
-    license="BSD",
-    install_requires=required,
+    name='corpuscula',
+    version=VERSION,
+    description='A toolkit that simplifies corpus processing',
+    long_description=open('README.md', 'rt', encoding='utf-8').read(),
+    long_description_content_type='text/markdown',
+    author='Sergei Ternovykh',
+    author_email='fostroll@gmail.com',
+    url='https://github.com/fostroll/corpuscula',
+    license='BSD',
+
+    # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
+    classifiers=[
+        # How mature is this project? Common values are
+        #   3 - Alpha
+        #   4 - Beta
+        #   5 - Production/Stable
+        'Development Status :: 4 - Beta',
+        # Indicate who your project is intended for
+        'Intended Audience :: Developers',
+        'Intended Audience :: Education',
+        'Intended Audience :: Science/Research',
+        'Intended Audience :: Information Technology',
+        'Topic :: Scientific/Engineering',
+        'Topic :: Scientific/Engineering :: Artificial Intelligence',
+        'Topic :: Scientific/Engineering :: Information Analysis',
+        'Topic :: Text Processing',
+        'Topic :: Text Processing :: Linguistic',
+        'Topic :: Software Development',
+        'Topic :: Software Development :: Libraries',
+        # Specify the Python versions you support here. In particular, ensure
+        # that you indicate whether you support Python 2, Python 3 or both.
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+    ]
+    # What does your project relate to?
+    keywords='natural-language-processing nlp conllu corpora',
+
+    packages=find_packages(exclude=['data', 'doc', 'scripts', 'tests']),
+    install_requires=[],
     include_package_data=True,
-    python_requires=">=3.6",
+    python_requires='>=3.6',
 )

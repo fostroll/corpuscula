@@ -12,6 +12,7 @@ corpus processing. Highlights are:
 * parser and wrapper for russian part of Wikipedia
 * Corpus Dictionary that can be used for further morphology processing
 """
-from .conllu import Conllu
-from .corpus_dict import CorpusDict
-from .items import Items
+from corpuscula._version import __version__
+from corpuscula.conllu import Conllu
+from corpuscula.corpus_dict import CorpusDict
+from corpuscula.items import Items

@@ -1,6 +1,9 @@
 <div align="right"><strong>RuMor: Russian Morphology project</strong></div>
 <h2 align="center">Corpuscula: a python NLP library for corpus processing</h2>
 
+[PyPI Version](https://img.shields.io/pypi/v/corpuscula?color=blue)
+[Python Version](https://img.shields.io/pypi/pyversions/corpuscula?colorB=blue)
+
 A part of ***RuMor*** project. It contains tools to simplify corpus
 processing. Highlights are:
 
