@@ -1,10 +1,10 @@
 import os
 from setuptools import setup, find_packages
 
-SCRIPT_PATH = path.abspath(path.dirname(__file__))
-version_file_contents = open(path.join(SCRIPT_PATH, 'corpuscula/_version.py'),
+SCRIPT_PATH = os.path.abspath(os.path.dirname(__file__))
+version_file_contents = open(os.path.join(SCRIPT_PATH, 'corpuscula/_version.py'),
                              'rt', encoding='utf-8').read()
-VERSION = re.search('__version__ = \"(.*)\"', version_file_contents).group(1)
+VERSION = version_file_contents.strip()[len('__version__ = "'):-1]
 
 setup(
     name='corpuscula',
@@ -41,7 +41,7 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
-    ]
+    ],
     # What does your project relate to?
     keywords='natural-language-processing nlp conllu corpora',
 
