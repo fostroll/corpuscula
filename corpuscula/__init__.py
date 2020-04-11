@@ -4,8 +4,8 @@
 # Copyright (C) 2019-present by Sergei Ternovykh
 # License: BSD, see LICENSE for details
 """
-Corpuscula is a part of the RuMor project. It is a toolkit that simplify corpus
-processing. Highlights are:
+Corpuscula is a part of the RuMor project. It is a toolkit that simplifies
+corpus processing. Highlights are:
 
 * full CONLL-U support (includes CONLL-U Plus)
 * wrappers for known corpora of Russian language
