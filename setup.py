@@ -40,6 +40,7 @@ setup(
         'Topic :: Software Development :: Libraries',
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
+        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
@@ -50,5 +51,5 @@ setup(
     packages=find_packages(exclude=['data', 'doc', 'scripts', 'tests']),
     install_requires=[],
     include_package_data=True,
-    python_requires='>=3.6',
+    python_requires='>=3.5',
 )
