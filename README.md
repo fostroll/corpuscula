@@ -3,7 +3,7 @@
 
 [![PyPI Version](https://img.shields.io/pypi/v/corpuscula?color=blue)](https://pypi.org/project/corpuscula/)
 [![Python Version](https://img.shields.io/pypi/pyversions/corpuscula?color=blue)](https://www.python.org/)
-[![License: BSD-3](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![License: BSD-3](https://img.shields.io/badge/License-BSD-brightgreen.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 A part of ***RuMor*** project. It contains tools to simplify corpus
 processing. Highlights are:
