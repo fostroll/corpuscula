@@ -35,7 +35,7 @@ setup(
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
         'Topic :: Scientific/Engineering :: Information Analysis',
         'Topic :: Text Processing',
-        'Topic :: Text Processing :: Linguistic',
+        'Topic :: Text Processing :: Linguistics',
         'Topic :: Software Development',
         'Topic :: Software Development :: Libraries',
         # Specify the Python versions you support here. In particular, ensure
