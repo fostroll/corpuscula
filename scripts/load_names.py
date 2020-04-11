@@ -7,7 +7,13 @@
 Loader for csv-files with names, surnames and patronyms to the Items database.
 """
 import csv
+import os
 
+SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
+###
+import sys
+sys.path.append(os.path.join(SCRIPT_PATH, '..'))
+###
 from corpuscula import Items
 
 
@@ -153,7 +159,8 @@ def load_names_db(names_csv, n_db, p_db, s_db,
 
 if __name__ == '__main__':
     n_db, s_db = Items(), Items()
-    load_names_db('names.csv', n_db=n_db, p_db=n_db, s_db=s_db,
+    load_names_db(os.path.join(SCRIPT_PATH, '../data/names.csv'),
+                  n_db=n_db, p_db=n_db, s_db=s_db,
                   n_thresh=5, p_thresh=5, s_thresh=3)
-    n_db.backup_to('names.pickle')
-    s_db.backup_to('surnames.pickle')
+    n_db.backup_to(os.path.join(SCRIPT_PATH, '../names.pickle'))
+    s_db.backup_to(os.path.join(SCRIPT_PATH, '../surnames.pickle'))
