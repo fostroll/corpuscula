@@ -5,6 +5,8 @@ SCRIPT_PATH = os.path.abspath(os.path.dirname(__file__))
 version_file_contents = open(os.path.join(SCRIPT_PATH, 'corpuscula/_version.py'),
                              'rt', encoding='utf-8').read()
 VERSION = version_file_contents.strip()[len('__version__ = "'):-1]
+print(VERSION)
+exit
 
 setup(
     name='corpuscula',
