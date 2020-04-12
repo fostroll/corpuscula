@@ -115,7 +115,7 @@ corpus.test()
 ### Adjust corpora for speech
 
 Usually, tools for translation speech to text produce output without any care
-of punctuation or letters' case of the resulting output. For morphological and
+of punctuation or letters' case in the resulting output. For morphological and
 syntactic parsing of such ouput, it is worth to have models trained on corpora
 of the same type. ***Corpuscula*** promote a simple way for such
 transformation of known corpora:
