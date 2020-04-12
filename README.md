@@ -43,16 +43,16 @@ This gives you access to examples and data that are not included to the
 
 ## Setup
 
-After installation, you'd like to specify a directory where you prefer to
-store downloading corpora:
+After installation, you need to specify a directory where you prefer to store
+downloading corpora:
 ```python
 >>> import corpuscula.corpus_utils as cu
 >>> cu.set_root_dir(<path>)  # We will keep corpora here
 ```
 **NB:** it will create/update config file `.rumor` in your home directory.
 
-If you'll not do it, ***Corpuscula*** will try to keep corpora in the
-directory where you installed it.
+If you won't set the root directory, ***Corpuscula*** will try to keep corpora
+in the directory where it's installed.
 
 ## Usage
 
@@ -67,6 +67,10 @@ directory where you installed it.
 [Utilities](https://github.com/fostroll/corpuscula/blob/master/doc/README_UTILS.md)
 
 [*Items* database](https://github.com/fostroll/corpuscula/blob/master/doc/README_ITEMS.md)
+
+## Examples
+
+You can find them in the directory `examples` of our github ***Corpuscula*** repository.
 
 ## License
 

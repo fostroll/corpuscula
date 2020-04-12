@@ -90,16 +90,16 @@ if items.isempty():
 
 ### Russian Names Database
 
-As an example of usage of `Items`, we put to the `data` of our github
-***Corpuscula*** directory a csv-file (in Russian) with a list of person's
-names (see `names.zip` file). We can't find names database anywhere, so we
-just grab the data from open resouces (mostly, it's some war heroes and smth
-like that, so we have a strong bias to the male side). We also put there the
-script `scripts/load_names.py` to convert that data to `Items` databases. The
-script is complex, but the meaning of it, that we detect a gender of person by
-it's patronym. As a result, we got lists of unique names, patronyms and
-surnames together with their genders and numbers of occurences. If a name is
-unisex, we also keep the number of occurences for every gender.
+As an example of usage of `Items`, we put to the `data` directory of our
+github ***Corpuscula*** repository a csv-file (in Russian) with a list of
+person's names (see `names.zip` file). We can't find names database anywhere,
+so we just grab the data from open resouces (mostly, it's some war heroes and
+smth like that, so we have a strong bias to the male side). We also put there
+the script `scripts/load_names.py` to convert that data to `Items` databases.
+The script is complex, but the meaning of it, that we detect a gender of
+person by it's patronym. As a result, we got lists of unique names, patronyms
+and surnames together with their genders and numbers of occurences. If a name
+is unisex, we also keep the number of occurences for every gender.
 
 By default, script set thresholds of `5` for names and patronym, and of `3`
 for surnames. That means that if any item was met less times than that
@@ -119,8 +119,8 @@ store it to  `surnames.pickle` file. Names and patronyms you can find in
 
 If you need your own version of names' database, you can change arguments of
 the call of the function `load_names_db` at the bottom of the `load_names.py`
-script and re-run it. The script put its result to the root of the
-***Corpuscula*** distributive directory.
+script and re-run it. The script put its result to the directory where you run
+it.
 
 **NB:**: Before running the script, unpack the archive `names.zip` in the
 `data` directory.

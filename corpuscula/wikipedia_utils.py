@@ -10,9 +10,9 @@ Includes wrapper to simplify the further processing.
 from html import unescape
 from re import compile as re_compile, match as re_match, sub as re_sub
 
-from .corpus_utils import _AbstractCorpus, \
-                          download_corpus, remove_corpus, get_corpus_fpath
-from .utils import LOG_FILE, print_progress, read_bz2
+from corpuscula.corpus_utils import _AbstractCorpus, download_corpus, \
+                                    remove_corpus, get_corpus_fpath
+from corpuscula.utils import LOG_FILE, print_progress, read_bz2
 
 
 WIKIPEDIA_RU = 'Wikipedia.RU'

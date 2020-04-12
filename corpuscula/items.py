@@ -11,7 +11,7 @@ from copy import deepcopy
 import pickle
 import sys
 
-from .utils import LOG_FILE
+from corpuscula.utils import LOG_FILE
 
 
 class Items:

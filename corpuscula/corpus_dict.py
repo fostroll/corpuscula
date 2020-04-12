@@ -12,9 +12,9 @@ from operator import itemgetter
 import pickle
 import sys
 
-from .conllu import Conllu
-from .corpus_utils import _AbstractCorpus
-from .utils import LOG_FILE, find_affixes, print_progress
+from corpuscula.conllu import Conllu
+from corpuscula.corpus_utils import _AbstractCorpus
+from corpuscula.utils import LOG_FILE, find_affixes, print_progress
 
 
 class CorpusDict:

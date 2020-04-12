@@ -16,8 +16,9 @@ import re
 import sys
 from urllib.error import HTTPError
 
-from .conllu import Conllu
-from .utils import LOG_FILE, download_file, rmdir, read_bz2, read_rar, read_zip
+from corpuscula.conllu import Conllu
+from corpuscula.utils import LOG_FILE, download_file, rmdir, \
+                             read_bz2, read_rar, read_zip
 
 
 ROOT_DIR = os.path.dirname(os.path.realpath(__file__))

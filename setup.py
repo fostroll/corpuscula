@@ -1,15 +1,15 @@
 import os
 from setuptools import setup, find_packages
 
-SCRIPT_PATH = os.path.abspath(os.path.dirname(__file__))
-version_file_contents = open(os.path.join(SCRIPT_PATH, 'corpuscula/_version.py'),
+SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
+version_file_contents = open(os.path.join(SCRIPT_DIR, 'corpuscula/_version.py'),
                              'rt', encoding='utf-8').read()
 VERSION = version_file_contents.strip()[len('__version__ = "'):-1]
 
 setup(
     name='corpuscula',
     version=VERSION,
-    description='A toolkit that simplifies corpus processing',
+    description='Toolkit that simplifies corpus processing',
     long_description=open('README.md', 'rt', encoding='utf-8').read(),
     long_description_content_type='text/markdown',
     author='Sergei Ternovykh',
@@ -46,7 +46,8 @@ setup(
     # What does your project relate to?
     keywords='natural-language-processing nlp conllu corpora',
 
-    packages=find_packages(exclude=['data', 'doc', 'scripts', 'tests']),
+    packages=find_packages(exclude=['data', 'doc', 'examples', 'scripts',
+                                    'tests']),
     install_requires=[],
     include_package_data=True,
     python_requires='>=3.5',

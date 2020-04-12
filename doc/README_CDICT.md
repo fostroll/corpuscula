@@ -30,10 +30,10 @@ format:
 ```python
 cdict.parse(corpus, format='conllu', append=False, log_file=sys.stderr)
 ```
-Param **format** can be `'conllu'` or `'parsed_conllu'`. Default is
-`'conllu'`, and it allows to download both of them. The difference is that
-when **format**=`'parsed_conllu'`, the **corpus** will be used directly,
-without processing via `Conllu.load` method.
+Param **format** can be `'conllu'` (default) or `'parsed_conllu'`.
+
+You can specify one of our corpora wrappers as **corpus**. In that case we'll
+create `cdict` based on `.train()` part of the **corpus**.
 
 If `cdict` already contain data, the try to append it via second call of its
 `parse` method will throw an error. If you really want to append current

@@ -13,7 +13,7 @@ import os
 import pickle
 import sys
 
-from .utils import LOG_FILE, print_progress
+from corpuscula.utils import LOG_FILE, print_progress
 
 
 def id_to_numeric(id_):

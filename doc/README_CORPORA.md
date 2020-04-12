@@ -14,8 +14,8 @@ corpus_utils.set_root_dir(root_dir)
 ```
 **NB:** it will create/update config file `.rumor` in your home directory.
 
-If you won't do it, ***Corpuscula*** will try to keep corpora in the directory
-where you installed it.
+If you won't set the root directory, ***Corpuscula*** will try to keep corpora
+in the directory where it's installed.
 
 Next method allows to receive currently set root directory:
 ```python
@@ -28,8 +28,8 @@ Common attributes for operations below:
 
 **root_dir**: in all methods allow to specify alternative root directory
 location for any operation. Default is the path from `.rumor` config or, if
-the config is not exists, root directory is the exact directory of
-***Corpuscula*** package.
+the config is not exists, root directory is the exact directory where
+***Corpuscula*** is installed.
 
 **overwrite**: if `True` (default), then in downloading methods means force
 download corpus even if it's already exists.
@@ -159,7 +159,7 @@ Here:
 
 **url**: url of a downloading file.
 
-**dname**: a name of the directory where to download. The directory will be
+**dname**: a name of the directory where download to. The directory will be
 created (if not exists) inside your **root_dir**/corpus path. If **dname** is
 `None`, param **name** will be used instead.
 
