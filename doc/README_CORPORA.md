@@ -179,5 +179,5 @@ corpus_utils.remove_corpus(dname, root_dir=None)
 **dname**: a name of the corpus' directory (located inside **root_dir**/corpus
 path).
 
-**NB:** Param **dname**=`None` is allowed. In this case *all the corpora will be
-deleted*. It's a feature. Be careful.
+**NB:** Param **dname**=`None` is allowed. In this case, *all the corpora will
+be deleted*. It's a feature. Be careful.

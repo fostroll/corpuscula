@@ -32,7 +32,7 @@ cdict.parse(corpus, format='conllu', append=False, log_file=sys.stderr)
 ```
 Param **format** can be `'conllu'` (default) or `'parsed_conllu'`.
 
-You can specify one of our corpora wrappers as **corpus**. In that case we'll
+You can specify one of our corpora wrappers as **corpus**. In that case, we'll
 create `cdict` based on `.train()` part of the **corpus**.
 
 If `cdict` already contain data, the try to append it via second call of its

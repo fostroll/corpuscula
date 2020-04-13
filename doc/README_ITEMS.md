@@ -23,7 +23,7 @@ items.load(items, items_class=None, update=False, encoding='utf-8-sig',
            log_file=sys.stderr)
 ```
 Param **item** is usually a *dict* ({**item**: {attr: val}}), but it can also
-be a *list* or *set* of **item** constants. In the latter case they will be
+be a *list* or *set* of **item** constants. In the latter case, they will be
 transformed to the *dict* of {**item**: {}}.
 
 While loading, orig **item** will be copied to its attributes with a key =
