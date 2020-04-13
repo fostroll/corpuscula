@@ -70,9 +70,11 @@ in the directory where it's installed.
 
 ## Examples
 
-You can find them in the directory `examples` of our github ***Corpuscula*** repository.
+You can find them in the directory `examples` of our ***Corpuscula*** github
+repository.
 
 ## License
 
 ***Corpuscula*** is released under the BSD License. See the
-[LICENSE](https://github.com/fostroll/corpuscula/blob/master/LICENSE) file for more details.
+[LICENSE](https://github.com/fostroll/corpuscula/blob/master/LICENSE) file for
+more details.
