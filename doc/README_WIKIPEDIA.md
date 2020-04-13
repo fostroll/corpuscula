@@ -3,8 +3,8 @@
 
 ## Wrapper for *Wikipedia*
 
-The package `wikipedia_utils` contain tools to simplify usage *Wikipedia* in NLP
-tasks. So far, ***Corpuscula*** supports only Russian part of *Wikipedia*.
+The package `wikipedia_utils` contains tools to simplify usage *Wikipedia* in
+NLP tasks. So far, ***Corpuscula*** supports only Russian part of *Wikipedia*.
 
 ### Setting a root directory for store downloaded corpora
 
@@ -26,8 +26,8 @@ root_dir = corpus_utils.get_root_dir()
 
 ```python
 from corpuscula import wikipedia_utils
-wikipedia_utils.download_(lang='RU', root_dir=None, overwrite=True)
-wikipedia_utils.remove_syntagrus(lang='RU', root_dir=None)
+wikipedia_utils.download_wikipedia(lang='RU', root_dir=None, overwrite=True)
+wikipedia_utils.remove_wikipedia(lang='RU', root_dir=None)
 ```
 
 **lang**: specifies what language you'd like to download *Wikipedia* dump for.
@@ -43,10 +43,9 @@ exists.
 ### Wrappers for *Wikipedia*'s parts:
 
 ```python
-from corpuscula import Wikipedia
-Wikipedia.titles()
-Wikipedia.articles()
-Wikipedia.templates()
+wikipedia_utils.Wikipedia.titles()
+wikipedia_utils.Wikipedia.articles()
+wikipedia_utils.Wikipedia.templates()
 ```
 All methods return lists of tuples that are:
 

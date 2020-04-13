@@ -3,7 +3,7 @@
 
 ## Management of Corpora
 
-The package `corpus_utils` contain tools for downloading, store and usage of
+The package `corpus_utils` contains tools for downloading, store and usage of
 known corpora that can be accessed online.
 
 ### Setting a root directory for store downloaded corpora

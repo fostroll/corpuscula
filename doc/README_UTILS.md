@@ -3,8 +3,8 @@
 
 ## Utilities
 
-The package contain a bunch of utilities that can sometimes be useful. Here we
-show just an unsorted list of them.
+The package contains a bunch of utilities that can sometimes be useful. Here
+we show just unsorted list of them.
 
 Sort objects by their frequency:
 ```python

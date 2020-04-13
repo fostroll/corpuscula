@@ -3,7 +3,7 @@
 
 ## *Corpus Dictionary*
 
-The class `CorpusDict` parse training corpus and gather some statistics that
+The class `CorpusDict` parses training corpus and gather some statistics that
 can be used in further morphology processing pipeline. Also, the class has
 methods to predict *POS*, *LEMMA* and *FEATS* tags of a word form based on
 that statistics. Further, that predictions can be used as a hints for more
@@ -24,8 +24,8 @@ cdict = CorpusDict()
 See below for the full parameter list of the constructor.
 
 Then, you can gather statistics from any **corpus** of
-[CONLL-U](https://universaldependencies.org/format.html) or
-[Parsed CONLL-U](https://github.com/fostroll/corpuscula/blob/master/doc/README_PARSED_CONLLU.md)
+[*CONLL-U*](https://universaldependencies.org/format.html) or
+[*Parsed CONLL-U*](https://github.com/fostroll/corpuscula/blob/master/doc/README_PARSED_CONLLU.md)
 format:
 ```python
 cdict.parse(corpus, format='conllu', append=False, log_file=sys.stderr)
