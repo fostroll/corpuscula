@@ -63,4 +63,4 @@ were used for parsing the articles.
 **NB:** all methods return just a cleared text, not *CONLL-U*. That's because
 for *CONLL-U* we require tokenized text. If you want *Wikipedia* wrapper with
 *CONLL-U* tokenized output, refer our
-[***Toxic***](https://github.com/fostroll/toxic) library.
+[***Tuko***](https://github.com/fostroll/tuko) library.
