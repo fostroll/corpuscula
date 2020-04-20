@@ -7,7 +7,7 @@ version_file_contents = open(os.path.join(SCRIPT_DIR, 'corpuscula/_version.py'),
 VERSION = version_file_contents.strip()[len('__version__ = "'):-1]
 
 setup(
-    name='Corpuscula',
+    name='corpuscula',
     version=VERSION,
     description='Toolkit that simplifies corpus processing',
     long_description=open('README.md', 'rt', encoding='utf-8').read(),
