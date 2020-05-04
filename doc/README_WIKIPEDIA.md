@@ -3,7 +3,7 @@
 
 ## Wrapper for *Wikipedia*
 
-The package `wikipedia_utils` contains tools to simplify usage *Wikipedia* in
+The package `wikipedia_utils` contains tools to simplify using *Wikipedia* in
 NLP tasks. So far, ***Corpuscula*** supports only Russian part of *Wikipedia*.
 
 ### Setting a root directory for store downloaded corpora
@@ -31,13 +31,13 @@ wikipedia_utils.remove_wikipedia(lang='RU', root_dir=None)
 ```
 
 **lang**: specifies what language you'd like to download *Wikipedia* dump for.
-Only **lang**=`'RU'` is supported.
+Only **lang**=`'RU'` is currently supported.
 
-**root_dir**: param allow to specify alternative root directory location.
-Default is the path from `.rumor` config or, if the config is not exists, root
+**root_dir**: allows to specify alternative root directory location.
+Default is the path from `.rumor` config or, if the config does not exist, root
 directory is the exact directory where ***Corpuscula*** is installed.
 
-**overwrite**: If `True` (default), force download corpus even if it's already
+**overwrite**: If `True` (default), force download corpus even if it already
 exists.
 
 ### Wrappers for *Wikipedia*'s parts:
@@ -56,11 +56,11 @@ for `Wikipedia.articles`: `(<article id>, <article title>, <article text>)`;
 for `Wikipedia.templates`: `(<template id>, <template title>,
 <template text>)`;
 
-We promote `Wikipedia.templates` on the case if anyone can make parser for
+We promote `Wikipedia.templates` in case if anyone can make parser for
 Wikipedia articles based on that templates. So far, only most common templates
 were used for parsing the articles.
 
-**NB:** all methods return just a cleared text, not *CONLL-U*. That's because
+**NB:** all methods return processed clean text, not *CONLL-U*. That's because
 for *CONLL-U* we require tokenized text. If you want *Wikipedia* wrapper with
 *CONLL-U* tokenized output, refer our
 [***Toxine***](https://github.com/fostroll/toxine) library.

@@ -4,15 +4,15 @@
 ## Parsed CONLL-U format
 
 In ***Corpuscula***, internal representation of *CONLL-U* file is ***Parsed
-CONLL-U*** format. It has a structure as follows. Each sentence represents as
+CONLL-U*** format. It has a structure as follows. Each sentence is represented as
 a tuple of two lists: the *tokenized sentence* and the *metadata*. *Tokenized
 sentence* is a list of of sentence's tokens, each of those is represented as a
-dict with *CONLL-U* fields. All fields' names keeps as constants of `str`
-type. Fields' values has an `str` type, too, except *FEATS* and *MISC* fields
-that's kept as `OrderedDict` of their components. Keys and values of components
-are of `str` type.
+dict with *CONLL-U* fields. All fields' names are kept as constants of `str`
+type. Fields' values have a `str` type, too, except *FEATS* and *MISC* fields
+that are kept as `OrderedDict` of their components. Keys and values of the 
+components are of `str` type.
 
-*Metadata* stores as `OrderedDict` with `str` keys and values.
+*Metadata* is stored as `OrderedDict` with `str` keys and values.
 
 Example:
 ```sh
