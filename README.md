@@ -44,14 +44,14 @@ This gives you access to examples and data that are not included to the
 ## Setup
 
 After installation, you need to specify a directory where you prefer to store
-downloading corpora:
+downloaded corpora:
 ```python
 >>> import corpuscula.corpus_utils as cu
 >>> cu.set_root_dir(<path>)  # We will keep corpora here
 ```
 **NB:** it will create/update config file `.rumor` in your home directory.
 
-If you won't set the root directory, ***Corpuscula*** will try to keep corpora
+If you won't set the root directory, ***Corpuscula*** will keep corpora
 in the directory where it's installed.
 
 ## Usage
@@ -70,7 +70,7 @@ in the directory where it's installed.
 
 ## Examples
 
-You can find them in the directory `examples` of our ***Corpuscula*** github
+You can find examples in the directory `examples` of our ***Corpuscula*** github
 repository.
 
 ## License

@@ -3,7 +3,7 @@
 
 ## Management of Corpora
 
-The package `corpus_utils` contains tools for downloading, store and usage of
+The package `corpus_utils` contains tools for downloading, storing and using
 known corpora that can be accessed online.
 
 ### Setting a root directory for store downloaded corpora
@@ -26,17 +26,17 @@ root_dir = corpus_utils.get_root_dir()
 
 Common attributes for operations below:
 
-**root_dir**: in all methods allow to specify alternative root directory
+**root_dir**: in all methods allows to specify alternative root directory
 location for any operation. Default is the path from `.rumor` config or, if
-the config is not exists, root directory is the exact directory where
+the config does not exists, root directory is the exact directory where
 ***Corpuscula*** is installed.
 
-**overwrite**: if `True` (default), then in downloading methods means force
-download corpus even if it's already exists.
+**overwrite**: if `True` (default), then in downloading methods it means force
+download corpus even if it already exists.
 
 #### [*SynTagRus* from UniversalDependencies](https://github.com/UniversalDependencies/UD_Russian-SynTagRus/)
 
-Downloading and removal *SynTagRus*:
+Downloading and removing *SynTagRus*:
 ```python
 corpus_utils.download_syntagrus(root_dir=None, overwrite=True)
 corpus_utils.remove_syntagrus(root_dir=None)
@@ -52,13 +52,13 @@ corpus_utils.syntagrus.test()
 
 #### [*OpenCorpora*](http://opencorpora.org/?page=downloads)
 
-Downloading and removal *OpenCorpora*:
+Downloading and removing *OpenCorpora*:
 ```python
 corpus_utils.download_opencorpora(root_dir=None, overwrite=True)
 corpus_utils.remove_opencorpora(root_dir=None)
 ```
 
-Wrappers for the whole *OpenCorpora* and its the only part:
+Wrappers for the whole *OpenCorpora* and its part (only train):
 ```python
 corpus_utils.opencorpora
 corpus_utils.opencorpora.train()
@@ -66,7 +66,7 @@ corpus_utils.opencorpora.train()
 
 #### [*GICR* from morphoRuEval-2017](https://github.com/dialogue-evaluation/morphoRuEval-2017)
 
-Downloading and removal *GICR*:
+Downloading and removing *GICR*:
 ```python
 corpus_utils.download_gicr(root_dir=None, overwrite=True)
 corpus_utils.remove_gicr(root_dir=None)
@@ -81,7 +81,7 @@ corpus_utils.gicr.test()
 
 #### [*RNC* from morphoRuEval-2017](https://github.com/dialogue-evaluation/morphoRuEval-2017)
 
-Downloading and removal *RNC*:
+Downloading and removing *RNC*:
 ```python
 corpus_utils.download_rnc(root_dir=None, overwrite=True)
 corpus_utils.remove_rnc(root_dir=None)
@@ -95,7 +95,7 @@ corpus_utils.rnc.train()
 
 #### [*UD Treebanks*](https://github.com/UniversalDependencies)
 
-Downloading and removal **corpus_name** *UD Treebank*:
+Downloading and removing **corpus_name** *UD Treebank*:
 ```python
 corpus_utils.download_ud(corpus_name, root_dir=None, overwrite=True)
 corpus_utils.remove_rnc(corpus_name, root_dir=None)
@@ -109,22 +109,22 @@ corpus.dev()
 corpus.test()
 ```
 
-**NB:** The *SynTagRus* wrapper above do exactly the same as the wrapper for
+**NB:** The *SynTagRus* wrapper above behaves exactly the same as the wrapper for
 *UD Treebank* with **corpus_name**=`'UD_Russian_SynTagRus'`.
 
 ### Adjust corpora for speech
 
-Usually, tools for translation speech to text produce output without any care
-of punctuation or letters' case in the resulting output. For morphological and
+Usually, speech-to-text transcription tools produce texts without considering 
+punctuation or letters' case in the resulting output. For morphological and
 syntactic parsing of such ouput, it is worth to have models trained on corpora
-of the same type. ***Corpuscula*** promote a simple way for such
+of the same type. ***Corpuscula*** promotes a simple way for such
 transformation of known corpora:
 ```python
 corpus = corpus_utils.AdjustedForSpeech(corpus_utils.syntagrus)
 corpus = corpus_utils.AdjustedForSpeech(corpus_utils.UniversalDependencies('UD_Russian_SynTagRus'))
 ```
 
-Really, any object with `train()`, `dev()`, or `test()` methods which returns
+Any object with `train()`, `dev()`, or `test()` methods which returns
 data in *Parsed CONLL-U* format can be wrapped by
 `corpus_utils.AdjustedForSpeech`. However, if your **corpus** is simply a
 [CONLL-U](https://universaldependencies.org/format.html) file or
@@ -142,7 +142,7 @@ method of `Conllu` class directly:
 from corpuscula import Conllu
 corpus = Conllu.fix(corpus, adjust_for_speech=True)
 ```
-Really, the wrapper `corpus_utils.AdjustedForSpeech` do exactly that.
+In fact, the wrapper `corpus_utils.AdjustedForSpeech` does exactly that.
 
 ### Support for other corpora
 
@@ -155,15 +155,15 @@ corpus_utils.download_corpus(name, url, dname=None, root_dir=None, fname=None,
 ```
 Here:
 
-**name**: a name of the downloading corpus.
+**name**: a name of the corpus to download.
 
-**url**: url of a downloading file.
+**url**: url of a file to download.
 
-**dname**: a name of the directory where download to. The directory will be
-created (if not exists) inside your **root_dir**/corpus path. If **dname** is
-`None`, param **name** will be used instead.
+**dname**: a name of the directory where the corpus will be downloaded to. 
+The directory will be created (if not exists) inside your **root_dir**/corpus path. 
+If **dname** is `None`, param **name** will be used instead.
 
-**fname**: a name of a downloading file. If `None`, then the name from url will
+**fname**: a name of the file to download. If `None`, then the name from url will
 be kept.
 
 **file_noless**: size in bytes. If not `None`, then the metod checks a size of

@@ -3,8 +3,7 @@
 
 ## Utilities
 
-The package contains a bunch of utilities that can sometimes be useful. Here
-we show just unsorted list of them.
+The package contains a bunch of utilities. Below is an unsorted list of them.
 
 Sort objects by their frequency:
 ```python
@@ -27,18 +26,19 @@ If **lower** is `True` then both **wform** and **lemma** will be converted to
 lower case before comparison. Thus, all return values will be in lower case,
 too.
 
-**NB:** Russian letters 'е' and 'ё' counts equal while comparison
+**NB:** Russian letters 'е' and 'ё' are considered as the same letter while 
+comparison.
 
 Find a full file name by its **prefix**:
 ```python
 find_file(prefix, ext=None, dname=None)
 ```
-**ext**: an extension of the target file
+**ext**: an extension of the target file.
 
 **dname**: a name of the directory for searching. If **dname** is `None`
 (default), then the current directory will be used.
 
-**NB:** If the directory **dname** contain several such files, only the name
+**NB:** If the directory **dname** contains several such files, only the name
 of the first one will be returned.
 
 Recursively remove directory **dname**:
@@ -52,12 +52,12 @@ print_progress(current_value, end_value=10, step=1, start_value=0,
                max_width=60, file=sys.stderr)
 ```
 If **end_value** is not `None` and greater than `0`, then indicator shows a
-value in percents. Elsewise, it shows absolute value.
+value in percents. Elsewise, it shows an absolute value.
 
 **end_value** == `0` means the end of iterations. Indicator shows final
 status.
 
-**max_width** allow to change max width of the indicator in characters.
+**max_width** allows changing max width of the indicator in characters.
 
 The meaning of **current_value**, **step** and **start_value** params is
 obvious.
@@ -94,10 +94,10 @@ kept.
 
 **chunk_size**: show progress after every **chunk_size** bytes read.
 
-**file_noless** if the file is smaller, then don't download it and keep
+**file_noless** if the file size is smaller, then don't download it and keep
 already downloaded one (if exists).
 
-**overwrite**: if `False` and the file is exist, overwrite it.
+**overwrite**: if `False` and the file exists, overwrite it.
 
 **log_msg**: message that will be printed before downloading.
 
