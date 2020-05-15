@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# Toxic project: Text Preprocessing pipeline
+# Corpuscula project
 #
 # Copyright (C) 2019-present by Sergei Ternovykh
 # License: BSD, see LICENSE for details
