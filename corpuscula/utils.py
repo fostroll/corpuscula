@@ -214,7 +214,7 @@ def download_file(url, dpath=None, fname=None, chunk_size=CALLBACK_CHUNK_SIZE,
     fpath = os.path.join(dpath, re.sub('^.+/', '', url)
                                     if fname is None else fname)
     if overwrite or not os.path.isfile(fpath):
-        if not silent:
+        if not silent and log_msg:
             print(log_msg, file=LOG_FILE)
         fpath_ = fpath + '$'
         with urlopen(url) as f_in:
