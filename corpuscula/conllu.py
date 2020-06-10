@@ -245,7 +245,7 @@ class Conllu:
             sentence_meta = OrderedDict()
             columns = None
             sent_no = -1
-            for line_no, line in corpus:
+            for line_no, line in enumerate(corpus):
                 line = line.strip()
                 if len(line) == 0:
                     if len(sentence) > 0 or len(sentence_meta) > 0:
