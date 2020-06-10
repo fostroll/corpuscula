@@ -293,13 +293,13 @@ class Conllu:
                                     [(k, v) for k, v in [
                                         t.split('=', 1) for t in val.split('|')
                                     ]])
-                            except e:
+                            except ValueError as e:
                                 print('ERROR when loading Conllu (line {})'
                                           .format(line_no), sys.stderr)
                                 print(line, sys.stderr)
                                 print(column, sys.stderr)
                                 print(val, sys.stderr)
-                                
+                                raise e
                         else:
                             if val == '_':
                                 val = None
