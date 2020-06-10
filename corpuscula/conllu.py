@@ -289,13 +289,13 @@ class Conllu:
                             try:
                                 val = OrderedDict(
                                     () if val == '_' else
-#                                        or val.startswith ('_|') else
+                                        or val.startswith ('_|') else
                                     [(k, v) for k, v in [
                                         t.split('=', 1) for t in val.split('|')
                                     ]])
                             except ValueError as e:
                                 print('ERROR when loading Conllu (line {})'
-                                          .format(line_no), sys.stderr)
+                                          .format(line_no + 1), sys.stderr)
                                 print(line, sys.stderr)
                                 print(column, sys.stderr)
                                 print(val, sys.stderr)
