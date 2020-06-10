@@ -245,7 +245,7 @@ class Conllu:
             sentence_meta = OrderedDict()
             columns = None
             sent_no = -1
-            for line in corpus:
+            for line_no, line in corpus:
                 line = line.strip()
                 if len(line) == 0:
                     if len(sentence) > 0 or len(sentence_meta) > 0:
@@ -288,16 +288,18 @@ class Conllu:
                         if column in ['FEATS', 'MISC']:
                             try:
                                 val = OrderedDict(
-                                    () if val == '_'
-                                       or val.startswith ('_|') else
+                                    () if val == '_' else
+#                                        or val.startswith ('_|') else
                                     [(k, v) for k, v in [
                                         t.split('=', 1) for t in val.split('|')
                                     ]])
-                            except:
-                                print('ERROR when loading Conllu', sys.stderr)
+                            except e:
+                                print('ERROR when loading Conllu (line {})'
+                                          .format(line_no), sys.stderr)
                                 print(line, sys.stderr)
                                 print(column, sys.stderr)
                                 print(val, sys.stderr)
+                                
                         else:
                             if val == '_':
                                 val = None
