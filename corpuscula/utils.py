@@ -233,7 +233,7 @@ def download_file(url, dpath=None, fname=None, chunk_size=CALLBACK_CHUNK_SIZE,
                         'Check the url manually:\n' + url
                     )
             total_, used_, free_ = shutil.disk_usage(dpath)
-            if f_in_length > free_:
+            if f_in_length is not None and f_in_length > free_:
                  raise RuntimeError('Not enough space in {} to download file'
                                         .format(dpath))
             chunks_count = f_in_length / CALLBACK_CHUNK_SIZE \
