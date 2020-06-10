@@ -288,8 +288,8 @@ class Conllu:
                         if column in ['FEATS', 'MISC']:
                             try:
                                 val = OrderedDict(
-                                    () if val == '_' else
-                                        or val.startswith ('_|') else
+                                    () if val == '_'
+                                       or val.startswith ('_|') else
                                     [(k, v) for k, v in [
                                         t.split('=', 1) for t in val.split('|')
                                     ]])
