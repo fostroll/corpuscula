@@ -24,8 +24,8 @@ cdict = CorpusDict()
 See below for the full list of parameters for the constructor.
 
 Then, you can gather statistics from any **corpus** of
-[*CONLL-U*](https://universaldependencies.org/format.html) or
-[*Parsed CONLL-U*](https://github.com/fostroll/corpuscula/blob/master/doc/README_PARSED_CONLLU.md)
+[*CoNLL-U*](https://universaldependencies.org/format.html) or
+[*Parsed CoNLL-U*](https://github.com/fostroll/corpuscula/blob/master/doc/README_PARSED_CONLLU.md)
 format:
 ```python
 cdict.parse(corpus, format='conllu', append=False, log_file=sys.stderr)

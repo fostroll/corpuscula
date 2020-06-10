@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# Corpuscula project: CONLL-U support
+# Corpuscula project: CoNLL-U support
 #
 # Copyright (C) 2019-present by Sergei Ternovykh
 # License: BSD, see LICENSE for details
 """
-Full CONLL-U and CONLL-U Plus formats support.
+Full CoNLL-U and CoNLL-U Plus formats support.
 """
 from collections import OrderedDict
 from difflib import SequenceMatcher
@@ -24,7 +24,7 @@ def id_to_numeric(id_):
 
 
 class Conllu:
-    """Full CONLL-U and CONLL-U Plus formats support"""
+    """Full CoNLL-U and CoNLL-U Plus formats support"""
 
     STD_COLUMNS = ['ID', 'FORM', 'LEMMA', 'UPOS', 'XPOS',
                    'FEATS', 'HEAD', 'DEPREL', 'DEPS', 'MISC']
@@ -34,7 +34,7 @@ class Conllu:
 
     @staticmethod
     def fix(corpus, split_multi=False, adjust_for_speech=False):
-        """Fix Parsed CONLL-U structure of *corpus* (renew token ids, generate
+        """Fix Parsed CoNLL-U structure of *corpus* (renew token ids, generate
         sentence ids and text if they are not present in metadata, etc.)
 
         :param split_multi: if True then wforms with spaces will be processed
@@ -97,7 +97,7 @@ class Conllu:
                                                      if x not in [
                                                          'ID', 'FORM', 'MISC'
                                                      ]
-                                    ), 'ERROR: Fix of CONLL-U structure ' \
+                                    ), 'ERROR: Fix of CoNLL-U structure ' \
                                        'with split_multi=True can be made ' \
                                        'before any tagging'
                                     for id_, wform in enumerate(wforms,
@@ -156,9 +156,9 @@ class Conllu:
 
     @classmethod
     def from_sentence(cls, wforms, columns=None):
-        """Convert a list of wforms to Parsed CONLL-U format.
+        """Convert a list of wforms to Parsed CoNLL-U format.
 
-        :param columns: list of column names. If None, standard CONLL-U columns
+        :param columns: list of column names. If None, standard CoNLL-U columns
                         are used
         :type columns: list(str)
 
@@ -192,9 +192,9 @@ class Conllu:
     @classmethod
     def from_sentences(cls, sentences, split_multi=False,
                        adjust_for_speech=False, columns=None):
-        """Convert a sequence of tokenized sentences to Parsed CONLL-U format
+        """Convert a sequence of tokenized sentences to Parsed CoNLL-U format
 
-        :param fix: fix CONLL-U structure of after conversion
+        :param fix: fix CoNLL-U structure of after conversion
         :param split_multi: if True then wforms with spaces will be processed
                             as multiword tokens (used only with fix=True)
         :param adjust_for_speech: if yes, remove all non alphanumeric tokens
@@ -210,22 +210,22 @@ class Conllu:
     @classmethod
     def load(cls, corpus, encoding='utf-8-sig', fix=True, split_multi=False,
              adjust_for_speech=False, log_file=LOG_FILE):
-        """Load corpus in CONLL-U format as sequence of Parsed CONLL-U
+        """Load corpus in CoNLL-U format as sequence of Parsed CoNLL-U
         sentences. Each sentence returns as tuple of a list of tagged tokens
         and a dict of metadata that can be used to restore corpus back to
-        CONLL-U format.
+        CoNLL-U format.
 
-        :param fix: fix CONLL-U structure of after conversion
+        :param fix: fix CoNLL-U structure of after conversion
         :param split_multi: if True then wforms with spaces will be processed
                             as multiword tokens (used only with fix=True)
         :param adjust_for_speech: if yes, remove all non alphanumeric tokens
                                   and convert all words to lower case (used
                                   only with fix=True)
-        :return: sentences in Parsed CONLL-U format
+        :return: sentences in Parsed CoNLL-U format
         :rtype: sequence of tuple(list(dict(str: str|OrderedDict(str: str))),
                                   OrderedDict(str: str))
 
-        NOTE: For CONLL-U Plus format the field list must be specified in the
+        NOTE: For CoNLL-U Plus format the field list must be specified in the
               first line of the *corpus* (in the meta variable
               "global.columns")"""
         if fix:
@@ -320,7 +320,7 @@ class Conllu:
     @classmethod
     def get_as_text(cls, corpus, fix=True, split_multi=False,
                     adjust_for_speech=False, log_file=LOG_FILE):
-        """Convert a *corpus* in Parsed CONLL-U format to text form.
+        """Convert a *corpus* in Parsed CoNLL-U format to text form.
 
         :rtype: iter(str)
         """
@@ -405,7 +405,7 @@ class Conllu:
 
     @classmethod
     def save(cls, corpus, file_path, **kwargs):
-        """Save a *corpus* in Parsed CONLL-U format to CONLL-U file"""
+        """Save a *corpus* in Parsed CoNLL-U format to CoNLL-U file"""
         with open(file_path, mode='wt', encoding='utf-8') as f:
             for line in cls.get_as_text(corpus, **kwargs):
                 print(line, end='', file=f)

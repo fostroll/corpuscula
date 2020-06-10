@@ -8,8 +8,8 @@
 A part of ***RuMor*** project. It contains tools to simplify corpus
 processing. Highlights are:
 
-* full [*CONLL-U*](https://universaldependencies.org/format.html) support
-(includes [*CONLL-U Plus*](https://universaldependencies.org/ext-format.html))
+* full [*CoNLL-U*](https://universaldependencies.org/format.html) support
+(includes [*CoNLL-U Plus*](https://universaldependencies.org/ext-format.html))
 * wrappers for known corpora of Russian language
 * parser and wrapper for Russian part of *Wikipedia*
 * *Corpus Dictionary* that can be used for further morphology processing
@@ -56,7 +56,7 @@ in the directory where it's installed.
 
 ## Usage
 
-[*CONLL-U* Support](https://github.com/fostroll/corpuscula/blob/master/doc/README_CONLLU.md)
+[*CoNLL-U* Support](https://github.com/fostroll/corpuscula/blob/master/doc/README_CONLLU.md)
 
 [Management of Corpora](https://github.com/fostroll/corpuscula/blob/master/doc/README_CORPORA.md)
 

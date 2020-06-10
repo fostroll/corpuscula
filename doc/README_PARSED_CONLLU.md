@@ -1,13 +1,13 @@
 <div align="right"><strong>RuMor: Russian Morphology project</strong></div>
 <h2 align="center">Corpuscula: a python NLP library for corpus processing</h2>
 
-## Parsed CONLL-U format
+## Parsed CoNLL-U format
 
-In ***Corpuscula***, internal representation of *CONLL-U* file is ***Parsed
-CONLL-U*** format. It has a structure as follows. Each sentence is represented as
+In ***Corpuscula***, internal representation of *CoNLL-U* file is ***Parsed
+CoNLL-U*** format. It has a structure as follows. Each sentence is represented as
 a tuple of two lists: the *tokenized sentence* and the *metadata*. *Tokenized
 sentence* is a list of of sentence's tokens, each of those is represented as a
-dict with *CONLL-U* fields. All fields' names are kept as constants of `str`
+dict with *CoNLL-U* fields. All fields' names are kept as constants of `str`
 type. Fields' values have a `str` type, too, except *FEATS* and *MISC* fields
 that are kept as `OrderedDict` of their components. Keys and values of the 
 components are of `str` type.

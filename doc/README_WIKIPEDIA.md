@@ -60,7 +60,7 @@ We promote `Wikipedia.templates` in case if anyone can make parser for
 Wikipedia articles based on that templates. So far, only most common templates
 were used for parsing the articles.
 
-**NB:** all methods return processed clean text, not *CONLL-U*. That's because
-for *CONLL-U* we require tokenized text. If you want *Wikipedia* wrapper with
-*CONLL-U* tokenized output, refer our
+**NB:** all methods return processed clean text, not *CoNLL-U*. That's because
+for *CoNLL-U* we require tokenized text. If you want *Wikipedia* wrapper with
+*CoNLL-U* tokenized output, refer our
 [***Toxine***](https://github.com/fostroll/toxine) library.

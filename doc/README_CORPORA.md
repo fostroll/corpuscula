@@ -125,10 +125,10 @@ corpus = corpus_utils.AdjustedForSpeech(corpus_utils.UniversalDependencies('UD_R
 ```
 
 Any object with `train()`, `dev()`, or `test()` methods which returns
-data in *Parsed CONLL-U* format can be wrapped by
+data in *Parsed CoNLL-U* format can be wrapped by
 `corpus_utils.AdjustedForSpeech`. However, if your **corpus** is simply a
-[CONLL-U](https://universaldependencies.org/format.html) file or
-[Parsed CONLL-U](https://github.com/fostroll/corpuscula/blob/master/doc/README_PARSED_CONLLU.md)
+[CoNLL-U](https://universaldependencies.org/format.html) file or
+[Parsed CoNLL-U](https://github.com/fostroll/corpuscula/blob/master/doc/README_PARSED_CONLLU.md)
 sequence, you can just
 use `adjust_for_speech` parameter of `Conllu.load` method:
 ```python
@@ -136,7 +136,7 @@ from corpuscula import Conllu
 corpus = Conllu.load(corpus, fix=True, adjust_for_speech=True)
 ```
 
-Also, if the **corpus** is a *Parsed CONLL-U* sequence, you can run `fix`
+Also, if the **corpus** is a *Parsed CoNLL-U* sequence, you can run `fix`
 method of `Conllu` class directly:
 ```python
 from corpuscula import Conllu

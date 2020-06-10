@@ -429,7 +429,7 @@ class gicr(_AbstractCorpus):
 
     @classmethod
     def train(cls):
-        """Return train part of GICR corpus in CONLL-U format"""
+        """Return train part of GICR corpus in CoNLL-U format"""
         fpath = get_corpus_fpath(dname=GICR_DNAME, url=GICR_URL)
         cls.isfile(fpath)
         return Conllu.load(read_zip(fpath, 'gikrya_new_train.out',
@@ -438,7 +438,7 @@ class gicr(_AbstractCorpus):
 
     @classmethod
     def test(cls):
-        """Return test part of GICR corpus in CONLL-U format"""
+        """Return test part of GICR corpus in CoNLL-U format"""
         fpath = get_corpus_fpath(dname=GICR_DNAME, url=GICR_URL)
         cls.isfile(fpath)
         return Conllu.load(read_zip(fpath, 'gikrya_new_test.out',
@@ -533,7 +533,7 @@ class opencorpora(_AbstractCorpus):
 
     @classmethod
     def train(cls, noamb=False, nounkn=False):
-        """Return OpenCorpora corpus in CONLL-U format.
+        """Return OpenCorpora corpus in CoNLL-U format.
 
         :param noamb: download a version of the corpus with removed ambiguity
         :param nounkn: download a version of the corpus without UNKN tags
@@ -605,7 +605,7 @@ class rnc(_AbstractCorpus):
 
     @classmethod
     def train(cls):
-        """Return RNC corpus in CONLL-U format"""
+        """Return RNC corpus in CoNLL-U format"""
         fpath = get_corpus_fpath(dname=RNC_DNAME, url=RNC_URL)
         cls.isfile(fpath)
         return Conllu.load(

@@ -7,7 +7,7 @@
 Corpuscula is a part of the RuMor project. It is a toolkit that simplifies
 corpus processing. Highlights are:
 
-* full CONLL-U support (includes CONLL-U Plus)
+* full CoNLL-U support (includes CoNLL-U Plus)
 * wrappers for known corpora of Russian language
 * parser and wrapper for russian part of Wikipedia
 * Corpus Dictionary that can be used for further morphology processing
