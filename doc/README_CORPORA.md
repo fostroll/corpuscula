@@ -98,7 +98,7 @@ corpus_utils.rnc.train()
 Downloading and removing **corpus_name** *UD Treebank*:
 ```python
 corpus_utils.download_ud(corpus_name, root_dir=None, overwrite=True)
-corpus_utils.remove_rnc(corpus_name, root_dir=None)
+corpus_utils.remove_ud(corpus_name, root_dir=None)
 ```
 
 Wrappers for the whole **corpus_name** *UD Treebank* and its parts:
