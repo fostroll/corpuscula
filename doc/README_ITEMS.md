@@ -63,6 +63,11 @@ You can check if a certain **item** is present in a certain **item_class**:
 items.item_isknown(self, item, item_class)
 ```
 
+To get a `list` of present item classes, call:
+```python
+classes = items.get_classes()
+```
+
 Anytime, you can backup and restore current state of an `Items` object:
 ```python
 o = items.backup()

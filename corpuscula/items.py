@@ -4,8 +4,8 @@
 # Copyright (C) 2019-present by Sergei Ternovykh
 # License: BSD, see LICENSE for details
 """
-Just a simple wrapper to store some structured data. For example (see lower),
-to store dictionary of names.
+Just a simple wrapper to store some structured data. For example, to store a
+dictionary of names.
 """
 from copy import deepcopy
 import pickle
@@ -49,6 +49,10 @@ class Items:
         """Restore current state from file"""
         with open(file_path, 'rb') as f:
             self.restore(pickle.load(f))
+
+    def get_classes(self):
+        """Return a list of item classes"""
+        return list(items._items.keys())
 
     def isempty(self, item_class=None):
         """Check if current state is not contain any information"""
