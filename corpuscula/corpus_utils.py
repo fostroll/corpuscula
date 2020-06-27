@@ -129,13 +129,16 @@ def get_corpus_fpath(dname=None, root_dir=None, fname=None, url=None):
     return fpath
 
 def _get_ud_train_name(file_list):
-    return next((x for x in file_list if x.endswith('train.conllu')), None)
+    return next((x for x in file_list if x and x.endswith('train.conllu')),
+                None)
 
 def _get_ud_dev_name(file_list):
-    return next((x for x in file_list if x.endswith('dev.conllu')), None)
+    return next((x for x in file_list if x and x.endswith('dev.conllu')),
+                None)
 
 def _get_ud_test_name(file_list):
-    return next((x for x in file_list if x.endswith('test.conllu')), None)
+    return next((x for x in file_list if x and x.endswith('test.conllu')),
+                None)
 
 UD = 'UniversalDependencies'
 UD_URL = 'https://api.github.com/repos/UniversalDependencies/{}/contents/'
