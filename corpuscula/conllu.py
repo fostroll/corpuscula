@@ -12,7 +12,6 @@ from io import BufferedReader
 import os
 import pickle
 import sys
-import typing
 
 from corpuscula.utils import LOG_FILE, print_progress
 
@@ -413,6 +412,3 @@ class Conllu:
         with open(file_path, mode='wt', encoding='utf-8') as f:
             for line in cls.get_as_text(corpus, **kwargs):
                 print(line, end='', file=f)
-        if isinstance(corpus, Iterator):
-            for s in corpus:
-                pass
