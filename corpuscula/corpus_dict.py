@@ -148,7 +148,7 @@ class CorpusDict:
     def restore_from(self, file_path, log_file=LOG_FILE):
         """Restore current state from file"""
         with open(file_path, 'rb') as f:
-            self.restore(pickle.load(f))
+            self.restore(pickle.load(f), log_file=log_file)
 
     def isempty(self):
         """Check if current state does not contain any information"""
