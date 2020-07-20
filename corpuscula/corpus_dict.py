@@ -108,7 +108,7 @@ class CorpusDict:
         with open(file_path, 'wb') as f:
             pickle.dump(self.backup(), f, 2)
 
-    def restore(self, o):
+    def restore(self, o, log_file=LOG_FILE):
         """Restore current state from backup object"""
         (self._cnt_thresh      ,
          self._ambiguity_thresh,
@@ -143,9 +143,9 @@ class CorpusDict:
             [k for k, _ in sorted(vals.items(), key=itemgetter(1))]
                 for vals in self._feat_vals_id
         )
-        self.fit()
+        self.fit(log_file=log_file)
 
-    def restore_from(self, file_path):
+    def restore_from(self, file_path, log_file=LOG_FILE):
         """Restore current state from file"""
         with open(file_path, 'rb') as f:
             self.restore(pickle.load(f))
