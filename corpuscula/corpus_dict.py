@@ -417,7 +417,7 @@ class CorpusDict:
                 feat = self._feats[feat_id]
                 vals = self._feat_vals[feat_id]
                 total_cnt2 = sum(item.values())
-                feats_freq.append((feat, total_cnt2 / total_cnt))
+                feats_freq.append((feat, total_cnt2, total_cnt2 / total_cnt))
                 feat_vals_freq = feat_vals[feat] = []
                 for val_id, cnt in item.items():
                     val = vals[val_id]
