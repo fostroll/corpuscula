@@ -566,6 +566,14 @@ class CorpusDict:
             res = self._wform_tag_cnts[res].get(self._tags_id[tag])
         return res is not None
 
+    def lemma_isknown(self, lemma, tag=None):
+        res = self._lemmata_id.get(lemma)
+        if res is None:
+            res = self._lemmata_id.get(lemma.lower())
+        if res is not None and tag:
+            res = self._lemma_tag_cnts[res].get(self._tags_id[tag])
+        return res is not None
+
     def most_common_tag(self):
         """Return most common tag for the whole corpus"""
         return self._most_common_tag
