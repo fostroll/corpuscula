@@ -87,7 +87,7 @@ class CorpusDict:
         if backup_to:
             self.backup_to(backup_to)
         if corpus:
-            self.fit()
+            self.fit(log_file=log_file)
 
     def backup(self):
         """Get current state"""
