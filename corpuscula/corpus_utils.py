@@ -183,19 +183,28 @@ def download_ud(corpus_name, root_dir=None, overwrite=True):
             dpath = os.path.join(dpath, corpus_name)
             if train:
                 fpaths.append(
-                    download_corpus('{}/{}:train'.format(UD, corpus_name),
-                                    train, dname=dpath, root_dir='',
-                                    overwrite=overwrite))
+                    #download_corpus('{}/{}:train'.format(UD, corpus_name),
+                    #                train, dname=dpath, root_dir='',
+                    #                overwrite=overwrite))
+                    download_file(train, dpath=dpath, fname=fname,
+                                  log_msg='Downloading {}/{}:train'
+                                              .format(UD, corpus_name))
             if dev:
                 fpaths.append(
-                    download_corpus('{}/{}:dev'.format(UD, corpus_name),
-                                    dev, dname=dpath, root_dir='',
-                                    overwrite=overwrite))
+                    #download_corpus('{}/{}:dev'.format(UD, corpus_name),
+                    #                dev, dname=dpath, root_dir='',
+                    #                overwrite=overwrite))
+                    download_file(dev, dpath=dpath, fname=fname,
+                                  log_msg='Downloading {}/{}:dev'
+                                              .format(UD, corpus_name))
             if test:
                 fpaths.append(
-                    download_corpus('{}/{}:test'.format(UD, corpus_name),
-                                    test, dname=dpath, root_dir='',
-                                    overwrite=overwrite))
+                    #download_corpus('{}/{}:test'.format(UD, corpus_name),
+                    #                test, dname=dpath, root_dir='',
+                    #                overwrite=overwrite))
+                    download_file(test, dpath=dpath, fname=fname,
+                                  log_msg='Downloading {}/{}:test'
+                                              .format(UD, corpus_name))
         os.remove(fcont)
     return fpaths
 
