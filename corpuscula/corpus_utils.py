@@ -189,6 +189,7 @@ def download_ud(corpus_name, root_dir=None, overwrite=True):
                     download_file(train, dpath=dpath, fname=fname,
                                   log_msg='Downloading {}/{}:train'
                                               .format(UD, corpus_name))
+                )
             if dev:
                 fpaths.append(
                     #download_corpus('{}/{}:dev'.format(UD, corpus_name),
@@ -197,6 +198,7 @@ def download_ud(corpus_name, root_dir=None, overwrite=True):
                     download_file(dev, dpath=dpath, fname=fname,
                                   log_msg='Downloading {}/{}:dev'
                                               .format(UD, corpus_name))
+                )
             if test:
                 fpaths.append(
                     #download_corpus('{}/{}:test'.format(UD, corpus_name),
@@ -205,6 +207,7 @@ def download_ud(corpus_name, root_dir=None, overwrite=True):
                     download_file(test, dpath=dpath, fname=fname,
                                   log_msg='Downloading {}/{}:test'
                                               .format(UD, corpus_name))
+                )
         os.remove(fcont)
     return fpaths
 
