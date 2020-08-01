@@ -116,8 +116,8 @@ class Conllu:
                             token['ID'] = str(id_) + '.' + str(sub_id)
                     if token['ID'] != old_id:
                         for token_ in sentence:
-                            if token['HEAD'] == old_id:
-                                token['HEAD'] = token['ID']
+                            if token_['HEAD'] == old_id:
+                                token_['HEAD'] = token['ID']
             sentence = tokens
             if not sentence:
                 vals = {}
