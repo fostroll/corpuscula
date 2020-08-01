@@ -63,15 +63,11 @@ class Conllu:
                 tokens.append(token)
                 columns = token.keys()
                 if 'ID' in token and 'FORM' in columns:
-                    old_id = token['ID'] or ''
+                    old_id = token['ID']
                     if '.' in old_id:
                         sub_id += 1
                         token['ID'] = str(id_) + '.' + str(sub_id)
                     elif multi_token:
-                        #if '.' in old_id:
-                        #    sub_id += 1
-                        #    token['ID'] = str(id_) + '.' + str(sub_id)
-                        #else:
                         id_ += 1
                         sub_id = 0
                         token['ID'] = str(id_)
@@ -118,6 +114,10 @@ class Conllu:
                         else:
                             sub_id += 1
                             token['ID'] = str(id_) + '.' + str(sub_id)
+                    if token['ID'] != old_id:
+                        for token_ in sentence:
+                            if token['HEAD'] == old_id:
+                                token['HEAD'] = token['ID']
             sentence = tokens
             if not sentence:
                 vals = {}
