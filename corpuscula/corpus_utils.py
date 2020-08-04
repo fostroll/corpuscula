@@ -51,15 +51,22 @@ def set_root_dir(root_dir):
 def get_root_dir():
     cfg_path = os.path.join(str(Path.home()), '.rumor')
     res = ROOT_DIR
-    with open(cfg_path, 'rt', encoding='utf-8') as f:
-        for line in f:
-            try:
-                var, val = line.split('\t', maxsplit=1)
-                if var == _CFG_ROOT_DIR:
-                    res = val.strip()
-                    break
-            except ValueError:
-                pass
+    try:
+        with open(cfg_path, 'rt', encoding='utf-8') as f:
+            for line in f:
+                try:
+                    var, val = line.split('\t', maxsplit=1)
+                    if var == _CFG_ROOT_DIR:
+                        res = val.strip()
+                        break
+                except ValueError:
+                    pass
+    except FileNotFoundError:
+        raise FileNotFoundError(
+           'Configuration file is absent. Invoke '
+           '`corpuscula.set_root_dir(<directory to keep corpora>)` '
+           'to create it'
+        )
     return res
 
 CORPUS_DNAME = 'corpus'
