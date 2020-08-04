@@ -64,8 +64,8 @@ def get_root_dir():
     except FileNotFoundError:
         raise FileNotFoundError(
            'Configuration file is absent. Invoke '
-           '`corpuscula.corpus_utils.set_root_dir(<directory to keep '
-           'corpora>)` to create it'
+           '`corpuscula.corpus_utils.set_root_dir(<directory where to '
+           'create corpora storage>)` to create it'
         )
     return res
 
