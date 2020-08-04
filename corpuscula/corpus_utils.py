@@ -17,20 +17,22 @@ import sys
 from urllib.error import HTTPError
 
 from corpuscula.conllu import Conllu
-from corpuscula.utils import LOG_FILE, download_file, rmdir, \
-                             read_bz2, read_rar, read_zip
+from corpuscula.utils import DIR_ACCESS_RIGHTS, LOG_FILE, download_file, \
+                             rmdir, read_bz2, read_rar, read_zip
 
 
 ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
 _CFG_ROOT_DIR = 'ROOT_DIR'
+CORPUS_DNAME = 'corpus'
 def set_root_dir(root_dir):
     root_dir = root_dir.strip()
     if root_dir and root_dir[0] == '~' \
    and (len(root_dir) == 1 or root_dir[1] in r'\/'):
         root_dir = os.path.join(Path.home(), root_dir[:2])
     assert os.path.isabs(root_dir), 'ERROR: Only absolute path is allowed'
-    if not os.path.exists(root_dir):
-        os.makedirs(root_dir, DIR_ACCESS_RIGHTS)
+    corpus_dir = os.path.join(root_dir, CORPUS_DNAME)
+    if not os.path.exists(corpus_dir):
+        os.makedirs(corpus_dir, DIR_ACCESS_RIGHTS)
     cfg_path = os.path.join(str(Path.home()), '.rumor')
     cfg = ["# Config file for RuMor project. Don't change it manually."]
     isdone = False
@@ -75,7 +77,6 @@ def get_root_dir():
         )
     return res
 
-CORPUS_DNAME = 'corpus'
 def download_corpus(name, url, dname=None, root_dir=None, fname=None,
                     **kwargs):
     """Download a corpus *name* from *url*. The corpus will be stored inside
