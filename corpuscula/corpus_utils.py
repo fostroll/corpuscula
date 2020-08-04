@@ -28,7 +28,7 @@ def set_root_dir(root_dir):
     root_dir = root_dir.strip()
     if root_dir and root_dir[0] == '~' \
    and (len(root_dir) == 1 or root_dir[1] in r'\/'):
-        root_dir = os.path.join(Path.home(), root_dir[:2])
+        root_dir = os.path.join(Path.home(), root_dir[2:])
     assert os.path.isabs(root_dir), 'ERROR: Only absolute path is allowed'
     corpus_dir = os.path.join(root_dir, CORPUS_DNAME)
     if not os.path.exists(corpus_dir):
