@@ -25,6 +25,11 @@ ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
 _CFG_ROOT_DIR = 'ROOT_DIR'
 def set_root_dir(root_dir):
     root_dir = root_dir.strip()
+    if root_dir[0] == '~' and root_dir[1] in r'\/':
+        root_dir[:1] = Path.home()
+    assert os.path.isabs(root_dir), 'ERROR: Only absolute path is allowed'
+    if not os.path.exists(root_dir):
+        os.makedirs(root_dir, DIR_ACCESS_RIGHTS)
     cfg_path = os.path.join(str(Path.home()), '.rumor')
     cfg = ["# Config file for RuMor project. Don't change it manually."]
     isdone = False

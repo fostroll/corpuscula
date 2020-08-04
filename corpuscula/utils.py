@@ -211,8 +211,8 @@ def download_file(url, dpath=None, fname=None, chunk_size=CALLBACK_CHUNK_SIZE,
         dpath = '.'
     if dpath and not os.path.exists(dpath):
         os.makedirs(dpath, DIR_ACCESS_RIGHTS)
-    fpath = os.path.join(dpath, re.sub('^.+/', '', url)
-                                    if fname is None else fname)
+    fpath = os.path.join(dpath, re.sub('^.+/', '', url) if fname is None else
+                                fname)
     if overwrite or not os.path.isfile(fpath):
         if not silent and log_msg is not None:
             print(log_msg, file=LOG_FILE)
