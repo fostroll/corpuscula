@@ -25,8 +25,9 @@ ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
 _CFG_ROOT_DIR = 'ROOT_DIR'
 def set_root_dir(root_dir):
     root_dir = root_dir.strip()
-    if root_dir[0] == '~' and root_dir[1] in r'\/':
-        root_dir[:1] = Path.home()
+    if root_dir and root_dir[0] == '~' \
+   and (len(root_dir) == 1 or root_dir[1] in r'\/'):
+        root_dir = os.path.join(Path.home(), root_dir[:2])
     assert os.path.isabs(root_dir), 'ERROR: Only absolute path is allowed'
     if not os.path.exists(root_dir):
         os.makedirs(root_dir, DIR_ACCESS_RIGHTS)
