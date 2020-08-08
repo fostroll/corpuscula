@@ -207,7 +207,7 @@ class CorpusDict:
                     # wforms instead of one: with and without "yo" with the
                     # same lemma and other attributes
                     wforms_ = [wform]
-                    wform_ = wform.replace('ё', 'е')
+                    wform_ = wform.replace('ё', 'е').replace('Ё', 'Е')
                     if wform_ != wform:
                         wforms_.append(wform_)
                         nyo += 1
