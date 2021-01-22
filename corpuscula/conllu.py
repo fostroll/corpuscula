@@ -41,7 +41,9 @@ class Conllu:
                             as multiword tokens
         :param adjust_for_speech: if True, remove all non alphanumeric tokens
                                   and convert all words to lower case
-        :rtype: iter
+        :return: sentences in Parsed CoNLL-U format
+        :rtype: sequence of tuple(list(dict(str: str|OrderedDict(str: str))),
+                                  OrderedDict(str: str))
         """
         for sent_no, sentence in enumerate(corpus):
             sentence, sentence_meta = \
@@ -156,7 +158,7 @@ class Conllu:
 
     @classmethod
     def from_sentence(cls, wforms, columns=None):
-        """Convert a list of wforms to Parsed CoNLL-U format.
+        """Convert a list of *wforms* to Parsed CoNLL-U format.
 
         :param columns: list of column names. If None, standard CoNLL-U columns
                         are used
@@ -192,7 +194,7 @@ class Conllu:
     @classmethod
     def from_sentences(cls, sentences, split_multi=False,
                        adjust_for_speech=False, columns=None):
-        """Convert a sequence of tokenized sentences to Parsed CoNLL-U format
+        """Convert a sequence of tokenized *sentences* to Parsed CoNLL-U format
 
         :param fix: fix CoNLL-U structure of after conversion
         :param split_multi: if True then wforms with spaces will be processed
@@ -200,6 +202,9 @@ class Conllu:
         :param adjust_for_speech: if yes, remove all non alphanumeric tokens
                                   and convert all words to lower case (used
                                   only with fix=True)
+        :param columns: list of column names. If None, standard CoNLL-U columns
+                        are used
+        :type columns: list(str)
         :rtype: iter
         """
         yield from cls.fix((cls.from_sentence(s, columns=columns)
@@ -210,7 +215,7 @@ class Conllu:
     @classmethod
     def load(cls, corpus, encoding='utf-8-sig', fix=True, split_multi=False,
              adjust_for_speech=False, log_file=LOG_FILE):
-        """Load corpus in CoNLL-U format as sequence of Parsed CoNLL-U
+        """Load *corpus* in CoNLL-U format as sequence of Parsed CoNLL-U
         sentences. Each sentence returns as tuple of a list of tagged tokens
         and a dict of metadata that can be used to restore corpus back to
         CoNLL-U format.
@@ -221,6 +226,7 @@ class Conllu:
         :param adjust_for_speech: if yes, remove all non alphanumeric tokens
                                   and convert all words to lower case (used
                                   only with fix=True)
+        :param log_file: stream for messages
         :return: sentences in Parsed CoNLL-U format
         :rtype: sequence of tuple(list(dict(str: str|OrderedDict(str: str))),
                                   OrderedDict(str: str))
@@ -325,6 +331,14 @@ class Conllu:
                     adjust_for_speech=False, log_file=LOG_FILE):
         """Convert a *corpus* in Parsed CoNLL-U format to text form.
 
+        :param fix: fix CoNLL-U structure of after conversion
+        :param split_multi: if True then wforms with spaces will be processed
+                            as multiword tokens (used only with fix=True)
+        :param adjust_for_speech: if yes, remove all non alphanumeric tokens
+                                  and convert all words to lower case (used
+                                  only with fix=True)
+        :param log_file: stream for messages
+        :return: CoNLL-U as text
         :rtype: iter(str)
         """
         if log_file:
@@ -408,7 +422,83 @@ class Conllu:
 
     @classmethod
     def save(cls, corpus, file_path, **kwargs):
-        """Save a *corpus* in Parsed CoNLL-U format to CoNLL-U file"""
+        """Save a *corpus* in Parsed CoNLL-U format to CoNLL-U file.
+
+        :param **kwargs: params for ``.get_as_text()`` method
+        """
         with open(file_path, mode='wt', encoding='utf-8') as f:
             for line in cls.get_as_text(corpus, **kwargs):
                 print(line, end='', file=f)
+
+    @classmethod
+    def merge(cls, corpus1, corpus2, encoding='utf-8-sig', stop_on_error=True,
+              log_file=LOG_FILE):
+        """Merge CoNLL-U fields of two corpuses with identical text data.
+
+        :param stop_on_error: if `True`, the method will raise an error if
+                              some field of any token has non-`None` values in
+                              both corpuses and these values are not
+                              equivalent. Note, that non-equivalent values in
+                              the FORM field will raise an error in any case.
+        :param log_file: stream for messages
+        :return: sentences in Parsed CoNLL-U format
+        :rtype: sequence of tuple(list(dict(str: str|OrderedDict(str: str))),
+                                  OrderedDict(str: str))
+        """
+        corpus1 = cls.load(corpus1, encoding=encoding, fix=False,
+                           log_file=log_file)
+        corpus2 = cls.load(corpus2, encoding=encoding, fix=False,
+                           log_file=None)
+        for sentence1, sentence2 in zip(corpus1, corpus2):
+            sentence1, sentence_meta1 = \
+                sentence1 if isinstance(sentence1, tuple) else \
+                (sentence1, OrderedDict())
+            sentence2, sentence_meta2 = \
+                sentence2 if isinstance(sentence2, tuple) else \
+                (sentence2, OrderedDict())
+
+            def error(msg, val1, val2):
+                msg += ' are not equals:\n' \
+                     + 'Value 1: "{}"\n'.format(val1) \
+                     + 'Value 2: "{}"\n'.format(val2) \
+                     + 'Meta 1: {}\n'.format(sentence_meta1) \
+                     + 'Meta 2: {}\n'.format(sentence_meta2)
+                raise RuntimeError(msg)
+
+            for meta_key, meta_val2 in sentence_meta2.items():
+                meta_val1 = sentence_meta1.get(meta_key)
+                if meta_val2 is not None:
+                    if stop_on_error and meta_val1 is not None \
+                                     and meta_val1 != meta_val2:
+                        error('Values of meta "{}"'.format(meta_key),
+                              meta_val1, meta_val2)
+                    sentence_meta1[meta_key] = meta_val2
+            for token1, token2 in zip(sentence1, sentence2):
+                for field_key, field_val2 in token2.items():
+                    field_val1 = token1.get(field_key)
+                    if field_val1 is not None and field_val2 is not None \
+                   and type(field_val1) != type(field_val2):
+                        if stop_on_error:
+                            error('Types of field "{}"'.format(field_key),
+                                  field_val1, field_val2)
+                    elif isinstance(field_val1, dict):
+                        for feat_key, feat_val2 in field_val2.items():
+                            feat_val1 = field_val1.get(feat_key)
+                            if feat_val2 is not None:
+                                if stop_on_error and feat_val1 is not None \
+                                                 and feat_val1 != feat_val2:
+                                    error('Values of feat "{}:{}"'
+                                              .format(field_key, feat_key),
+                                          feat_val1, feat_val2)
+                                field_val1[feat_key] = feat_val2
+                    else:
+                        if field_val2 is not None:
+                            if field_val1 != field_val2 and (
+                                (stop_on_error and field_val1 is not None) \
+                             or field_key == 'FORM'
+                            ):
+                                error('Values of field "{}"'
+                                          .format(field_key, feat_key),
+                                      field_val1, field_val2)
+                            token1[field_key] = field_val2
+            yield sentence1, sentence_meta1

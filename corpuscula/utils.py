@@ -173,7 +173,7 @@ def copy_file(src, dst, buf_size=COPY_BUF_SIZE, **kwargs):
 
     :param src: source file name
     :param dst: destination file name
-    :param kwargs: params for ``copyfileobj()`` method
+    :param **kwargs: keyword params for ``copyfileobj()`` method
     """
     with open(src, 'rb') as fsrc, open(dst, 'wb') as fdst:
         copyfileobj(fsrc, fdst, **kwargs)

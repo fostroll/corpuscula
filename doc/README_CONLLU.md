@@ -58,8 +58,10 @@ format.
 **split_multi** and **adjust_for_speech**: params to pass to `Conllu.fix`
 method. Have no affect if **fix** is `False`.
 
-**log_file**: stream for progress messages. Default is `sys.stderr`. If
+**log_file**: a stream for progress messages. Default is `sys.stderr`. If
 `None`, then output will be suppressed.
+
+Returns sentences in *Parsed CoNLL-U* format
 
 **NB:** For *CoNLL-U Plus* format, the field list must be specified in the first
 line of the **corpus** (in the meta variable *global.columns*)
@@ -77,7 +79,7 @@ Saves a **corpus** of *Parsed CoNLL-U* format to *CoNLL-U* file **file_path**.
 **split_multi** and **adjust_for_speech**: params to pass to `Conllu.fix`
 method. Have no affect if **fix** is `False`.
 
-**log_file**: stream for progress messages. Default is `sys.stderr`. If
+**log_file**: a stream for progress messages. Default is `sys.stderr`. If
 `None`, then output will be suppressed.
 
 ```python
@@ -87,10 +89,12 @@ Conllu.get_as_text(corpus, fix=True, split_multi=False,
 Converts a **corpus** of *Parsed CoNLL-U* format to text representation of
 *CoNLL-U*. All params are equals to the ones of `Conllu.save` method.
 
+Return iterator of `str` lines.
+
 ### Fixing *CoNLL-U* structure
 
-```
-Conllu.get_as_text(corpus, split_multi=False, adjust_for_speech=False)
+```python
+Conllu.fix(corpus, split_multi=False, adjust_for_speech=False)
 ```
 If need, restore correct *ID* numeration and adjust sentences' *metadata*.
 
@@ -102,3 +106,29 @@ multiword tokens.
 **adjust_for_speech**: if `True`, remove all non alphanumeric tokens and
 convert all words to lower case. That makes the **corpus** blend in with the
 output of speech recognition tools.
+
+Returns sentences in *Parsed CoNLL-U* format
+
+### Merging *CoNLL-U* annotations
+
+Sometimes, we have one corpus tagged independently for different tasks. As
+result, we have several copies of the coprus, each with its own annotations.
+To merge it in one *CoNLL-U* file, use:
+```python
+Conllu.merge(corpus1, corpus2, encoding='utf-8-sig', stop_on_error=True,
+             log_file=sys.stderr)
+```
+**corpus1**, **corpus2**: corpora with identical values in the FORM field.
+Values in any other fields may be different. Set of fields also don't have to
+be equvalent for both corpuses. Result *CoNNL-U* file will include fields from
+both of sets.
+
+Param **stop_on_error**: if `True`, the method will raise an error if some
+field of any token has non-`None` values in both corpuses and these values are
+not equivalent. Note, that non-equivalent values in the FORM field will raise
+an error in any case.
+
+**log_file**: a stream for progress messages. Default is `sys.stderr`. If
+`None`, then output will be suppressed.
+
+Returns sentences in *Parsed CoNLL-U* format
