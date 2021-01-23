@@ -22,7 +22,7 @@ Next method allows to receive currently set root directory:
 root_dir = corpus_utils.get_root_dir()
 ```
 
-### Downloading and removal Wikipedia dump
+### Downloading and removal *Wikipedia* dump
 
 ```python
 from corpuscula import wikipedia_utils
@@ -43,22 +43,33 @@ exists.
 ### Wrappers for *Wikipedia*'s parts:
 
 ```python
-wikipedia_utils.Wikipedia.titles()
-wikipedia_utils.Wikipedia.articles()
-wikipedia_utils.Wikipedia.templates()
+wiki = wikipedia_utils.Wikipedia(lang='RU', fpath=None, silent=False)
+titles = wiki.titles()
+articles = wiki.articles()
+templates = wiki.templates()
 ```
-All methods return lists of tuples that are:
+Params of the constructor:
 
-for `Wikipedia.titles`: `(<article id>, <article title>)`;
+**lang**: specifies of what language *Wikipedia* dump you want to use. Only
+**lang**=`'RU'` is currently supported.
 
-for `Wikipedia.articles`: `(<article id>, <article title>, <article text>)`;
+**fpath**: path to the *Wikipedia* dump. If it downloaded in default location,
+keep it `None`.
 
-for `Wikipedia.templates`: `(<template id>, <template title>,
+**silent**: suppress output.
+
+All methods return iterators of tuples that are:
+
+for `Wikipedia.titles()`: `(<article id>, <article title>)`;
+
+for `Wikipedia.articles()`: `(<article id>, <article title>, <article text>)`;
+
+for `Wikipedia.templates()`: `(<template id>, <template title>,
 <template text>)`;
 
-We promote `Wikipedia.templates` in case if anyone can make parser for
-Wikipedia articles based on that templates. So far, only most common templates
-were used for parsing the articles.
+We promote `.templates()` in case if anyone can make parser for *Wikipedia*
+articles based on that templates. So far, only most common templates were used
+for parsing the articles.
 
 **NB:** all methods return processed clean text, not *CoNLL-U*. That's because
 for *CoNLL-U* we require tokenized text. If you want *Wikipedia* wrapper with
