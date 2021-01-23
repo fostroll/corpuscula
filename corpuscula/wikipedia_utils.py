@@ -114,7 +114,7 @@ def _get_all(fpath, what=None, silent=False):
             elif not id_ and line.startswith('<id>'):
                 id_ = re_html.sub('', line)
                 if what == 'titles':
-                    yield id_, title
+                    yield id_, title.strip()
 
             elif what != 'titles' and title and line.startswith('<text '):
                 text = ''
@@ -131,8 +131,8 @@ def _get_all(fpath, what=None, silent=False):
             if istemplate:
                 text += line
                 if ready_for_save:
-                    yield (id_, title, text) if what else \
-                          (id_, title, None, text)
+                    yield (id_, title.strip(), text.strip()) if what else \
+                          (id_, title.strip(), None, text.strip())
                     id_ = title = text = None
                     istemplate = False
                     ready_for_save = False
@@ -376,8 +376,8 @@ def _get_all(fpath, what=None, silent=False):
         if ready_for_save:
             if text and enters:
                 text = text[:-enters]
-            yield (id_, title, text) if what else \
-                  (id_, title, text, None)
+            yield (id_, title.strip(), text.strip()) if what else \
+                  (id_, title.strip(), text.strip(), None)
             id_ = title = text = None
             isobject = istable = issquare = 0
             iscomment = False
@@ -387,10 +387,10 @@ def _get_all(fpath, what=None, silent=False):
 
     if article_no >= 0:
         if text:
-            yield (id_, title, text) if what else \
-                  (id_, title, \
-                   None if istemplate else text, \
-                   text if istemplate else None)
+            yield (id_, title.strip(), text.strip()) if what else \
+                  (id_, title.strip(), \
+                   None if istemplate else text.strip(), \
+                   text.strip() if istemplate else None)
             article_no += 1
         article_no += 1
         if not silent:
