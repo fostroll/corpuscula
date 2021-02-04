@@ -60,6 +60,7 @@ def _get_templates(fpath, silent=False):
     return _get_all(fpath, what='templates', silent=silent)
 
 re_html = re_compile(r'<[^<>]+?>')
+re_spenter = re_compile(r'[^\S\n]+\n')
 def _get_all(fpath, what=None, silent=False):
 
     def read_txt():
@@ -131,8 +132,9 @@ def _get_all(fpath, what=None, silent=False):
             if istemplate:
                 text += line
                 if ready_for_save:
-                    yield (id_, title.strip(), text.strip()) if what else \
-                          (id_, title.strip(), None, text.strip())
+                    text = re_spenter.sub('\n', text).strip()
+                    yield (id_, title.strip(), text) if what else \
+                          (id_, title.strip(), None, text)
                     id_ = title = text = None
                     istemplate = False
                     ready_for_save = False
@@ -375,9 +377,9 @@ def _get_all(fpath, what=None, silent=False):
 
         if ready_for_save:
             if text and enters:
-                text = text[:-enters]
-            yield (id_, title.strip(), text.strip()) if what else \
-                  (id_, title.strip(), text.strip(), None)
+                text = re_spenter.sub('\n', text[:-enters]).strip()
+            yield (id_, title.strip(), text) if what else \
+                  (id_, title.strip(), text, None)
             id_ = title = text = None
             isobject = istable = issquare = 0
             iscomment = False
@@ -387,10 +389,11 @@ def _get_all(fpath, what=None, silent=False):
 
     if article_no >= 0:
         if text:
-            yield (id_, title.strip(), text.strip()) if what else \
-                  (id_, title.strip(), \
-                   None if istemplate else text.strip(), \
-                   text.strip() if istemplate else None)
+            text = re_spenter.sub('\n', text).strip()
+            yield (id_, title.strip(), text) if what else \
+                  (id_, title.strip(), 
+                   None if istemplate else text,
+                   text if istemplate else None)
             article_no += 1
         article_no += 1
         if not silent:
