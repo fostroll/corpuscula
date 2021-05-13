@@ -431,11 +431,14 @@ class Conllu:
                 print(line, end='', file=f)
 
     @classmethod
-    def merge(cls, corpus1, corpus2, encoding='utf-8-sig', stop_on_error=True,
-              log_file=LOG_FILE):
+    def merge(cls, corpus1, corpus2, encoding='utf-8-sig',
+              ignore_new_meta=False, stop_on_error=True, log_file=LOG_FILE):
         """Merge CoNLL-U fields of two corpuses with identical text data.
 
-        :param stop_on_error: if `True`, the method will raise an error if
+        :param ignore_new_meta: if ``True``, output metadata will be exactly
+                                as in *corpus1*. Metadata of *corpus2* is
+                                ignored.
+        :param stop_on_error: if ``True``, the method will raise an error if
                               some field of any token has non-`None` values in
                               both corpuses and these values are not
                               equivalent. Note, that non-equivalent values in
@@ -445,6 +448,14 @@ class Conllu:
         :rtype: sequence of tuple(list(dict(str: str|OrderedDict(str: str))),
                                   OrderedDict(str: str))
         """
+        def error(msg, val1, val2):
+            msg += ' are not equals:\n' \
+                 + 'Value 1: "{}"\n'.format(val1) \
+                 + 'Value 2: "{}"\n'.format(val2) \
+                 + 'Meta 1: {}\n'.format(sentence_meta1) \
+                 + 'Meta 2: {}\n'.format(sentence_meta2)
+            raise RuntimeError(msg)
+
         corpus1 = cls.load(corpus1, encoding=encoding, fix=False,
                            log_file=log_file)
         corpus2 = cls.load(corpus2, encoding=encoding, fix=False,
@@ -456,23 +467,15 @@ class Conllu:
             sentence2, sentence_meta2 = \
                 sentence2 if isinstance(sentence2, tuple) else \
                 (sentence2, OrderedDict())
-
-            def error(msg, val1, val2):
-                msg += ' are not equals:\n' \
-                     + 'Value 1: "{}"\n'.format(val1) \
-                     + 'Value 2: "{}"\n'.format(val2) \
-                     + 'Meta 1: {}\n'.format(sentence_meta1) \
-                     + 'Meta 2: {}\n'.format(sentence_meta2)
-                raise RuntimeError(msg)
-
-            for meta_key, meta_val2 in sentence_meta2.items():
-                meta_val1 = sentence_meta1.get(meta_key)
-                if meta_val2 is not None:
-                    if stop_on_error and meta_val1 is not None \
-                                     and meta_val1 != meta_val2:
-                        error('Values of meta "{}"'.format(meta_key),
-                              meta_val1, meta_val2)
-                    sentence_meta1[meta_key] = meta_val2
+            if not ignore_new_meta:
+                for meta_key, meta_val2 in sentence_meta2.items():
+                    meta_val1 = sentence_meta1.get(meta_key)
+                    if meta_val2 is not None:
+                        if stop_on_error and meta_val1 is not None \
+                                         and meta_val1 != meta_val2:
+                            error('Values of meta "{}"'.format(meta_key),
+                                  meta_val1, meta_val2)
+                        sentence_meta1[meta_key] = meta_val2
             for token1, token2 in zip(sentence1, sentence2):
                 for field_key, field_val2 in token2.items():
                     field_val1 = token1.get(field_key)
@@ -493,12 +496,14 @@ class Conllu:
                                 field_val1[feat_key] = feat_val2
                     else:
                         if field_val2 is not None:
+                            #print(field_val1, field_val2)
                             if field_val1 != field_val2 and (
-                                (stop_on_error and field_val1 is not None) \
+                                (stop_on_error and field_val1 is not None
+                             and not (field_key == 'ID' and ignore_new_meta))
                              or field_key == 'FORM'
                             ):
                                 error('Values of field "{}"'
-                                          .format(field_key, feat_key),
+                                          .format(field_key),
                                       field_val1, field_val2)
                             token1[field_key] = field_val2
             yield sentence1, sentence_meta1

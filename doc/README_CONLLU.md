@@ -123,6 +123,9 @@ Values in any other fields may be different. Set of fields also don't have to
 be equvalent for both corpuses. Result *CoNNL-U* file will include fields from
 both of sets.
 
+If param **ignore_new_meta** is `True`, output metadata will be exactly as in
+**corpus1**. Metadata of **corpus2** is ignored. Default is `False`.
+
 Param **stop_on_error**: if `True`, the method will raise an error if some
 field of any token has non-`None` values in both corpuses and these values are
 not equivalent. Note, that non-equivalent values in the FORM field will raise
