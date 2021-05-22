@@ -32,8 +32,9 @@ class Conllu:
     def __new__(cls):
         raise NotImplementedError('This class has only static methods')
 
-    @staticmethod
-    def fix(corpus, split_multi=False, adjust_for_speech=False):
+    @classmethod
+    def fix(cls, corpus, split_multi=False, adjust_for_speech=False,
+            columns=None):
         """Fix Parsed CoNLL-U structure of *corpus* (renew token ids, generate
         sentence ids and text if they are not present in metadata, etc.)
 
@@ -41,10 +42,15 @@ class Conllu:
                             as multiword tokens
         :param adjust_for_speech: if True, remove all non alphanumeric tokens
                                   and convert all words to lower case
+        :param columns: list of column names. If None, standard CoNLL-U columns
+                        are used
+        :type columns: list(str)
         :return: sentences in Parsed CoNLL-U format
         :rtype: sequence of tuple(list(dict(str: str|OrderedDict(str: str))),
                                   OrderedDict(str: str))
         """
+        if columns is None:
+            columns = cls.STD_COLUMNS
         for sent_no, sentence in enumerate(corpus):
             sentence, sentence_meta = \
                 sentence if isinstance(sentence, tuple) else \
@@ -196,12 +202,10 @@ class Conllu:
                        adjust_for_speech=False, columns=None):
         """Convert a sequence of tokenized *sentences* to Parsed CoNLL-U format
 
-        :param fix: fix CoNLL-U structure of after conversion
         :param split_multi: if True then wforms with spaces will be processed
-                            as multiword tokens (used only with fix=True)
+                            as multiword tokens
         :param adjust_for_speech: if yes, remove all non alphanumeric tokens
-                                  and convert all words to lower case (used
-                                  only with fix=True)
+                                  and convert all words to lower case
         :param columns: list of column names. If None, standard CoNLL-U columns
                         are used
         :type columns: list(str)
@@ -210,7 +214,8 @@ class Conllu:
         yield from cls.fix((cls.from_sentence(s, columns=columns)
                                for s in sentences),
                            split_multi=split_multi,
-                           adjust_for_speech=adjust_for_speech)
+                           adjust_for_speech=adjust_for_speech,
+                           columns=columns)
 
     @classmethod
     def load(cls, corpus, encoding='utf-8-sig', fix=True, split_multi=False,

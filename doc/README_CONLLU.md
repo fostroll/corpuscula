@@ -17,7 +17,8 @@ Input sequences may be both generators and lists.
 ### Converting tokenized sentences to *Parsed CoNLL-U*
 
 ```python
-Conllu.from_sentences(sentences, split_multi=False, adjust_for_speech=False, columns=None)
+Conllu.from_sentences(sentences, split_multi=False, adjust_for_speech=False,
+                      columns=None)
 ```
 Converts a sequence of tokenized sentences to *Parsed CoNLL-U* format. For every
 sentence from **sentences**, the method `Conllu.from_sentence` will be run.
@@ -94,7 +95,7 @@ Return iterator of `str` lines.
 ### Fixing *CoNLL-U* structure
 
 ```python
-Conllu.fix(corpus, split_multi=False, adjust_for_speech=False)
+Conllu.fix(corpus, split_multi=False, adjust_for_speech=False, columns=None)
 ```
 If need, restore correct *ID* numeration and adjust sentences' *metadata*.
 
@@ -107,7 +108,12 @@ multiword tokens.
 convert all words to lower case. That makes the **corpus** blend in with the
 output of speech recognition tools.
 
-Returns sentences in *Parsed CoNLL-U* format
+Returns sentences in *Parsed CoNLL-U* format. Each fixed sentence will contain
+the same set of fields as the original one. But, if the sentence is empty, the
+empty stub sentence will be generated, fields of which are the default fields
+of *CoNLL-U* format. If you need any alternative fields set, you can pass them
+to the method as a list of `str` via **columns** param. **NB:** This affects
+only on empty sentences.
 
 ### Merging *CoNLL-U* annotations
 
