@@ -141,3 +141,9 @@ an error in any case.
 `None`, then output will be suppressed.
 
 Returns sentences in *Parsed CoNLL-U* format
+
+**Important:** if a sentence of **corpus1** has a token with an *ID* field
+that contains char `'-'` or `'.'`, and a corresponding sentence of a
+**corpus2** doesn't contain an *ID* field with identical character in that
+position, we'd get the first token as is and compare next token of its
+sentence instead of it.

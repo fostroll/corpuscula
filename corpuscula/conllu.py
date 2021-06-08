@@ -58,7 +58,7 @@ class Conllu:
 
             tokens = []
             id_, sub_id = 0, 0
-            multi_token, last_old_id = None, None
+            multi_token, multi_token_id, last_old_id = None, None, None
             for token in sentence:
                 if adjust_for_speech:
                     wform = token['FORM']
@@ -76,6 +76,9 @@ class Conllu:
                         sub_id += 1
                         token['ID'] = str(id_) + '.' + str(sub_id)
                     elif multi_token:
+                        assert '-' not in old_id, 'ERROR: ' \
+                            'overlapping multi-tokens {} and {}' \
+                                .format(multi_token_id, old_id)
                         id_ += 1
                         sub_id = 0
                         token['ID'] = str(id_)
@@ -90,7 +93,7 @@ class Conllu:
                             token['ID'] = str(id_)
                             dash_pos = old_id.rfind('-')
                             if dash_pos > 0:
-                                multi_token = token
+                                multi_token, multi_token_id = token, old_id
                                 last_old_id = old_id[dash_pos + 1:]
                                 id_ -= 1
                             else:
@@ -126,6 +129,8 @@ class Conllu:
                         for token_ in sentence:
                             if token_['HEAD'] == old_id:
                                 token_['HEAD'] = token['ID']
+            assert not multi_token, 'ERROR: ' \
+                "can't close multi-token {}".format(multi_token_id)
             sentence = tokens
             if not sentence:
                 vals = {}
@@ -437,7 +442,8 @@ class Conllu:
 
     @classmethod
     def merge(cls, corpus1, corpus2, encoding='utf-8-sig',
-              ignore_new_meta=False, stop_on_error=True, log_file=LOG_FILE):
+              ignore_new_meta=False,
+              stop_on_error=True, log_file=LOG_FILE):
         """Merge CoNLL-U fields of two corpuses with identical text data.
 
         :param ignore_new_meta: if ``True``, output metadata will be exactly
@@ -452,63 +458,119 @@ class Conllu:
         :return: sentences in Parsed CoNLL-U format
         :rtype: sequence of tuple(list(dict(str: str|OrderedDict(str: str))),
                                   OrderedDict(str: str))
+
+        Important: if a sentence of *corpus1* has a token with an ID field
+                   that contains char '-' or '.', and a corresponding sentence
+                   of a *corpus2* doesn't contain an ID field with identical
+                   character in that position, we'd get the first token as is
+                   and compare next token of its sentence instead of it.
         """
+        sentence_meta1 = sentence_meta1 = None
+
         def error(msg, val1, val2):
-            msg += ' are not equals:\n' \
+            if not msg.endswith(':'):
+                msg += ' are not equals:'
+            msg += '\n' \
                  + 'Value 1: "{}"\n'.format(val1) \
                  + 'Value 2: "{}"\n'.format(val2) \
                  + 'Meta 1: {}\n'.format(sentence_meta1) \
                  + 'Meta 2: {}\n'.format(sentence_meta2)
-            raise RuntimeError(msg)
+            raise ValueError(msg)
 
         corpus1 = cls.load(corpus1, encoding=encoding, fix=False,
                            log_file=log_file)
         corpus2 = cls.load(corpus2, encoding=encoding, fix=False,
                            log_file=None)
-        for sentence1, sentence2 in zip(corpus1, corpus2):
-            sentence1, sentence_meta1 = \
-                sentence1 if isinstance(sentence1, tuple) else \
-                (sentence1, OrderedDict())
-            sentence2, sentence_meta2 = \
-                sentence2 if isinstance(sentence2, tuple) else \
-                (sentence2, OrderedDict())
-            if not ignore_new_meta:
-                for meta_key, meta_val2 in sentence_meta2.items():
-                    meta_val1 = sentence_meta1.get(meta_key)
-                    if meta_val2 is not None:
-                        if stop_on_error and meta_val1 is not None \
-                                         and meta_val1 != meta_val2:
-                            error('Values of meta "{}"'.format(meta_key),
-                                  meta_val1, meta_val2)
-                        sentence_meta1[meta_key] = meta_val2
-            for token1, token2 in zip(sentence1, sentence2):
-                for field_key, field_val2 in token2.items():
-                    field_val1 = token1.get(field_key)
-                    if field_val1 is not None and field_val2 is not None \
-                   and type(field_val1) != type(field_val2):
-                        if stop_on_error:
-                            error('Types of field "{}"'.format(field_key),
-                                  field_val1, field_val2)
-                    elif isinstance(field_val1, dict):
-                        for feat_key, feat_val2 in field_val2.items():
-                            feat_val1 = field_val1.get(feat_key)
-                            if feat_val2 is not None:
-                                if stop_on_error and feat_val1 is not None \
-                                                 and feat_val1 != feat_val2:
-                                    error('Values of feat "{}:{}"'
-                                              .format(field_key, feat_key),
-                                          feat_val1, feat_val2)
-                                field_val1[feat_key] = feat_val2
-                    else:
-                        if field_val2 is not None:
-                            #print(field_val1, field_val2)
-                            if field_val1 != field_val2 and (
-                                (stop_on_error and field_val1 is not None
-                             and not (field_key == 'ID' and ignore_new_meta))
-                             or field_key == 'FORM'
-                            ):
-                                error('Values of field "{}"'
-                                          .format(field_key),
+        for sentence2 in corpus2:
+            while True:
+                is_empty = True
+                try:
+                    sentence1 = next(corpus1)
+                except StopIteration:
+                    error('Extra sentence in corpus2:',
+                          None, sentence2)
+                sentence1, sentence_meta1 = \
+                    sentence1 if isinstance(sentence1, tuple) else \
+                    (sentence1, OrderedDict())
+                sentence2, sentence_meta2 = \
+                    sentence2 if isinstance(sentence2, tuple) else \
+                    (sentence2, OrderedDict())
+                if not ignore_new_meta:
+                    for meta_key, meta_val2 in sentence_meta2.items():
+                        meta_val1 = sentence_meta1.get(meta_key)
+                        if meta_val2 is not None:
+                            if stop_on_error and meta_val1 is not None \
+                                             and meta_val1 != meta_val2:
+                                error('Values of meta "{}"'.format(meta_key),
+                                      meta_val1, meta_val2)
+                            sentence_meta1[meta_key] = meta_val2
+                sentence1_ = sentence1
+                sentence1_ = iter(sentence1_)
+                token1 = None
+                for token2 in sentence2:
+                    id2 = token2.get('ID', '')
+                    while True:
+                        try:
+                            token1 = next(sentence1_)
+                        except StopIteration:
+                            if is_empty:
+                                break
+                            else:
+                                error('Extra token in sentence of corpus2:',
+                                      None, token2)
+                        id1 = token1.get('ID', '')
+                        if ('.' not in id1 or '.' in id2) \
+                       and ('-' not in id1 or '-' in id2):
+                            is_empty = False
+                            break
+                    if is_empty:
+                        break
+                    for field_key, field_val2 in token2.items():
+                        field_val1 = token1.get(field_key)
+                        if field_val1 is not None and field_val2 is not None \
+                       and type(field_val1) != type(field_val2):
+                            if stop_on_error:
+                                error('Types of field "{}"'.format(field_key),
                                       field_val1, field_val2)
-                            token1[field_key] = field_val2
+                        elif isinstance(field_val1, dict):
+                            for feat_key, feat_val2 in field_val2.items():
+                                feat_val1 = field_val1.get(feat_key)
+                                if feat_val2 is not None:
+                                    if stop_on_error \
+                                   and feat_val1 is not None \
+                                   and feat_val1 != feat_val2:
+                                        error('Values of feat "{}:{}"'
+                                                  .format(field_key,
+                                                          feat_key),
+                                              feat_val1, feat_val2)
+                                    field_val1[feat_key] = feat_val2
+                        else:
+                            if field_val2 is not None:
+                                if field_val1 != field_val2 and (
+                                    (stop_on_error and field_val1 is not None
+                                 and not (field_key == 'ID'
+                                      and ignore_new_meta))
+                                 or field_key == 'FORM'
+                                ):
+                                    error('Values of field "{}"'
+                                              .format(field_key),
+                                          field_val1, field_val2)
+                                if field_key != 'ID':
+                                    token1[field_key] = field_val2
+                if is_empty:
+                    yield sentence1, sentence_meta1
+                else:
+                    break
+            try:
+                next(sentence1_)
+            except StopIteration:
+                pass
+            else:
+                error('Extra token in sentence of corpus1:', token1, None)
             yield sentence1, sentence_meta1
+        try:
+            next(sentence1_)
+        except StopIteration:
+            pass
+        else:
+            error('Extra sentence in corpus1:', sentence1, None)
