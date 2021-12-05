@@ -143,15 +143,31 @@ def get_corpus_fpath(dname=None, root_dir=None, fname=None, url=None):
     return fpath
 
 def _get_ud_train_name(file_list):
-    return next((x for x in file_list if x and x.endswith('train.conllu')),
+    return next((x for x in file_list 
+                   if x and x.lower().endswith('train.conllu')),
                 None)
 
+def _get_ud_train_names(file_list):
+    fns = _get_ud_train_name(file_list)
+    if not fns:
+        fns = {}
+        for fn in file_list:
+            if fn:
+                match = re.search(r'train-(\w+).conllu$', fn.lower())
+                if match:
+                    fns[fn] = match.group(1)
+        fns = {y: x for x, y in fns.items()}  # kills duplicates
+        fns = sorted(fns.items())
+    return fns
+
 def _get_ud_dev_name(file_list):
-    return next((x for x in file_list if x and x.endswith('dev.conllu')),
+    return next((x for x in file_list
+                   if x and x.lower().endswith('dev.conllu')),
                 None)
 
 def _get_ud_test_name(file_list):
-    return next((x for x in file_list if x and x.endswith('test.conllu')),
+    return next((x for x in file_list
+                   if x and x.lower().endswith('test.conllu')),
                 None)
 
 UD = 'UniversalDependencies'
@@ -191,16 +207,36 @@ def download_ud(corpus_name, root_dir=None, overwrite=True):
         with open(fcont, 'rt', encoding='utf-8') as f:
             cont = json.loads(f.read())
             urls = [o.get('download_url') for o in cont]
-            train, dev, test = _get_ud_train_name(urls), \
+            train, dev, test = _get_ud_train_names(urls), \
                                  _get_ud_dev_name(urls), \
                                 _get_ud_test_name(urls)
             dpath = os.path.join(dpath, corpus_name)
             if train:
-                fpaths.append(
-                    download_file(train, dpath=dpath, overwrite=overwrite,
-                                  log_msg='Downloading {}/{}:train'
-                                              .format(UD, corpus_name))
-                )
+                if isinstance(train, list):
+                    train_fn = None
+                    for label, fn in train:
+                        fn = download_file(
+                            fn, dpath=dpath, overwrite=overwrite,
+                            log_msg=f'Downloading {UD}/{corpus_name}:'
+                                    f'train-{label}'
+                        )
+                        if not train_fn:
+                            train_fn = \
+                                fn[:-len(f'-{label}.conllu')] + '.conllu'
+                            mode = 'wb'
+                        else:
+                            mode = 'ab'
+                        with open(train_fn, mode) as f_out:
+                            with open(fn, 'rb') as f_in:
+                                f_out.write(f_in.read())
+                    if train_fn:
+                        fpaths.append(train_fn)
+                else:
+                    fpaths.append(
+                        download_file(train, dpath=dpath, overwrite=overwrite,
+                                      log_msg='Downloading {}/{}:train'
+                                                  .format(UD, corpus_name))
+                    )
             if dev:
                 fpaths.append(
                     download_file(dev, dpath=dpath, overwrite=overwrite,
