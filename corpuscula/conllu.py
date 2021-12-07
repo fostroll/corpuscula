@@ -307,9 +307,12 @@ class Conllu:
                                     #() if val == '_'
                                     # fix for the last MISC feat of syntagrus
                                     # that is '_~':
-                                    () if val.startswith ('_') else
+                                    #() if val.startswith ('_') else
                                     [(k, v) for k, v in [
-                                        t.split('=', 1) for t in val.split('|')
+                                        t.split('=', 1) if '=' in t else
+                                        (t, None)
+                                            for t in val.split('|')
+                                            if t and t != '_'
                                     ]])
                             except ValueError as e:
                                 print('ERROR when loading Conllu (line {})'
