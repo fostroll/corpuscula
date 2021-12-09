@@ -424,7 +424,7 @@ class Conllu:
                 if misc_idx is not None:
                     misc = line[misc_idx]
                     line[misc_idx] = \
-                        '|'.join('='.join((x, misc[x])) \
+                        '|'.join('='.join((x, misc[x])) if misc[x] else x \
                                      for x in sorted(misc)) \
                                          if misc else \
                                  '_'
