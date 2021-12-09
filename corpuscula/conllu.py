@@ -417,7 +417,7 @@ class Conllu:
                 if feats_idx is not None:
                     feats = line[feats_idx]
                     line[feats_idx] = \
-                        '|'.join('='.join((x, feats[x])) \
+                        '|'.join('='.join((x, feats[x]) if feats[x] else x \
                                      for x in sorted(feats)) \
                                          if feats else \
                                  '_'
